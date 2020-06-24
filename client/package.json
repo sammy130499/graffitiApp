@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "cssBuild":"npx tailwindcss build tailwind.css -o src/styles.css"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +23,7 @@
     "@types/jquery": "^3.5.0",
     "jquery": "^3.5.1",
     "rxjs": "~6.4.0",
+    "tailwindcss": "^1.4.6",
     "tslib": "^1.10.0",
     "tui-image-editor": "^3.9.0",
     "zone.js": "~0.9.1"
