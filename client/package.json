@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "cssBuild":"npx tailwindcss build tailwind.css -o src/styles.css"
+    "cssBuild": "npx tailwindcss build tailwind.css -o src/styles.css"
   },
   "private": true,
   "dependencies": {
@@ -26,7 +26,10 @@
     "tailwindcss": "^1.4.6",
     "tslib": "^1.10.0",
     "tui-image-editor": "^3.9.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "crypto-js": "^4.0.0",
+    "@types/crypto-js": "^3.1.47",
+    "ngx-spinner": "^9.0.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.0",
@@ -48,5 +51,8 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
+  },
+  "browser": {
+    "crypto": false
   }
 }
