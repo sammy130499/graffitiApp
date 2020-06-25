@@ -9,11 +9,11 @@ import $ from 'jquery';
 export class EditPageComponent implements OnInit {
 
   constructor() { }
-
+  private imageEditor;
   ngOnInit() {
     let flag=0;
 
-    let imageEditor = new ImageEditor('#tui-image-editor-container', {
+    this.imageEditor = new ImageEditor('#tui-image-editor-container', {
       includeUI: {
           menu:['text'],
           loadImage: {
@@ -28,25 +28,24 @@ export class EditPageComponent implements OnInit {
       usageStatistics: false
   });
 
-  imageEditor.on('mousedown', function(event, originPointer) {
+  this.imageEditor.on('mousedown', function(event, originPointer) {
      if(flag==1){
-         imageEditor.stopDrawingMode();
+         this.imageEditor.stopDrawingMode();
      }
  });
 
- imageEditor.on('objectActivated', function(props) {
+ this.imageEditor.on('objectActivated', function(props) {
      flag=1
  });
+  
+}
 
-  window.onresize = function(e) {
-    console.log(e);
-      // imageEditor.ui.resizeEditor();
-  }
-  $('#btn').click(()=>{
-     let data=imageEditor.toDataURL();
-     console.log(data);
-  })
-  }
+sendPhoto(){
+  let data=this.imageEditor.toDataURL();
+  // send this data to backend using userservice
+}
+
+
 
          
 

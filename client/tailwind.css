@@ -47,6 +47,14 @@
   @apply mt-4 border-green-300 border-t-2 text-center text-xl flex flex-col;
 }
 
+#tui-image-editor-svg-default-icons{
+  display:none;
+}
+
+svg[display="none"]{
+  display:none;
+}
+
 .alert {
     padding: 15px;
     margin-bottom: 20px;
