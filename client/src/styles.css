@@ -580,6 +580,13 @@ object {
   display: block;
   vertical-align: middle;
 }
+#tui-image-editor-svg-default-icons{
+  display:none;
+}
+
+svg[display="none"]{
+  display:none;
+}
 
 /**
  * Constrain images and videos to the parent width and preserve

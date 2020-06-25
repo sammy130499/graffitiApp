@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl = "http://localhost:8000/";
+  private baseUrl = "http://localhost:8000/api/";
   constructor( private http : HttpClient, private router : Router ) { }
 
 

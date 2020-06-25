@@ -6,7 +6,9 @@ var userSchema = new Schema({
     userId:String,
     password:String,
     usersAffected:[String],
-    photoUrl:String
+    prevPhotoUrl:String,
+    newPhotoUrl:String,
+    department:String
   });
 
 module.exports=mongoose.model('user',userSchema,'USER');
