@@ -1,15 +1,22 @@
 <div class="container">
     <div class="hero-bg flex justify-center items-center  w-screen h-screen flex-col text-center bg-local">
         <div class="bg-red-700 px-4 py-5 bg-opacity-75 text-white text-2xl rounded-lg ">
-            <label for="username">College Id
-                    <input type="text" class="input-area" id="username">
-                </label>
-                <label for="password" class="mt-2"> Password
-                    <input type="text" class="input-area" id="password">
-            </label>
+            <form (submit)="registerUser($event)">
+                <div>
+                    <input type="text" class="input-area" placeholder="username" id="username">
+
+                </div>
+                <div>
+                    <input type="password" class="input-area" placeholder="password" id="password">                    
+                </div>
+                <div>
+                    <button type="submit" id="submit"></button>
+                </div>
+
+            </form>
         </div>
         
         
-        <button type="button" class="btn-primary mt-4" routerLink="/homepage">Submit</button>
+        <button type="button" class="btn-primary mt-4" (click)="registerUser()">Submit</button>
     </div>
 </div>

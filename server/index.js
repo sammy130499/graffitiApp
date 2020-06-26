@@ -25,7 +25,6 @@ mongoose.connect('mongodb+srv://m001-student:mBVI3SbOLiX22EPT@avinash-001-q92dl.
     .catch(e => console.log(e));
 
 
-
 app.post('/api/updatePhoto',(req,res)=>{
     let {userId,photoUrl}=req.body;
     User.findOne({userId}).then(ret=>{
