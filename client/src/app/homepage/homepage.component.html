@@ -1,17 +1,23 @@
 <div class="container">
     <div class="hero-bg flex justify-center items-center  w-screen h-screen flex-col text-center object-contain">
-        <form [formGroup]="form" class="bg-red-700 px-4 py-5 bg-opacity-75 text-white text-2xl rounded-lg ">
-            <label for="username"> Username
-                    <input formControlName="username" type="text" class="input-area" id="username">
-                </label>
-                <label for="password" class="mt-2"> Password
-                    <input formControlName="password" type="password" class="input-area" id="password">
-            </label>
-        </form>
-        <div>
-                <button type="button" class="btn-primary mt-4 m-4" (click)="login()">Log In</button>
-                <button type="button" class="btn-primary mt-4 m-4" routerLink="/signup">Sign Up</button>
+        <div class="flex-1 text-center mt-16">
+            <img src="../../assets/images/logo.png" alt="">
         </div>
+        <div class="flex-1 -mt-16">
+                <form [formGroup]="form" class="bg-red-600 px-4 py-5 bg-opacity-75 text-white text-2xl rounded-lg ">
+                        <label for="username"> Username
+                                <input formControlName="username" type="text" class="input-area" id="username">
+                            </label>
+                            <label for="password" class="mt-2"> Password
+                                <input formControlName="password" type="password" class="input-area" id="password">
+                        </label>
+                    </form>
+                    <div>
+                            <button type="button" class="btn-primary mt-4 m-4" (click)="login()">Log In</button>
+                            <button type="button" class="btn-primary mt-4 m-4" routerLink="/signup">Sign Up</button>
+                    </div>
+        </div>
+        
         
     </div>
 </div>
