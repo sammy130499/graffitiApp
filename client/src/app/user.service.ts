@@ -11,30 +11,37 @@ export class UserService {
   constructor( private http : HttpClient, private router : Router ) { }
 
 
-  createUser(user:any){
+  createUser(user:any):any{
     let url = this.baseUrl + "createUser";
     let headers=new HttpHeaders();
     headers.set('Content-Type','application/json');
     return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
   }
 
-  updatePhoto(user:any){
+  updatePhoto(user:any):any{
     let url = this.baseUrl + "updatePhoto";
     let headers=new HttpHeaders();
     headers.set('Content-Type','application/json');
     return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
   }
 
-  checkUser(user:any){
+  checkUser(user:any):any{
     let url = this.baseUrl + "checkUser";
     let headers=new HttpHeaders();
     headers.set('Content-Type','application/json');
     return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
   }
 
-  getDataForDashboard(user:any){
+  getDataForDashboard(user:any):any{
     let url = this.baseUrl + "getDataForDashboard";
     
     return this.http.get(url);
+  }
+
+  getImageUrlForUser(user:any):any{
+    let url = this.baseUrl + "getImageUrlForUser";
+    let headers=new HttpHeaders();
+    headers.set('Content-Type','application/json');
+    return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
   }
 }

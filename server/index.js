@@ -11,7 +11,7 @@ const {
 } = require('uuid')
 
 const app = express();
-
+const photo=require('./photo');
 
 app.use(morgan('combined'));
 app.use(bodyParser.json());
@@ -58,7 +58,7 @@ app.post('/api/createUser',(req,res)=>{
             })
         }
         else{
-            let user=new User({userId,password,department,userAffected:[]});
+            let user=new User({userId,password,department,usersAffected:[],newPhotoUrl:photo,oldPhotoUrl:photo});
             user.save().then(ret1=>{
                 res.send({
                     action:true,
@@ -100,6 +100,26 @@ app.get('/api/getDataForDashboard',(req,res)=>{
             res.send({
                 action:true,
                 message:ret
+            })
+        }
+    })
+})
+
+
+app.post('/api/getImageUrlForUser',(req,res)=>{
+    let {userId}=req.body;
+    console.log(userId);
+    User.findOne({userId}).then(ret=>{
+        if(!ret){
+            res.send({
+                action:false,
+                message:"user not present"
+            })
+        }
+        else{
+            res.send({
+                action:true,
+                message:ret.newPhotoUrl
             })
         }
     })

@@ -8,6 +8,7 @@ var userSchema = new Schema({
     usersAffected:[String],
     prevPhotoUrl:String,
     newPhotoUrl:String,
+    oldPhotoUrl:String,
     department:String
   });
 

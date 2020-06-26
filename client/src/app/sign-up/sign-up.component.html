@@ -1,22 +1,30 @@
 <div class="container">
     <div class="hero-bg flex justify-center items-center  w-screen h-screen flex-col text-center bg-local">
-        <div class="bg-red-700 px-4 py-5 bg-opacity-75 text-white text-2xl rounded-lg ">
-            <form (submit)="registerUser($event)">
-                <div>
-                    <input type="text" class="input-area" placeholder="username" id="username">
-
-                </div>
-                <div>
-                    <input type="password" class="input-area" placeholder="password" id="password">                    
-                </div>
-                <div>
-                    <button type="submit" id="submit"></button>
-                </div>
-
-            </form>
-        </div>
+        <form [formGroup]="form" class="bg-red-700 px-4 py-5 bg-opacity-75 text-white text-2xl rounded-lg ">
+                <label for="username"> Username
+                    <input formControlName="username" type="text" class="input-area" id="username">
+                </label>
+                <label for="password" class="mt-2"> Password
+                    <input formControlName="password" type="password" class="input-area" id="password">
+                </label>
+                <label for="firstName" class="mt-2"> First Name
+                    <input formControlName="firstName" type="text" class="input-area" id="firstName">
+                </label>
+                <label for="lastName" class="mt-2"> Last Name
+                    <input formControlName="lastName" type="text" class="input-area" id="lastName">
+                </label>
+                <label for="department" class="mt-2"> Department
+                    <select name="department" id="department" class="flex block bg-red-200 text-red-800" (change)="setDepartment(department.value)" #department>
+                        <option value="COED">Computer Engineering Department</option>
+                        <option value="CHED">Chemical Engineering Department</option>
+                        <option value="MED">Mechanical Engineering Department</option>
+                        <!-- <option value="COED"></option>
+                        <option value="COED"></option>
+                        <option value="COED"></option> -->
+                    </select>
+                </label>
+        </form>
         
-        
-        <button type="button" class="btn-primary mt-4" (click)="registerUser()">Submit</button>
+        <button type="button" class="btn-primary mt-4" (click)="signup()">Sign Up</button>
     </div>
 </div>

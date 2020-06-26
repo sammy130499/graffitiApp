@@ -8,9 +8,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {path:"homepage",component:HomepageComponent},
-  {path:"edit",component:EditPageComponent},
-  {path:"signUp",component:SignUpComponent},
-  {path:"dashboard",component:DashboardComponent},
+  {path:"edit/:userId/:editId",component:EditPageComponent},
+  {path:"signup",component:SignUpComponent},
+  {path:"dashboard/:userId",component:DashboardComponent},
   {path: '',   redirectTo: 'homepage', pathMatch: 'full'},
 
 ];
