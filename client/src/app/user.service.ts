@@ -11,6 +11,19 @@ export class UserService {
   constructor( private http : HttpClient, private router : Router ) { }
 
 
+
+  loginUser(user:any):any{
+    let url = this.baseUrl + "login";
+    let headers=new HttpHeaders();
+    headers.set('Content-Type','application/json');
+    return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
+  }
+  logoutUser(){
+    let url = this.baseUrl + "logout";
+    let headers=new HttpHeaders();
+    headers.set('Content-Type','application/json');
+    return this.http.get(url);
+  }
   createUser(user:any):any{
     let url = this.baseUrl + "createUser";
     let headers=new HttpHeaders();

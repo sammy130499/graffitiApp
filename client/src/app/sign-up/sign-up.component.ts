@@ -38,13 +38,15 @@ export class SignUpComponent implements OnInit {
     let lastName=this.form.get('lastName').value;
     let password=this.form.get('password').value;
     const hashedPass = SHA256(password).toString(enc.Hex);
-    this.userService.createUser({"userId":username,"firstName":firstName,"lastName":lastName,"password":hashedPass,"department":this.department}).subscribe(res=>{
-      if(!res.action){
-        console.log(res.message);
+    this.userService.createUser({"userId":username,"firstName":firstName,"lastName":lastName,"password":hashedPass,"department":this.department}).subscribe(data=>{
+      if(!data.action){
+        console.log(data.message);
       }
       else{
-        this.global.loggedInUsername=username;
-        this.router.navigate([`/dashboard/${this.global.loggedInUsername}`]);
+        console.log(data.message);
+        let username=data.message.user.userId;
+        localStorage.setItem("access_token",data.message.token)
+        this.router.navigate(['/dashboard/'+username]);
       }
     })
   }
