@@ -22,6 +22,7 @@ export class HomepageComponent implements OnInit {
   }
 
   login(){
+   
     let username=this.form.get('username').value;
     let password=this.form.get('password').value;
     this.global.loggedInUsername=username;

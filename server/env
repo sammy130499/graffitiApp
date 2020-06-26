@@ -1,0 +1,4 @@
+
+MONGODB_URL=mongodb+srv://m001-student:mBVI3SbOLiX22EPT@avinash-001-q92dl.mongodb.net/graffiti?retryWrites=true&w=majority
+JWT_KEY=WinterIsComingGOT2019
+PORT=8000
