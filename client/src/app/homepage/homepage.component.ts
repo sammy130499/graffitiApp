@@ -4,6 +4,7 @@ import { SHA256, enc } from "crypto-js";
 import { Router } from '@angular/router';
 import { GlobalDataService } from '../global-data.service';
 import { UserService } from '../user.service';
+import { AlertService } from '../alert.service';
 
 @Component({
   selector: 'app-homepage',
@@ -12,7 +13,7 @@ import { UserService } from '../user.service';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor(private router : Router, private global:GlobalDataService,private user:UserService) { }
+  constructor(private router : Router,private alertService:AlertService, private global:GlobalDataService,private user:UserService) { }
 
   form = new FormGroup({
     username : new FormControl('',Validators.required),
@@ -31,12 +32,14 @@ export class HomepageComponent implements OnInit {
     this.user.loginUser({"userId":username,"password":hashedPass}).subscribe((data)=>{
       if(!data.action){
         console.log(data.message);
+        this.alertService.error(data.message);
       }
       else{
         let username=data.message.user.userId;
         localStorage.setItem("access_token",data.message.token)
+        this.alertService.success("Logged in successfully !!!");
         this.router.navigate(['/dashboard/'+username]);
-
+        
       }
     })
 

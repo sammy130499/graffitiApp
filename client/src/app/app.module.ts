@@ -11,6 +11,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './auth.guard';
 import { UserService } from './user.service';
+import { AlertComponent } from './alert/alert.component';
 
 
 export function tokenGetter() {
@@ -22,7 +23,8 @@ export function tokenGetter() {
     HomepageComponent,
     DashboardComponent,
     EditPageComponent,
-    SignUpComponent
+    SignUpComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
