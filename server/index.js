@@ -16,17 +16,19 @@ const photo=require('./photo');
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
+const auth=require('./auth');
 
 const User=require('./models/User');
-mongoose.connect('mongodb+srv://m001-student:mBVI3SbOLiX22EPT@avinash-001-q92dl.mongodb.net/graffiti?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MONGODB_URL, {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useCreateIndex: true
     }).then(res => console.log('connected'))
     .catch(e => console.log(e));
 
 
 
-app.post('/api/updatePhoto',(req,res)=>{
+app.post('/api/updatePhoto',auth,(req,res)=>{
     let {userId,photoUrl}=req.body;
     User.findOne({userId}).then(ret=>{
         if(!ret){
@@ -49,9 +51,9 @@ app.post('/api/updatePhoto',(req,res)=>{
 
 })
 
-app.post('/api/createUser',(req,res)=>{
+app.post('/api/createUser',async (req,res)=>{
     let {userId,password,department}=req.body;
-    User.findOne({userId}).then(ret=>{
+    User.findOne({userId}).then(async ret=>{
         if(ret){
             res.send({
                 action:false,
@@ -59,16 +61,65 @@ app.post('/api/createUser',(req,res)=>{
             })
         }
         else{
-            let user=new User({userId,password,department,usersAffected:[],newPhotoUrl:photo,oldPhotoUrl:photo});
-            user.save().then(ret1=>{
+            try{
+                let user=new User({userId,password,department,usersAffected:[],newPhotoUrl:photo,oldPhotoUrl:photo});
+                await user.save()
+                let token=await user.generateAuthToken();
                 res.send({
                     action:true,
-                    message:"user created"
+                    message:{token,user}
                 })
-            })
+            }
+            catch(e){
+                res.status(400).send({
+                    action:true,
+                    message:e
+                })
+            }
+            
         }
     })
-})
+});
+
+app.post('/api/login',async (req,res)=>{
+    let {userId,password}=req.body;
+    try{
+        let user=await User.findByCredentials(userId,password);
+    if (!user) {
+        return res.status(401).send({message: 'Login failed! Check authentication credentials',action:false})
+    }
+    const token = await user.generateAuthToken();
+    
+    res.send({
+        action:true,
+        message:{token,user}
+    })
+    }
+    catch(e){
+        console.log(e);
+        res.status(400).send({message:e,action:false});
+    }
+});
+
+app.get('/api/logout',auth,async (req,res)=>{
+    try {
+        req.user.tokens = req.user.tokens.filter((token) => {
+            return token.token != req.token
+        })
+        await req.user.save()
+        res.send({
+            action:true,
+            message:"user logged out"
+        })
+    } catch (error) {
+        res.status(500).send({
+            action:false,
+            message:error
+        })
+    }
+});
+
+
 
 app.post('/api/checkUser',(req,res)=>{
     let {userId}=req.body;
@@ -88,7 +139,7 @@ app.post('/api/checkUser',(req,res)=>{
     })
 });
 
-app.get('/api/getDataForDashboard',(req,res)=>{
+app.get('/api/getDataForDashboard',auth,(req,res)=>{
     let {department}=req.body;
     User.find({department}).then(ret=>{
         if(ret.length==0){
@@ -107,26 +158,14 @@ app.get('/api/getDataForDashboard',(req,res)=>{
 })
 
 
-app.post('/api/getImageUrlForUser',(req,res)=>{
-    let {userId}=req.body;
-    console.log(userId);
-    User.findOne({userId}).then(ret=>{
-        if(!ret){
-            res.send({
-                action:false,
-                message:"user not present"
-            })
-        }
-        else{
-            res.send({
-                action:true,
-                message:ret.newPhotoUrl
-            })
-        }
+app.post('/api/getImageUrlForUser',auth,(req,res)=>{
+    res.send({
+        action:true,
+        message:req.user.newPhotoUrl
     })
 })
 
 
-app.listen(8000, () => {
+app.listen(process.env.PORT, () => {
     console.log('listening at port 8000');
 });
