@@ -27,6 +27,9 @@ export class HomepageComponent implements OnInit {
    
     let username=this.form.get('username').value;
     let password=this.form.get('password').value;
+    if((username || password) ==""){
+      return;
+    }
     this.global.loggedInUsername=username;
     const hashedPass = SHA256(password).toString(enc.Hex);
     this.user.loginUser({"userId":username,"password":hashedPass}).subscribe((data)=>{
