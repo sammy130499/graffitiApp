@@ -54,7 +54,9 @@
 svg[display="none"]{
   display:none;
 }
-
+*{
+  font-family: 'Balsamiq Sans', cursive;
+}
 .alert {
     padding: 15px;
     margin-bottom: 20px;
