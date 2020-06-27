@@ -44,30 +44,33 @@
             <option value="COED"></option>
             <option value="COED"></option> -->
       </select>
-
-      <div *ngFor="let user of userArr">
-        <div *ngIf="currentUser.userId!=user.userId">
-          <a class="mb-2" routerLink="/edit/{{currentUser.userId}}/{{user.userId}}">
-            <div class="max-w-sm w-full lg:max-w-full lg:flex ">
-              <div class=" h-24 lg:w-24 bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-                [style.backgroundImage]="'url('+ user.newPhotoUrl +')'" title="Tshirt">
-              </div>
-              <div
-                class=" h-24 overflow-auto  w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                <div>
-                  <p class="  flex items-center">
-                    {{user.userId}}
-                  </p>
-                  <div class="  font-bold">Name: name1</div>
-                  <p class="text-base">{{user.department}}</p>
+     
+        <div *ngFor="let user of userArr |  paginate: { itemsPerPage: 6, currentPage: page }">
+          <div *ngIf="currentUser.userId!=user.userId">
+            <a class="mb-2" routerLink="/edit/{{currentUser.userId}}/{{user.userId}}">
+              <div class="max-w-sm w-full lg:max-w-full lg:flex ">
+                <div class=" h-24 lg:w-24 bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+                  [style.backgroundImage]="'url('+ user.newPhotoUrl +')'" title="Tshirt">
                 </div>
-
+                <div
+                  class=" h-24 overflow-auto  w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+                  <div>
+                    <p class="  flex items-center">
+                      {{user.userId}}
+                    </p>
+                    <div class="  font-bold">Name: name1</div>
+                    <p class="text-base">{{user.department}}</p>
+                  </div>
+  
+                </div>
               </div>
-            </div>
-          </a>
+            </a>
+          </div>
+          <br>
         </div>
-        <br>
-      </div>
+      <div class="text-white-100">
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    </div>
     </div>
   </div>
 </div>
