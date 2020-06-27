@@ -56,7 +56,7 @@
      
         <div *ngFor="let user of userArr |  paginate: { itemsPerPage: 6, currentPage: page }">
           <div *ngIf="currentUser.userId!=user.userId">
-            <a class="mb-2" routerLink="/edit/{{currentUser.userId}}/{{user.userId}}">
+            <a class="mb-2" (click)="callEdit(user.userId,currentUser.userId)">
               <div class="max-w-sm w-full lg:max-w-full lg:flex ">
                 <div class=" h-24 lg:w-24 bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
                   [style.backgroundImage]="'url('+ user.photoUrl +')'" title="Tshirt">

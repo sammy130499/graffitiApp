@@ -71,7 +71,7 @@ app.post('/api/updatePhoto',auth,(req,res)=>{
 })
 
 app.post('/api/createUser',async (req,res)=>{
-    let {userId,password,department}=req.body;
+    let {userId,password,department,firstName,lastName}=req.body;
     User.findOne({userId}).then(async ret=>{
         if(ret){
             res.send({
@@ -84,7 +84,7 @@ app.post('/api/createUser',async (req,res)=>{
                 cloudinary.uploader.upload(photo).then(async ret1=>{
                     let photoUrl=ret1.secure_url;
                     let imgPublicId=ret1.public_id;
-                    let user=new User({userId,password,department,usersAffected:[],photoUrl,imgPublicId});
+                    let user=new User({userId,password,department,usersAffected:[],photoUrl,imgPublicId,firstName,lastName});
                     await user.save()
                     let token=await user.generateAuthToken();
                     res.send({

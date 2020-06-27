@@ -58,7 +58,6 @@ export class DashboardComponent implements OnInit {
       } else {
         this.userArr = JSON.parse(data.message);
         this.userArrPermanent = this.userArr;
-        console.log("this is department " + this.userArr[0].department);
       }
     })
   }
