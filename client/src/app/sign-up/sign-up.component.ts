@@ -60,6 +60,7 @@ export class SignUpComponent implements OnInit {
     let firstName=this.form.get('firstName').value;
     let lastName=this.form.get('lastName').value;
     let password=this.form.get('password').value;
+    // console.log("Outside");
     if(!username || !password)return;
     const hashedPass = SHA256(password).toString(enc.Hex);
     this.userService.createUser({"userId":username,"firstName":firstName,"lastName":lastName,"password":hashedPass,"department":this.department}).subscribe(data=>{
@@ -71,6 +72,7 @@ export class SignUpComponent implements OnInit {
       else{
         console.log(data.message);
         let username=data.message.user.userId;
+        localStorage.setItem("user",data.message.user);
         localStorage.setItem("access_token",data.message.token)
         this.router.navigate(['/dashboard/'+username]);
         this.spinner.hide();
