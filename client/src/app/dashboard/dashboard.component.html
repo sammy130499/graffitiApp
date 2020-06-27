@@ -1,102 +1,73 @@
 <app-alert></app-alert>
-<div class="flex w-screen">
-    
-    <div class="w-16 flex-auto h-screen border-2 ">
-        <img src="{{photo}}" alt="present image">
-
-
-
 <nav class="flex items-center justify-between flex-wrap bg-red-700 bg-opacity-75 p-6">
   <div class="w-1/2 flex items-center flex-shrink-0 text-white mr-6">
-    
+
     <span class="font-semibold text-xl tracking-tight">Graffi-Tee</span>
   </div>
- 
+
   <div class="w-1/2 block flex-grow lg:flex lg:w-auto ">
-    
-    <input type="search" #search name="search" id="search" class="bg-purple-white shadow rounded border-0 p-3" placeholder="Search by name..." (input)="searchWord(search.value)">
-        <div class="absolute pin-r pin-t mt-3 mr-4 text-purple-lighter">
-        </div>
+
+    <input type="search" #search name="search" id="search" class="bg-purple-white shadow rounded border-0 p-3"
+      placeholder="Search by name..." (input)="searchWord(search.value)">
+    <div class="absolute pin-r pin-t mt-3 mr-4 text-purple-lighter">
+    </div>
   </div>
 </nav>
 
-
-
-
 <div class="bg-black flex w-full">
-    <div class="w-1/2 h-full flex-auto  border-2 ">   
-      <div class="w-1/3 inline-block"></div>
-      <div class="w-1/3 inline-block h-screen rounded overflow-hidden ">
-        <img class="object-center sm:object-top md:object-right lg:object-bottom xl:object-center"  src="{{photo}}" alt="Tshirt photo">
-        <div class="px-6 py-4">
-          <div class=" font-bold text-xl mb-2">Name</div>
-          <p class="text-gray-700  text-base">
-            Username: {{currentUser.userId}}
-          </p>
-          <p class="text-gray-700 text-base">
-            Branch: {{currentUser.department}}
-          </p>
-
-
-        </div>
-        
+  <div class="w-1/2 h-full flex-auto  border-2 ">
+    <div class="w-1/3 inline-block"></div>
+    <div class="w-1/3 inline-block h-screen rounded overflow-hidden ">
+      <img class="object-center sm:object-top md:object-right lg:object-bottom xl:object-center" src="{{photo}}"
+        alt="Tshirt photo">
+      <div class="px-6 py-4">
+        <div class=" font-bold text-xl mb-2">Name</div>
+        <p class="text-gray-700  text-base">
+          Username: {{currentUser.userId}}
+        </p>
+        <p class="text-gray-700 text-base">
+          Branch: {{currentUser.department}}
+        </p>
       </div>
-
-      <div class="w-1/3 inline-block"></div>
-        
-
-
-
     </div>
+    <div class="w-1/3 inline-block"></div>
+  </div>
 
-    
+  <div class="w-1/2 flex-auto border-2">
+    <div class=" relative mr-6 my-2 mb-2 ml-2">
+      <select name="department" id="department" class="flex block bg-red-200 text-red-800"
+        (change)="getDepartmentUsers(department.value)" #department>
+        <option value="COED">Computer Engineering Department</option>
+        <option value="CHED">Chemical Engineering Department</option>
+        <option value="MED">Mechanical Engineering Department</option>
+        <!-- <option value="COED"></option>
+            <option value="COED"></option>
+            <option value="COED"></option> -->
+      </select>
 
-
-      <div class="w-1/2 flex-auto border-2">
-        
-        <div class=" relative mr-6 my-2 mb-2 ml-2">
-
-
-          <select name="department" id="department" class="flex block bg-red-200 text-red-800" (change)="getDepartmentUsers(department.value)" #department>
-            <option value="COED">Computer Engineering Department</option>
-            <option value="CHED">Chemical Engineering Department</option>
-            <option value="MED">Mechanical Engineering Department</option>
-        </select>
-        <div *ngFor="let user of userArr">
-          <div *ngIf="currentUser.userId!=user.userId">
-            <a href="#" class="mb-2" >
-              <div class="max-w-sm w-full lg:max-w-full lg:flex ">
-                <div class=" h-24 lg:w-24 bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" [style.backgroundImage]="'url('+ user.newPhotoUrl +')'" title="Tshirt">
-                  </div>
-                  <div class=" h-24 overflow-auto  w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                    <div >
-                    <p class="  flex items-center">
-                      {{user.userId}}
-                    </p>
-                    <div class="  font-bold">Name: name1</div>
-                    <p class="text-base">{{user.department}}</p>
-                  </div>
-                  
-                </div>
+      <div *ngFor="let user of userArr">
+        <div *ngIf="currentUser.userId!=user.userId">
+          <a href="#" class="mb-2">
+            <div class="max-w-sm w-full lg:max-w-full lg:flex ">
+              <div class=" h-24 lg:w-24 bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+                [style.backgroundImage]="'url('+ user.newPhotoUrl +')'" title="Tshirt">
               </div>
-            </a>
-          </div>
+              <div
+                class=" h-24 overflow-auto  w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+                <div>
+                  <p class="  flex items-center">
+                    {{user.userId}}
+                  </p>
+                  <div class="  font-bold">Name: name1</div>
+                  <p class="text-base">{{user.department}}</p>
+                </div>
 
-          <br>
+              </div>
+            </div>
+          </a>
         </div>
-
-       
-
-        
-          
-
+        <br>
       </div>
-
-
-
     </div>
-           
-
-
-
+  </div>
 </div>
