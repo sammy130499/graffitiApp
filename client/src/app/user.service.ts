@@ -60,4 +60,18 @@ export class UserService {
     headers.set('Content-Type','application/json');
     return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
   }
+
+  isLoggedIn(){
+    if(!localStorage.getItem("access_token"))
+    {
+      return false;
+    }
+    return true;
+  }
+
+  logout(){
+    localStorage.removeItem("access_token");
+    this.router.navigate(['/homepage']);
+  }
+  
 }
