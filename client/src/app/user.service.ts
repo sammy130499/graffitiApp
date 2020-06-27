@@ -46,14 +46,16 @@ export class UserService {
     return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
   }
 
-  getDataForDashboard(user:any):any{
+  getDataForDashboard(user):any{
     let url = this.baseUrl + "getDataForDashboard";
-    
-    return this.http.get(url);
+    let headers=new HttpHeaders();
+    headers.set('Content-Type','application/json');
+    return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
   }
 
   getImageUrlForUser(user:any):any{
     let url = this.baseUrl + "getImageUrlForUser";
+    console.log("inside function" +JSON.stringify(user.userId));
     let headers=new HttpHeaders();
     headers.set('Content-Type','application/json');
     return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});

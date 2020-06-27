@@ -26,6 +26,7 @@
                 </label>
         </form>
         <div>
+
             <ngx-spinner
             bdColor="rgba(51,51,51,0.8)"
             size="medium"
@@ -34,6 +35,7 @@
             >
             <p style="font-size: 20px; color: black">Onboarding your details...</p>
             </ngx-spinner>
+
             <button [disabled]="!allowSignup" type="button" [ngClass]="{'bg-red-500':!allowSignup}" class="btn-primary mt-4" (click)="signup()">Sign Up</button>
             <button type="button" class="btn-primary mt-4 m-4" routerLink="/homepage">Log In</button>
     </div>
