@@ -23,7 +23,6 @@ export class DashboardComponent implements OnInit {
   userArrPermanent:User[];
   page: number = 1;
   currentUser=JSON.parse(localStorage.getItem("user"));
-
   ngOnInit() {
     // this.userArr=[];
     this.getDepartmentUsers("COED");
