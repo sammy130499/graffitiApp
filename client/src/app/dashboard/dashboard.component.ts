@@ -76,6 +76,7 @@ export class DashboardComponent implements OnInit {
     var tempUser: User[];
     tempUser = [];
     for (var i = 0; i < userArrLen; i++) {
+      var tempString=this.userArr[i].firstName+" "+this.userArr[i].lastName;
       if ((this.userArr[i].userId).toLowerCase().indexOf(word.toLowerCase()) >= 0) {
         tempUser.push(this.userArr[i]);
         continue;
@@ -85,6 +86,11 @@ export class DashboardComponent implements OnInit {
         continue;
       }
       if ((this.userArr[i].lastName).toLowerCase().indexOf(word.toLowerCase()) >= 0) {
+        tempUser.push(this.userArr[i]);
+        continue;
+      }
+
+      if ((tempString).toLowerCase().indexOf(word.toLowerCase()) >= 0) {
         tempUser.push(this.userArr[i]);
         continue;
       }
