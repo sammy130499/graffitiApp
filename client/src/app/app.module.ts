@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './user.service';
 import { AlertComponent } from './alert/alert.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import {NgxPaginationModule} from 'ngx-pagination'; 
 
 
 export function tokenGetter() {
@@ -32,6 +33,7 @@ export function tokenGetter() {
     ReactiveFormsModule,
     FormsModule,
     NgxSpinnerModule,
+    NgxPaginationModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {

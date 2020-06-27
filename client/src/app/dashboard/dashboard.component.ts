@@ -4,13 +4,16 @@ import { GlobalDataService } from '../global-data.service';
 import { Router } from '@angular/router';
 import { User } from '../user.model';
 import { DomSanitizer } from '@angular/platform-browser';
+import {ChangeDetectionStrategy, Input} from "@angular/core";
+
 
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  providers: []
+  providers: [],
+  
 })
 export class DashboardComponent implements OnInit {
 
@@ -18,6 +21,7 @@ export class DashboardComponent implements OnInit {
   photo="";
   userArr:User[];
   userArrPermanent:User[];
+  page: number = 1;
   currentUser=JSON.parse(localStorage.getItem("user"));
 
   ngOnInit() {
@@ -57,6 +61,7 @@ export class DashboardComponent implements OnInit {
       }
     })
   }
+
 
   searchWord(word:string)
   {
