@@ -13,6 +13,7 @@ import { UserService } from './user.service';
 import { AlertComponent } from './alert/alert.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import {NgxPaginationModule} from 'ngx-pagination'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 export function tokenGetter() {
@@ -35,6 +36,7 @@ export function tokenGetter() {
     NgxSpinnerModule,
     NgxPaginationModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

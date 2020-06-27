@@ -28,13 +28,11 @@ export class HomepageComponent implements OnInit {
     this.spinner.show();
     let username=this.form.get('username').value;
     let password=this.form.get('password').value;
-    if((username || password) ==""){
+    if(!username || !password){
       return;
     }
-    console.log("kalsekar bomb "+username);
     this.global.loggedInUsername=username;
     localStorage.setItem("loggedInUsername",username);
-    // console.log("rogin no "+this.global.loggedInUsername)
     const hashedPass = SHA256(password).toString(enc.Hex);
     this.user.loginUser({"userId":username,"password":hashedPass}).subscribe((data)=>{
       if(!data.action){
@@ -46,16 +44,10 @@ export class HomepageComponent implements OnInit {
       else{
         
         let username=data.message.user.userId;
-        // console.log("this is "+data.message.user)
         localStorage.setItem("user",JSON.stringify(data.message.user));
         localStorage.setItem("access_token",data.message.token)
-
         this.router.navigate(['/dashboard/'+username]);
         this.spinner.hide();
-        window.alert("welcome to dashboard !!!");
-        
-        
-        
       }
     })
 

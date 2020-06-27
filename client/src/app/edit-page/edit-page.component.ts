@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import ImageEditor from 'tui-image-editor';
-import $ from 'jquery';
 import { UserService } from '../user.service';
 import { GlobalDataService } from '../global-data.service';
 @Component({
@@ -25,8 +24,8 @@ export class EditPageComponent implements OnInit {
           initMenu: 'text',
           menuBarPosition: 'bottom'
       },
-      cssMaxWidth: 700,
-      cssMaxHeight: 500,
+      cssMaxWidth:1000,
+      cssMaxHeight:1000,
       usageStatistics: false
   });
   // this.userService.getImageUrlForUser(this.global.editingUsername).subscribe((res)=>{
