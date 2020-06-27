@@ -84,8 +84,11 @@ app.post('/api/createUser',async (req,res)=>{
 app.post('/api/login',async (req,res)=>{
     let {userId,password}=req.body;
     try{
+        console.log(userId,password);
         let user=await User.findByCredentials(userId,password);
-    if (!user) {
+        
+    if (typeof user === "Error")
+    {
         return res.status(401).send({message: 'Login failed! Check authentication credentials',action:false})
     }
     const token = await user.generateAuthToken();
@@ -93,11 +96,14 @@ app.post('/api/login',async (req,res)=>{
     res.send({
         action:true,
         message:{token,user}
+    
     })
+    
     }
     catch(e){
         console.log(e);
-        res.status(400).send({message:e,action:false});
+        //res.status(400).send({message:e,action:false});
+        res.send({message:"wrong credentials",action:false});
     }
 });
 

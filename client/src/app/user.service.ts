@@ -16,6 +16,7 @@ export class UserService {
     let url = this.baseUrl + "login";
     let headers=new HttpHeaders();
     headers.set('Content-Type','application/json');
+    console.log(headers);
     return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
   }
   logoutUser(){

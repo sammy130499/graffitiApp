@@ -36,13 +36,15 @@ var userSchema = new Schema({
 
 userSchema.statics.findByCredentials = async (userId, password) => {
   // Search for a user by email and password.
-
   const user = await User.findOne({userId} )
   if (!user) {
+    
       throw new Error({ error: 'Invalid login credentials' })
   }
   const isPasswordMatch = (password===user.password);
+  
   if (!isPasswordMatch) {
+    
       throw new Error({ error: 'Invalid login credentials' })
   }
   return user
