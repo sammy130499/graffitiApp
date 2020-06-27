@@ -32,7 +32,6 @@ export class HomepageComponent implements OnInit {
       return;
     }
     this.global.loggedInUsername=username;
-    localStorage.setItem("loggedInUsername",username);
     const hashedPass = SHA256(password).toString(enc.Hex);
     this.user.loginUser({"userId":username,"password":hashedPass}).subscribe((data)=>{
       if(!data.action){
@@ -42,8 +41,8 @@ export class HomepageComponent implements OnInit {
       }
       
       else{
-        
         let username=data.message.user.userId;
+        localStorage.setItem("loggedInUsername",username);        
         localStorage.setItem("user",JSON.stringify(data.message.user));
         localStorage.setItem("access_token",data.message.token)
         this.router.navigate(['/dashboard/'+username]);

@@ -1,4 +1,12 @@
 <app-alert></app-alert>
+<ngx-spinner
+    bdColor="rgba(51,51,51,0.8)"
+    size="medium"
+    color="#E5433E"
+    type="pacman"
+    >
+    <p style="font-size: 20px; color:black">Let's create memories...</p>
+    </ngx-spinner>
 <nav class="flex items-center justify-between flex-wrap bg-red-700 bg-opacity-75 p-6">
   <div class="w-1/2 flex items-center flex-shrink-0 text-white mr-6">
 
@@ -47,10 +55,10 @@
 
       <div *ngFor="let user of userArr">
         <div *ngIf="currentUser.userId!=user.userId">
-          <a class="mb-2" routerLink="/edit/{{currentUser.userId}}/{{user.userId}}">
+          <a class="mb-2" (click)="callEdit(user.userId,currentUser.userId)">
             <div class="max-w-sm w-full lg:max-w-full lg:flex ">
               <div class=" h-24 lg:w-24 bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-                [style.backgroundImage]="'url('+ user.newPhotoUrl +')'" title="Tshirt">
+                [style.backgroundImage]="'url('+ user.photoUrl +')'" title="Tshirt">
               </div>
               <div
                 class=" h-24 overflow-auto  w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">

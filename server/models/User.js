@@ -20,8 +20,8 @@ var userSchema = new Schema({
       }
     }],
     usersAffected:[String],
-    newPhotoUrl:String,
-    oldPhotoUrl:String,
+    photoUrl:String,
+    imgPublicId:String,
     department:String
   });
 
