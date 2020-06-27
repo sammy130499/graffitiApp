@@ -139,19 +139,22 @@ app.post('/api/checkUser',(req,res)=>{
     })
 });
 
-app.get('/api/getDataForDashboard',auth,(req,res)=>{
+app.post('/api/getDataForDashboard',auth,(req,res)=>{
     let {department}=req.body;
+    console.log("getdatafordashboardfunction");
     User.find({department}).then(ret=>{
         if(ret.length==0){
+            console.log("inside if ");
             res.send({
                 action:false,
                 message:"nothing to show"
             })
         }
         else{
+            console.log("inside else ");
             res.send({
                 action:true,
-                message:ret
+                message:JSON.stringify(ret)
             })
         }
     })
