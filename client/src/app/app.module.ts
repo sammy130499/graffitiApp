@@ -12,7 +12,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './user.service';
 import { AlertComponent } from './alert/alert.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import {NgxPaginationModule} from 'ngx-pagination'; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -32,6 +34,7 @@ export function tokenGetter() {
     ReactiveFormsModule,
     FormsModule,
     NgxSpinnerModule,
+    NgxPaginationModule,
     HttpClientModule,
     BrowserAnimationsModule,
     JwtModule.forRoot({

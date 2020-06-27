@@ -1,40 +1,33 @@
 import {
-  Component,
-  OnInit
-} from '@angular/core';
-import {
-  UserService
-} from '../user.service';
-import {
-  GlobalDataService
-} from '../global-data.service';
-import {
-  Router
-} from '@angular/router';
-import {
-  User
-} from '../user.model';
-import {
-  DomSanitizer
-} from '@angular/platform-browser';
-import {
   NgxSpinnerService
 } from 'ngx-spinner';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user.service';
+import { GlobalDataService } from '../global-data.service';
+import { Router } from '@angular/router';
+import { User } from '../user.model';
+import { DomSanitizer } from '@angular/platform-browser';
+import {ChangeDetectionStrategy, Input} from "@angular/core";
+
 
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  providers: []
+  providers: [],
+  
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private userService: UserService, private global: GlobalDataService, private router: Router, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService) {}
-  photo = "";
-  userArr: User[];
-  userArrPermanent: User[];
-  currentUser: string;
+  constructor(private userService:UserService,private global:GlobalDataService,private router:Router,private sanitizer: DomSanitizer,private spinner:NgxSpinnerService) { }
+  photo="";
+  userArr:User[];
+  userArrPermanent:User[];
+  page: number = 1;
+  currentUser=JSON.parse(localStorage.getItem("user"));
+
+
 
   ngOnInit() {
     this.getDepartmentUsers("COED");

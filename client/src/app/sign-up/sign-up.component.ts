@@ -64,6 +64,7 @@ export class SignUpComponent implements OnInit {
     // console.log("Outside");
     if(!username || !password)return;
     const hashedPass = SHA256(password).toString(enc.Hex);
+    console.log("in signup");
     this.userService.createUser({"userId":username,"firstName":firstName,"lastName":lastName,"password":hashedPass,"department":this.department}).subscribe(data=>{
       if(!data.action){
         this.spinner.hide();
