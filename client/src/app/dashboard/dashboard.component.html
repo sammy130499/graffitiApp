@@ -31,8 +31,12 @@
       <div class="px-6 py-4">
         <div class=" font-bold text-xl mb-2">Name</div>
         <p class="text-gray-700  text-base">
-          Username: {{currentUser.userId}}
+          Name: {{currentUser.firstName}} {{currentUser.lastName}}
+       </p>
+        <p class="text-gray-700  text-base">
+           Username: {{currentUser.userId}}
         </p>
+        
         <p class="text-gray-700 text-base">
           Branch: {{currentUser.department}}
         </p>
@@ -67,7 +71,7 @@
                     <p class="  flex items-center">
                       {{user.userId}}
                     </p>
-                    <div class="  font-bold">Name: name1</div>
+                    <div class="  font-bold">Name: {{user.firstName}} {{user.lastName}}</div>
                     <p class="text-base">{{user.department}}</p>
                   </div>
   

@@ -6,4 +6,6 @@ export class User {
     newPhotoUrl:String;
     oldPhotoUrl:String;
     department:String;
+    firstName:String;
+    lastName:String
 }
