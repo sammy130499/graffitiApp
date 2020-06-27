@@ -746,16 +746,8 @@ video {
   flex-direction: column;
 }
 
-#tui-image-editor-svg-default-icons{
-  display:none;
-}
-
 svg[display="none"]{
   display:none;
-}
-
-*{
-  font-family: 'Balsamiq Sans', cursive;
 }
 
 .alert {
