@@ -15,6 +15,7 @@ export class EditPageComponent implements OnInit {
   private imageEditor;
   enableButton;
   ngOnInit() {
+    this.spinner.show();
     let flag=0;
     this.enableButton=false;
     this.imageEditor = new ImageEditor('#tui-image-editor-container', {
@@ -31,22 +32,26 @@ export class EditPageComponent implements OnInit {
       cssMaxHeight:1000,
       usageStatistics: false
   });
-  this.spinner.show();
   this.userService.getImageUrlForTshirtUser({"userId":localStorage.getItem('tshirtUser')}).subscribe((res)=>{
+    this.spinner.hide();
     if(!res.action){
-      this.spinner.hide();
       console.log(res.message);
     }
     else{
       this.imageEditor.loadImageFromURL(res.message.url,'tshirtImg').then(()=>{
-        this.spinner.hide();
-        let usersAffected=JSON.parse(res.message.user).usersAffected;
-        if(usersAffected.indexOf(localStorage.getItem('tshirtUser'))==-1){
+        console.log('here');
+        let user=JSON.parse(res.message.user)
+        let usersAffected=user.usersAffected;
+        let tshirtUser=localStorage.getItem('tshirtUser');
+        console.log(usersAffected,tshirtUser);
+        if(!usersAffected.includes(tshirtUser)){
           this.enableButton=true;
         }
         else{
           this.enableButton=false;
         }
+      }).catch(e=>{
+        console.log(e);
       })
     }
 
@@ -57,7 +62,10 @@ export class EditPageComponent implements OnInit {
      }
  });
 
- this.imageEditor.on('objectActivated', function(props) {
+
+
+
+ this.imageEditor.on('objectActivated',(props)=> {
      flag=1
  });
   
@@ -65,8 +73,9 @@ export class EditPageComponent implements OnInit {
 
 sendPhoto(){
   let data=this.imageEditor.toDataURL();
+  this.spinner.show();
   this.userService.updatePhoto({"tshirtUser":localStorage.getItem('tshirtUser'),"photo":data}).subscribe(ret=>{
-    console.log(ret);
+    this.spinner.hide();
     if(!ret.action){
       console.log(ret.message);
     }

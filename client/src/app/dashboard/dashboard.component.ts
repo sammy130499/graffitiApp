@@ -64,7 +64,6 @@ export class DashboardComponent implements OnInit {
 
   callEdit(tshirtUser,currentUser){
     localStorage.setItem('tshirtUser',tshirtUser);
-    this.spinner.show();
     this.router.navigate(['/edit/'+currentUser+'/'+tshirtUser])
   }
 

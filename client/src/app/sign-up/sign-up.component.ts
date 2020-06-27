@@ -74,7 +74,7 @@ export class SignUpComponent implements OnInit {
         let username=data.message.user.userId;
         localStorage.setItem("user",JSON.stringify(data.message.user));
         localStorage.setItem("loggedInUsername",username);        
-        localStorage.setItem("access_token",data.message.token)
+        localStorage.setItem("access_token",data.message.token);
         this.router.navigate(['/dashboard/'+username]);
         this.spinner.hide();
         this.alertService.success("you have been registered !!");

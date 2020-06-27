@@ -44,7 +44,7 @@ export class HomepageComponent implements OnInit {
         let username=data.message.user.userId;
         localStorage.setItem("loggedInUsername",username);        
         localStorage.setItem("user",JSON.stringify(data.message.user));
-        localStorage.setItem("access_token",data.message.token)
+        localStorage.setItem("access_token",data.message.token);
         this.router.navigate(['/dashboard/'+username]);
         this.spinner.hide();
       }
