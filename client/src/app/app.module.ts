@@ -9,7 +9,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditPageComponent } from './edit-page/edit-page.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthGuard } from './auth.guard';
 import { UserService } from './user.service';
 import { AlertComponent } from './alert/alert.component';
 import { NgxSpinnerModule } from "ngx-spinner";
@@ -41,7 +40,7 @@ export function tokenGetter() {
       }
     })
   ],
-  providers: [AuthGuard,UserService],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
