@@ -18,13 +18,12 @@ export class DashboardComponent implements OnInit {
   photo="";
   userArr:User[];
   userArrPermanent:User[];
-  currentUser=JSON.parse(localStorage.getItem("user"));
+  currentUser:string;
 
   ngOnInit() {
-    // this.userArr=[];
     this.getDepartmentUsers("COED");
+    this.currentUser=JSON.parse(localStorage.getItem('user'));
     this.userService.getImageUrlForUser({"userId":localStorage.getItem("loggedInUsername")}).subscribe((data)=>{
-      console.log("thu thu ");
       if(!data.action){
         console.log(data.message)
       }
@@ -40,8 +39,6 @@ export class DashboardComponent implements OnInit {
 
   getDepartmentUsers(department:string)
   {
-    console.log("this is the user "+this.currentUser);
-
     this.userService.getDataForDashboard({"department":department}).subscribe((data)=>
     {
       if(!data.action)
@@ -60,7 +57,6 @@ export class DashboardComponent implements OnInit {
 
   searchWord(word:string)
   {
-    console.log("randi sala " +(word));
     this.userArr=this.userArrPermanent;
     if(word=="")
     return;
@@ -76,7 +72,6 @@ export class DashboardComponent implements OnInit {
       }
     }
     this.userArr=tempUser;
-    console.log("this is user array"+this.userArr);
   }
 
   

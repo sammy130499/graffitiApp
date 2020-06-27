@@ -37,6 +37,7 @@ export class SignUpComponent implements OnInit {
 
   checkUsername(){
     let username=this.form.get('username').value;
+    if(!username)return;
     this.userService.checkUser({"userId":username}).subscribe((data)=>{
       if(!data.action && username!=" "){
         console.log(data.message);

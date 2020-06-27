@@ -1,9 +1,9 @@
 <div class="container">
-    <app-alert></app-alert>
     <div class="hero-bg flex justify-center items-center  w-screen h-screen flex-col text-center object-contain">
+        <app-alert ></app-alert>
         <div class="flex-1 text-center mt-16">
             <img src="../../assets/images/logo.png" alt="">
-        </div>        
+        </div>
         <div class="flex-1 -mt-32">            
                 <form [formGroup]="form" class="bg-red-600 px-4 py-5 bg-opacity-75 text-white text-2xl rounded-lg ">
                         <label for="username"> Username
@@ -17,7 +17,7 @@
                         <ngx-spinner
                         bdColor="rgba(51,51,51,0.8)"
                         size="medium"
-                        color="#000"
+                        color="#E5433E"
                         type="pacman"
                         >
                         <p style="font-size: 20px; color:black">Let's create memories...</p>
