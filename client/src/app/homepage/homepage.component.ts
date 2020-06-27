@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { GlobalDataService } from '../global-data.service';
 import { UserService } from '../user.service';
 import { AlertService } from '../alert.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-homepage',
@@ -13,7 +14,7 @@ import { AlertService } from '../alert.service';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor(private router : Router,private alertService:AlertService, private global:GlobalDataService,private user:UserService) { }
+  constructor(private router : Router,private spinner: NgxSpinnerService,private alertService:AlertService, private global:GlobalDataService,private user:UserService) { }
 
   form = new FormGroup({
     username : new FormControl('',Validators.required),
@@ -24,7 +25,7 @@ export class HomepageComponent implements OnInit {
   }
 
   login(){
-   
+    this.spinner.show();
     let username=this.form.get('username').value;
     let password=this.form.get('password').value;
     if((username || password) ==""){
@@ -36,12 +37,18 @@ export class HomepageComponent implements OnInit {
       if(!data.action){
         console.log(data.message);
         this.alertService.error(data.message);
+        this.spinner.hide();
       }
+      
       else{
+        
         let username=data.message.user.userId;
-        localStorage.setItem("access_token",data.message.token)
-        this.alertService.success("Logged in successfully !!!");
+        localStorage.setItem("access_token",data.message.token);             
         this.router.navigate(['/dashboard/'+username]);
+        this.spinner.hide();
+        window.alert("welcome to dashboard !!!");
+        
+        
         
       }
     })

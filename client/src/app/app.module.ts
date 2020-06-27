@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './auth.guard';
 import { UserService } from './user.service';
 import { AlertComponent } from './alert/alert.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 export function tokenGetter() {
@@ -31,6 +32,7 @@ export function tokenGetter() {
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxSpinnerModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {
