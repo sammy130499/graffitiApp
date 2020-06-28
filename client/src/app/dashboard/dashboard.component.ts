@@ -9,6 +9,7 @@ import { User } from '../user.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import {ChangeDetectionStrategy, Input} from "@angular/core";
 import { HostListener } from '@angular/core';
+import { AlertService } from '../alert.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ import { HostListener } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private userService:UserService,private global:GlobalDataService,private router:Router,private sanitizer: DomSanitizer,private spinner:NgxSpinnerService) { }
+  constructor(private userService:UserService,private alertService:AlertService,private global:GlobalDataService,private router:Router,private sanitizer: DomSanitizer,private spinner:NgxSpinnerService) { }
   photo="";
   userArr:User[];
   userArrPermanent:User[];
@@ -52,7 +53,7 @@ export class DashboardComponent implements OnInit {
       if (!data.action) {
         this.userArr = [];
         this.userArrPermanent = [];
-        console.log(data.message);
+        this.alertService.info("You haven't made any friends in this branch, that's SAD!!")
       } else {
         this.userArr = JSON.parse(data.message);
         this.userArr = this.userArr.filter(obj=>obj.userId!=this.currentUser.userId);
