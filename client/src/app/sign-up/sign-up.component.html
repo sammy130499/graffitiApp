@@ -6,13 +6,13 @@
                     <input formControlName="username" type="text" class="input-area" id="username" (blur)="checkUsername()">
                 </label>
                 <label for="password" class="mt-2"> Password
-                    <input formControlName="password" type="password" class="input-area" id="password">
+                    <input formControlName="password" type="password" class="input-area" id="password" (blur)="checkPassword()">
                 </label>
                 <label for="firstName" class="mt-2"> First Name
-                    <input formControlName="firstName" type="text" class="input-area" id="firstName">
+                    <input formControlName="firstName" type="text" class="input-area" id="firstName" (blur)="checkFirstName()">
                 </label>
                 <label for="lastName" class="mt-2"> Last Name
-                    <input formControlName="lastName" type="text" class="input-area" id="lastName">
+                    <input formControlName="lastName" type="text" class="input-area" id="lastName" (blur)="checkLastName()">
                 </label>
                 <label for="department" class="mt-2"> Department
                     <select name="department" id="department" class="flex block bg-red-200 text-red-800" (change)="setDepartment(department.value)" #department>
@@ -29,15 +29,15 @@
                 </label>
         </form>
         <div>
-                <ngx-spinner
-                bdColor="rgba(255,255,255,0.8)"
-                size="medium"
-                color="#E5433E"
-                type="pacman"
-                >
-                <p style="font-size: 20px; color:black">Please Wait! <br>Creating awesomness for you!!</p>
-                </ngx-spinner>
-            <button [disabled]="!allowSignup" type="button" [ngClass]="{'bg-red-500':!allowSignup}" class="btn-primary mt-4" (click)="signup()">Sign Up</button>
+            <ngx-spinner
+            bdColor="rgba(255,255,255,0.8)"
+            size="medium"
+            color="#E5433E"
+            type="pacman"
+            >
+            <p class="text-gray-900 text-xl p-2 mt-2">Creating a Graffi-Tee for you. <br>Wait for a few seconds</p>
+            </ngx-spinner>
+            <button [disabled]="!allowSignup||!allowSignupPassword||!allowSignupFirstName||!allowSignupLastName" type="button" [ngClass]="{'bg-red-500':!allowSignup}" class="btn-primary mt-4" (click)="signup()">Sign Up</button>
             <button type="button" class="btn-primary mt-4 m-4" routerLink="/homepage">Log In</button>
     </div>
     </div>

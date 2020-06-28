@@ -9,7 +9,6 @@
 
 
 
-
 <nav class="flex items-center justify-end border-bg p-6 bg-gray-900">
   <div class="self-end">
     <input type="search" #search name="search" id="search" class="bg-purple-white shadow rounded border-0 p-3"
@@ -57,9 +56,22 @@
       </select>
     </div>
  <div class="relative mr-6 my-2 mb-2 ml-2">    
-
   
-  <div class="grid grid-cols-3 "> 
+  <div *ngIf="!fetchedUsers" style="height: 400px;">
+    <ngx-spinner
+      bdColor="rgba(51,51,51,0.8)"
+      size="large"
+      color="#E5433E"
+      type="pacman"
+      size="medium"
+      name="spinner-2"
+      [fullScreen] = "false"
+      >
+      <p style="font-size: 20px; color:black; color: white;">Finding people...</p>
+    </ngx-spinner>
+  </div>
+
+  <div *ngIf="fetchedUsers" class="grid grid-cols-3 "> 
     <div *ngFor="let user of userArr |  paginate: { itemsPerPage: 6, currentPage: page }">
       <div *ngIf="currentUser.userId!=user.userId">   
         <a class="mb-2" (click)="callEdit(user.userId,currentUser.userId)">
@@ -81,6 +93,17 @@
     
     <div *ngIf="userArr.length!==0" class="w-1/2 text-white-100">
         <pagination-controls (pageChange)="page = $event" class="my-pagination"></pagination-controls>
+      <div class="w-1/2 text-white-100">
+
+
+    <div class="flex items-center justify-between h-20">
+      <div class="w-1/6"></div>
+      <div class="w-4/6 text-center text-white-100">
+    
+    
+      <div class="w-1/2 text-white-100">
+      </div>
+      <div class="w-1/6"></div>
     </div>
 
     </div>
