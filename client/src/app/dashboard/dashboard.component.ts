@@ -64,7 +64,7 @@ export class DashboardComponent implements OnInit {
 
   callEdit(tshirtUser,currentUser){
     localStorage.setItem('tshirtUser',tshirtUser);
-    this.router.navigate(['/edit/'+currentUser+'/'+tshirtUser])
+    this.router.navigate(['/edit/'+currentUser+'/'+tshirtUser+'/front'])
   }
 
   searchWord(word: string) {
