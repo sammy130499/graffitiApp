@@ -21,6 +21,8 @@ export class AlertComponent implements OnInit {
       }
 
       // add alert to array
+      if(this.alerts.length)
+      this.alerts.pop();
       this.alerts.push(alert);
   });
   }

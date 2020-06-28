@@ -14,16 +14,15 @@ export class AuthGuardLoginService implements CanActivate{
 
   canActivate(){
     if(this.userService.isLoggedIn()){
+      
+      if(localStorage.getItem("isBackBtnPressed")=="true"){
+        localStorage.setItem("isBackBtnPressed","false");
+        this.alertService.warn("You cannot visit that page without logging out");
+        return false;
+      }
       let loggedInUsername = localStorage.getItem("loggedInUsername");
       this.router.navigate(['/dashboard/'+loggedInUsername]);
-      if(localStorage.getItem("isBackBtnPressed")){
-        localStorage.removeItem("isBackBtnPressed");
-        this.alertService.warn("You cannot visit that page without logging out");
-      }
-      else{
-        this.alertService.success("Welcome back !!!");
-      }
-      
+      this.alertService.info("Welcome !!");
       return false;
     }
     return true;

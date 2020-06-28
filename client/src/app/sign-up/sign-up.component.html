@@ -1,30 +1,28 @@
 <div class="container">
     <div class="hero-bg flex justify-center items-center  w-screen h-screen flex-col text-center bg-local">
-        <app-alert></app-alert>        
+        
         <form [formGroup]="form" class="bg-red-700 px-4 py-5 bg-opacity-75 text-white text-2xl rounded-lg ">
                 <label for="username"> Username
                     <input formControlName="username" type="text" class="input-area" id="username" (blur)="checkUsername()">
                 </label>
                 <label for="password" class="mt-2"> Password
-                    <input formControlName="password" type="password" class="input-area" id="password">
+                    <input formControlName="password" type="password" class="input-area" id="password" (blur)="checkPassword()">
                 </label>
                 <label for="firstName" class="mt-2"> First Name
-                    <input formControlName="firstName" type="text" class="input-area" id="firstName">
+                    <input formControlName="firstName" type="text" class="input-area" id="firstName" (blur)="checkFirstName()">
                 </label>
                 <label for="lastName" class="mt-2"> Last Name
-                    <input formControlName="lastName" type="text" class="input-area" id="lastName">
+                    <input formControlName="lastName" type="text" class="input-area" id="lastName" (blur)="checkLastName()">
                 </label>
                 <label for="department" class="mt-2"> Department
                     <select name="department" id="department" class="flex block bg-red-200 text-red-800" (change)="setDepartment(department.value)" #department>
+                        <option disabled selected value> where you went most in SVNIT? :P </option>
                         <option value="COED">Computer Engineering Department</option>
                         <option value="CHED">Chemical Engineering Department</option>
                         <option value="MED">Mechanical Engineering Department</option>
                         <option value="ECED"> Electronics Engineering Department</option>
                         <option value="CED">Civil Engineering Department</option>
                         <option value="EED">Electrical Engineering Department</option>
-                        <!-- <option value="COED"></option>
-                        <option value="COED"></option>
-                        <option value="COED"></option> -->
                     </select>
                 </label>
         </form>
@@ -37,7 +35,7 @@
             >
             <p class="text-gray-900 text-xl p-2 mt-2">Creating a Graffi-Tee for you. <br>Wait for a few seconds</p>
             </ngx-spinner>
-            <button [disabled]="!allowSignup" type="button" [ngClass]="{'bg-red-500':!allowSignup}" class="btn-primary mt-4" (click)="signup()">Sign Up</button>
+            <button [disabled]="!allowSignup||!allowSignupPassword||!allowSignupFirstName||!allowSignupLastName" type="button" [ngClass]="{'bg-red-500':!allowSignup}" class="btn-primary mt-4" (click)="signup()">Sign Up</button>
             <button type="button" class="btn-primary mt-4 m-4" routerLink="/homepage">Log In</button>
     </div>
     </div>
