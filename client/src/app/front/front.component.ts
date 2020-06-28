@@ -29,29 +29,26 @@ export class FrontComponent implements OnInit {
           initMenu: 'text',
           menuBarPosition: 'bottom'
       },
-      cssMaxWidth:1000,
-      cssMaxHeight:1000,
+      cssMaxWidth:600,
+      cssMaxHeight:700,
       usageStatistics: false
   });
   this.spinner.show();
-  this.userService.getImageUrlForTshirtUser({"userId":localStorage.getItem('tshirtUser')}).subscribe((res)=>{
+  this.userService.getImageUrlForTshirtUser({"userId":localStorage.getItem('tshirtUser')}).subscribe( async (res)=>{
+    this.spinner.hide();    
     if(!res.action){
-      this.spinner.hide();
       console.log(res.message);
     }
     else{
-      this.imageEditor.loadImageFromURL(res.message.url,'tshirtImg').then(()=>{
-        this.spinner.hide();
-        let usersAffected=JSON.parse(res.message.user).usersAffected;
+      let usersAffected=JSON.parse(res.message.user).usersAffected;
         if(usersAffected.indexOf(localStorage.getItem('tshirtUser'))==-1){
           this.enableButton=true;
         }
         else{
           this.enableButton=false;
         }
-      })
+      await this.imageEditor.loadImageFromURL(res.message.url,'tshirtImg')
     }
-
   })
   this.imageEditor.on('mousedown',(event, originPointer)=> {
      if(flag==1){
