@@ -4,7 +4,7 @@
   color="#E5433E"
   type="pacman"
   >
-  <p style="font-size: 20px; color:black">Experience magic! <br> Setting up your dashboard</p>
+  <p style="font-size: 20px; color:black" [innerHtml]="spinnerMsg"></p>
   </ngx-spinner>
 
 
@@ -94,19 +94,6 @@
     <div *ngIf="userArr.length!==0" class="w-1/2 text-white-100">
         <pagination-controls (pageChange)="page = $event" class="my-pagination"></pagination-controls>
       <div class="w-1/2 text-white-100">
-
-
-    <div class="flex items-center justify-between h-20">
-      <div class="w-1/6"></div>
-      <div class="w-4/6 text-center text-white-100">
-    
-    
-      <div class="w-1/2 text-white-100">
-      </div>
-      <div class="w-1/6"></div>
-    </div>
-
-    </div>
   </div>
 </div>
 

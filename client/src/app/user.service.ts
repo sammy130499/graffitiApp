@@ -104,6 +104,9 @@ export class UserService {
       }
       else{
         localStorage.removeItem("access_token");
+        localStorage.removeItem("loggedInUsername")
+        localStorage.removeItem("tshirtUser")
+        localStorage.removeItem("currentUser")
         this.router.navigate(['/homepage']);
       }
     })

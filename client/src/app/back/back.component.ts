@@ -16,7 +16,9 @@ export class BackComponent implements OnInit {
   constructor(private userService:UserService,private global:GlobalDataService,private spinner:NgxSpinnerService,private router:Router) { }
   private imageEditor;
   enableButton;
+  spinnerMsg;
   ngOnInit() {
+    this.spinnerMsg="Thank you for creating memories with us :)"
     this.spinner.show();
     let flag=0;
     this.enableButton=false;
@@ -66,6 +68,7 @@ export class BackComponent implements OnInit {
 }
 
 sendPhoto(){
+  this.spinnerMsg="Your loved one has so many well wishers <br/> Adding your wishes too<br>Wait for a few moments!"
   this.spinner.show();
   let data=this.imageEditor.toDataURL();
   this.userService.updatePhotoBack({"tshirtUser":localStorage.getItem('tshirtUser'),"photo":data}).subscribe(ret=>{
