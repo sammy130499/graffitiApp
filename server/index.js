@@ -241,7 +241,7 @@ app.post('/api/getDataForDashboard',auth,(req,res)=>{
 })
 
 
-app.post('/api/getImageUrlForUser',auth,(req,res)=>{
+app.get('/api/getImageUrlForUser',auth,(req,res)=>{
     res.send({
         action:true,
         message:req.user.photoUrl
