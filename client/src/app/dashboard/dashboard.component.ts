@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { User } from '../user.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import {ChangeDetectionStrategy, Input} from "@angular/core";
-
+import { HostListener } from '@angular/core';
 
 
 @Component({
@@ -96,6 +96,16 @@ export class DashboardComponent implements OnInit {
 
     }
     this.userArr = tempUser;
+  }
+
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    localStorage.setItem("isBackBtnPressed","true");
+    console.log('Back button pressed');
+  }
+
+  logout(){
+    this.userService.logout();
   }
 
 
