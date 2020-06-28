@@ -23,7 +23,7 @@ export class FrontComponent implements OnInit {
       includeUI: {
           menu:['text'],
           loadImage: {
-              path: '../../assets/images/tshirtFront.png',
+              path: '../../assets/images/load.svg',
               name: 'SampleImage'
           },
           initMenu: 'text',
@@ -41,11 +41,12 @@ export class FrontComponent implements OnInit {
     }
     else{
       let usersAffected=JSON.parse(res.message.user).usersAffected;
-        if(usersAffected.indexOf(localStorage.getItem('tshirtUser'))==-1){
-          this.enableButton=true;
+      let tshirtUser=localStorage.getItem('tshirtUser')
+        if(usersAffected.includes(tshirtUser)){
+          this.enableButton=false;
         }
         else{
-          this.enableButton=false;
+          this.enableButton=true;
         }
       await this.imageEditor.loadImageFromURL(res.message.url,'tshirtImg')
     }

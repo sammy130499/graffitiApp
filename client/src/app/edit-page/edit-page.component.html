@@ -1,9 +1,8 @@
-<div class="w-1/2 flex items-center flex-shrink-0 text-white mr-6">
-    <button class="btn-secondary" (click)="showFront()">Front Side</button>
+<div class="flex justify-evenly" style="background-color: #1F1F1F;width: 100%;">
+            <button class="btn-secondary" (click)="showFront()">Front Side</button>
+            <button class="btn-secondary" (click)="showHome()">Home</button>
+            <button class="btn-secondary" (click)="showBack()">Back Side</button>
 </div>
 
-<div class="w-1/2 inline-block flex-grow lg:flex lg:w-auto ">
-    <button class="btn-secondary" (click)="showBack()">Back Side</button>
-</div>
 
 <router-outlet></router-outlet>

@@ -19,6 +19,10 @@ export class EditPageComponent implements OnInit {
 
   
 }
+showHome(){
+  let username=localStorage.getItem('loggedInUsername');
+  this.router.navigate(['/dashboard/'+username])
+}
 
 
 showFront()

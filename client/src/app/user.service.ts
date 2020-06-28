@@ -3,12 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable, Subscription, Subscribable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { AlertService } from './alert.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private baseUrl = "http://localhost:8000/api/";
-  constructor( private http : HttpClient, private router : Router ) { }
+  constructor( private http : HttpClient, private router : Router,private alert:AlertService,private spinner:NgxSpinnerService ) { }
 
 
 
@@ -18,12 +20,7 @@ export class UserService {
     headers.set('Content-Type','application/json');
     return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
   }
-  logoutUser(){
-    let url = this.baseUrl + "logout";
-    let headers=new HttpHeaders();
-    headers.set('Content-Type','application/json');
-    return this.http.get(url);
-  }
+  
   getUsersAffected():any{
     let url = this.baseUrl + "getUsersAffected";
     let headers=new HttpHeaders();
@@ -96,8 +93,20 @@ export class UserService {
   }
 
   logout(){
-    localStorage.removeItem("access_token");
-    this.router.navigate(['/homepage']);
+    let url = this.baseUrl + "logout";
+    let headers=new HttpHeaders();
+    headers.set('Content-Type','application/json');
+    this.spinner.show()
+    this.http.get(url).subscribe((data:any)=>{
+      this.spinner.hide();
+      if(!data.action){
+        this.alert.error(data.message);
+      }
+      else{
+        localStorage.removeItem("access_token");
+        this.router.navigate(['/homepage']);
+      }
+    })
   }
   
 }

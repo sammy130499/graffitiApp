@@ -24,33 +24,33 @@ export class BackComponent implements OnInit {
       includeUI: {
           menu:['text'],
           loadImage: {
-              path: '../../assets/images/tshirtBack.png',
+              path: '../../assets/images/load.svg',
               name: 'SampleImageBack'
           },
           initMenu: 'text',
           menuBarPosition: 'bottom'
       },
-      cssMaxWidth:1000,
-      cssMaxHeight:1000,
+      cssMaxWidth:600,
+      cssMaxHeight:700,
       usageStatistics: false
   });
   this.spinner.show();
-  this.userService.getImageUrlForTshirtUserBack({"userId":localStorage.getItem('tshirtUser')}).subscribe((res)=>{
+  this.userService.getImageUrlForTshirtUserBack({"userId":localStorage.getItem('tshirtUser')}).subscribe(async (res)=>{
+    this.spinner.hide();    
     if(!res.action){
-      this.spinner.hide();
       console.log(res.message);
     }
     else{
-      this.imageEditor.loadImageFromURL(res.message.url,'tshirtImg').then(()=>{
-        this.spinner.hide();
-        let usersAffected=JSON.parse(res.message.user).usersAffected;
-        if(usersAffected.indexOf(localStorage.getItem('tshirtUser'))==-1){
-          this.enableButton=true;
-        }
-        else{
+      let usersAffected=JSON.parse(res.message.user).usersAffected;
+      let tshirtUser=localStorage.getItem('tshirtUser')
+        if(usersAffected.includes(tshirtUser)){
           this.enableButton=false;
         }
-      })
+        else{
+          this.enableButton=true;
+        }
+      await this.imageEditor.loadImageFromURL(res.message.url,'tshirtImg')
+
     }
 
   })
