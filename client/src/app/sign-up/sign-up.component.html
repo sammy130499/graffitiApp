@@ -29,14 +29,14 @@
                 </label>
         </form>
         <div>
-            <ngx-spinner
-            bdColor="rgba(255,255,255,0.8)"
-            size="medium"
-            color="#E5433E"
-            type="pacman"
-            >
-            <p class="text-gray-900 text-xl p-2 mt-2">Creating a Graffi-Tee for you. <br>Wait for a few seconds</p>
-            </ngx-spinner>
+                <ngx-spinner
+                bdColor="rgba(255,255,255,0.8)"
+                size="medium"
+                color="#E5433E"
+                type="pacman"
+                >
+                <p style="font-size: 20px; color:black">Please Wait! <br>Creating awesomness for you!!</p>
+                </ngx-spinner>
             <button [disabled]="!allowSignup" type="button" [ngClass]="{'bg-red-500':!allowSignup}" class="btn-primary mt-4" (click)="signup()">Sign Up</button>
             <button type="button" class="btn-primary mt-4 m-4" routerLink="/homepage">Log In</button>
     </div>

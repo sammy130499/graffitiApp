@@ -33,7 +33,6 @@ export class FrontComponent implements OnInit {
       cssMaxHeight:700,
       usageStatistics: false
   });
-  this.spinner.show();
   this.userService.getImageUrlForTshirtUser({"userId":localStorage.getItem('tshirtUser')}).subscribe( async (res)=>{
     this.spinner.hide();    
     if(!res.action){
@@ -64,9 +63,10 @@ export class FrontComponent implements OnInit {
 }
 
 sendPhoto(){
+  this.spinner.show();
   let data=this.imageEditor.toDataURL();
   this.userService.updatePhoto({"tshirtUser":localStorage.getItem('tshirtUser'),"photo":data}).subscribe(ret=>{
-    console.log(ret);
+    this.spinner.hide();
     if(!ret.action){
       console.log(ret.message);
     }

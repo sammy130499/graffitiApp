@@ -21,7 +21,7 @@ export class BackProfileComponent implements OnInit {
     
     this.dataUrl='../../assets/images/load.svg'
     this.spinner.show();
-    this.userService.getImageUrlForUser().subscribe(async (res) => {
+    this.userService.getImageUrlForUser({"face":"back"}).subscribe(async (res) => {
       this.spinner.hide();
       if (!res.action) {
         console.log(res.message);

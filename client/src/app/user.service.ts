@@ -62,9 +62,11 @@ export class UserService {
     return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
   }
 
-  getImageUrlForUser():any{
+  getImageUrlForUser(face:any):any{
     let url = this.baseUrl + "getImageUrlForUser";
-    return this.http.get(url);
+    let headers=new HttpHeaders();
+    headers.set('Content-Type','application/json');
+    return this.http.post(url,JSON.parse(JSON.stringify(face)),{headers});
   }
 
   getImageUrlForTshirtUser(user:any):any{

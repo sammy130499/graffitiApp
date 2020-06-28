@@ -241,11 +241,21 @@ app.post('/api/getDataForDashboard',auth,(req,res)=>{
 })
 
 
-app.get('/api/getImageUrlForUser',auth,(req,res)=>{
-    res.send({
-        action:true,
-        message:req.user.photoUrl
-    })
+app.post('/api/getImageUrlForUser',auth,(req,res)=>{
+    let {face}=req.body;
+    if(face=="front"){
+        res.send({
+            action:true,
+            message:req.user.photoUrl
+        })
+    }
+    else{
+        res.send({
+            action:true,
+            message:req.user.photoUrlBack
+        })
+    }
+    
 });
 
 app.post('api/getImageUrlForUserBack',auth,(req,res)=>{

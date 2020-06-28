@@ -30,9 +30,10 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit() {
+    this.userArr=[];
     this.getDepartmentUsers("COED");
     this.currentUser = JSON.parse(localStorage.getItem('user'));
-    this.userService.getImageUrlForUser().subscribe((data) => {
+    this.userService.getImageUrlForUser({"face":"front"}).subscribe((data) => {
       if (!data.action) {
         console.log(data.message)
       } else {

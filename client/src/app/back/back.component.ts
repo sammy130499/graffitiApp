@@ -34,7 +34,6 @@ export class BackComponent implements OnInit {
       cssMaxHeight:700,
       usageStatistics: false
   });
-  this.spinner.show();
   this.userService.getImageUrlForTshirtUserBack({"userId":localStorage.getItem('tshirtUser')}).subscribe(async (res)=>{
     this.spinner.hide();    
     if(!res.action){
@@ -67,9 +66,10 @@ export class BackComponent implements OnInit {
 }
 
 sendPhoto(){
+  this.spinner.show();
   let data=this.imageEditor.toDataURL();
   this.userService.updatePhotoBack({"tshirtUser":localStorage.getItem('tshirtUser'),"photo":data}).subscribe(ret=>{
-    console.log(ret);
+    this.spinner.hide();
     if(!ret.action){
       console.log(ret.message);
     }

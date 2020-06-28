@@ -29,7 +29,7 @@ export class FrontProfileComponent implements OnInit {
   ngOnInit() {
     this.dataUrl='../../assets/images/load.svg'
     this.spinner.show();
-    this.userService.getImageUrlForUser().subscribe(async (res) => {
+    this.userService.getImageUrlForUser({"face":"front"}).subscribe(async (res) => {
       this.spinner.hide();
       if (!res.action) {
         console.log(res.message);

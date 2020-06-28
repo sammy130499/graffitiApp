@@ -1,11 +1,11 @@
 <ngx-spinner
-    bdColor="rgba(51,51,51,0.8)"
-    size="medium"
-    color="#E5433E"
-    type="pacman"
-    >
-    <p style="font-size: 20px; color:black">Let's create memories...</p>
-</ngx-spinner>
+  bdColor="rgba(255,255,255,0.8)"
+  size="medium"
+  color="#E5433E"
+  type="pacman"
+  >
+  <p style="font-size: 20px; color:black">Experience magic! <br> Setting up your dashboard</p>
+  </ngx-spinner>
 
 
 
@@ -70,8 +70,7 @@
                 <div class=" text-grey-darker text-sm flex-1">
                  <p>{{user.userId}} </p>
                 </div>
-                  <a href="#" class="border-t border-grey-light pt-2 text-xs text-grey hover:text-red uppercase no-underline tracking-wide" style="
-                    ">{{user.department}}</a>
+                  <a href="#" class="border-t border-grey-light pt-2 text-xs text-grey hover:text-red uppercase no-underline tracking-wide">{{user.department}}</a>
             </div>
           </div>
           </a>
@@ -80,8 +79,8 @@
     </div>
     
     
-      <div class="w-1/2 text-white-100">
-        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    <div *ngIf="userArr.length!==0" class="w-1/2 text-white-100">
+        <pagination-controls (pageChange)="page = $event" class="my-pagination"></pagination-controls>
     </div>
 
     </div>
