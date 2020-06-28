@@ -32,9 +32,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getDepartmentUsers("COED");
     this.currentUser = JSON.parse(localStorage.getItem('user'));
-    this.userService.getImageUrlForUser({
-      "userId": localStorage.getItem("loggedInUsername")
-    }).subscribe((data) => {
+    this.userService.getImageUrlForUser().subscribe((data) => {
       if (!data.action) {
         console.log(data.message)
       } else {
@@ -65,6 +63,11 @@ export class DashboardComponent implements OnInit {
   callEdit(tshirtUser,currentUser){
     localStorage.setItem('tshirtUser',tshirtUser);
     this.router.navigate(['/edit/'+currentUser+'/'+tshirtUser+'/front'])
+  }
+
+  callProfile(){
+    let user=localStorage.getItem('loggedInUsername');
+    this.router.navigate(['/profile/'+user+'/front'])
   }
 
   searchWord(word: string) {

@@ -16,6 +16,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FrontComponent } from './front/front.component';
 import { BackComponent } from './back/back.component';
+import { ProfileComponent } from './profile/profile.component';
+import { FrontProfileComponent } from './front-profile/front-profile.component';
+import { BackProfileComponent } from './back-profile/back-profile.component';
 
 
 export function tokenGetter() {
@@ -30,7 +33,10 @@ export function tokenGetter() {
     SignUpComponent,
     AlertComponent,
     FrontComponent,
-    BackComponent
+    BackComponent,
+    ProfileComponent,
+    FrontProfileComponent,
+    BackProfileComponent
   ],
   imports: [
     BrowserModule,
