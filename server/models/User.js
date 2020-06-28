@@ -20,9 +20,11 @@ var userSchema = new Schema({
       }
     }],
     usersAffected:[String],
-    newPhotoUrl:String,
-    oldPhotoUrl:String,
-    department:String
+    photoUrl:String,
+    imgPublicId:String,
+    department:String,
+    firstName:String,
+    lastName:String
   });
 
 

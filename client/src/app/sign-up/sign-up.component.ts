@@ -64,17 +64,17 @@ export class SignUpComponent implements OnInit {
     // console.log("Outside");
     if(!username || !password)return;
     const hashedPass = SHA256(password).toString(enc.Hex);
+    console.log("in signup");
     this.userService.createUser({"userId":username,"firstName":firstName,"lastName":lastName,"password":hashedPass,"department":this.department}).subscribe(data=>{
       if(!data.action){
-        console.log(data.message);
-        this.alertService.error(data.message);
         this.spinner.hide();
+        this.alertService.error(data.message);
       }
       else{
-        console.log(data.message);
         let username=data.message.user.userId;
-        localStorage.setItem("user",data.message.user);
-        localStorage.setItem("access_token",data.message.token)
+        localStorage.setItem("user",JSON.stringify(data.message.user));
+        localStorage.setItem("loggedInUsername",username);        
+        localStorage.setItem("access_token",data.message.token);
         this.router.navigate(['/dashboard/'+username]);
         this.spinner.hide();
         this.alertService.success("you have been registered !!");

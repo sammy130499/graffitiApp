@@ -16,11 +16,16 @@ export class UserService {
     let url = this.baseUrl + "login";
     let headers=new HttpHeaders();
     headers.set('Content-Type','application/json');
-    console.log(headers);
     return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
   }
   logoutUser(){
     let url = this.baseUrl + "logout";
+    let headers=new HttpHeaders();
+    headers.set('Content-Type','application/json');
+    return this.http.get(url);
+  }
+  getUsersAffected():any{
+    let url = this.baseUrl + "getUsersAffected";
     let headers=new HttpHeaders();
     headers.set('Content-Type','application/json');
     return this.http.get(url);
@@ -55,9 +60,29 @@ export class UserService {
 
   getImageUrlForUser(user:any):any{
     let url = this.baseUrl + "getImageUrlForUser";
-    console.log("inside function" +JSON.stringify(user.userId));
     let headers=new HttpHeaders();
     headers.set('Content-Type','application/json');
     return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
   }
+
+  getImageUrlForTshirtUser(user:any):any{
+    let url = this.baseUrl + "getImageUrlForTshirtUser";
+    let headers=new HttpHeaders();
+    headers.set('Content-Type','application/json');
+    return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
+  }
+
+  isLoggedIn(){
+    if(!localStorage.getItem("access_token"))
+    {
+      return false;
+    }
+    return true;
+  }
+
+  logout(){
+    localStorage.removeItem("access_token");
+    this.router.navigate(['/homepage']);
+  }
+  
 }

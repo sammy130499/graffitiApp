@@ -47,15 +47,17 @@
   @apply mt-4 border-green-300 border-t-2 text-center text-xl flex flex-col;
 }
 
-#tui-image-editor-svg-default-icons{
-  display:none;
-}
 
 svg[display="none"]{
   display:none;
 }
 *{
   font-family: 'Balsamiq Sans', cursive;
+}
+
+html,body{
+  height: 100%;
+  margin:0
 }
 .alert {
     padding: 15px;
