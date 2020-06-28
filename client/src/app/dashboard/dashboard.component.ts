@@ -7,7 +7,6 @@ import { GlobalDataService } from '../global-data.service';
 import { Router } from '@angular/router';
 import { User } from '../user.model';
 import { DomSanitizer } from '@angular/platform-browser';
-import {ChangeDetectionStrategy, Input} from "@angular/core";
 import { HostListener } from '@angular/core';
 
 
