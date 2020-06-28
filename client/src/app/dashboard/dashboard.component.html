@@ -7,43 +7,36 @@
     >
     <p style="font-size: 20px; color:black">Let's create memories...</p>
     </ngx-spinner>
-<nav class="flex items-center justify-between flex-wrap border-bg p-6">
-  <div class="w-1/2 flex items-center flex-shrink-0 text-white mr-6">
 
-    <span class="font-semibold text-xl tracking-tight">Graffi-Tee</span>
-  </div>
-  
-  <div class="w-1/4 block flex-grow lg:flex lg:w-auto ">
 
+
+<nav class="flex items-center justify-end border-bg p-6 bg-gray-900">
+  <div class="self-end">
     <input type="search" #search name="search" id="search" class="bg-purple-white shadow rounded border-0 p-3"
       placeholder="Search by name..." (input)="searchWord(search.value)">
-    <div class="absolute pin-r pin-t mt-3 mr-4 text-purple-lighter">
-    </div>
   </div>
-  <div class="w-1/4 block flex-grow lg:flex lg:w-auto ">
-    <button type="button" class="btn-primary mt-4 m-4" (click)="logout()">Logout</button>
+  <div class="self-end ml-4">
+    <button type="button" class="btn-primary" (click)="logout()">Logout</button>
   </div>
-  
 </nav>
 
 
 
-<div class="hero-bg flex w-full h-full">
-  <div class="bg-no-repeat bg-bottom w-1/2 flex-auto border-4  ">
+<div class="hero-bg flex w-full h-full" >
+  <div class="bg-no-repeat bg-bottom w-1/2 flex-auto" style="max-width:50%;">
     <div class="w-1/3 inline-block"></div>
-    <div class="bg-black w-1/3 inline-block rounded overflow-hidden" (click)="callProfile()">
+    <div class="bg-gray-900 w-2/3 inline-block rounded overflow-hidden mt-2" (click)="callProfile()" style="max-width: 50%;">
       <img class="object-center sm:object-top md:object-right lg:object-bottom xl:object-center" src="{{photo}}"
         alt="Tshirt photo">
-      <div class="px-6 py-4">
-        <div class=" font-bold text-xl mb-2">Name</div>
-        <p class="text-gray-700 text-center text-base sm:text-sm md:text-sm lg:text-sm xl:text-sm">
-          Name: {{currentUser.firstName}} {{currentUser.lastName}}
+      <div class="px-6 py-4 text-white">
+        <p class="text-center text-xl">
+          {{currentUser.firstName}} {{currentUser.lastName}}
        </p>
-        <p class="text-gray-700 text-center text-base sm:text-sm md:text-sm lg:text-sm xl:text-sm">
+        <p class="text-center text-base sm:text-sm md:text-sm lg:text-sm xl:text-sm">
            Username: {{currentUser.userId}}
         </p>
         
-        <p class="text-gray-700 text-center text-base sm:text-sm md:text-sm lg:text-sm xl:text-sm">
+        <p class="text-center text-base sm:text-sm md:text-sm lg:text-sm xl:text-sm">
           Branch: {{currentUser.department}}
         </p>
       </div>
@@ -51,9 +44,9 @@
     <div class="w-1/3 inline-block"></div>
   </div>
 
-  <div class=" flex-auto border-4">
+  <div class="flex-auto" style="max-width:50%;">
     <div class="relative mr-6 my-2 mb-2 ml-48">
-    <select name="department" id="department" class="w-auto block text-center px-4 py-2 bg-red-200 text-red-800"
+    <select name="department" id="department" class="w-auto block text-center px-4 py-2 bg-red-600 text-white"
         (change)="getDepartmentUsers(department.value)" #department>
         <option value="COED">Computer Engineering Department</option>
         <option value="CHED">Chemical Engineering Department</option>
@@ -67,10 +60,10 @@
     <div *ngFor="let user of userArr |  paginate: { itemsPerPage: 6, currentPage: page }">
       <div *ngIf="currentUser.userId!=user.userId">   
         <a class="mb-2" (click)="callEdit(user.userId,currentUser.userId)">
-        <div class=" text-gray-700 text-center bg-black rounded-lg shadow-lg px-4 py-12 m-2">
+        <div class="text-center bg-gray-900 rounded-lg shadow-lg px-4 py-12 m-2">
           <div class="bg-cover h-24 " [style.backgroundImage]="'url('+ user.photoUrl +')'" ></div>
-            <div class="p-2 h-12 text-center text-white flex-1 flex flex-col" style="  ">
-              <h3 class=" text-base sm:text-sm md:text-sm lg:text-sm xl:text-sm">{{user.firstName}} {{user.lastName}}  </h3>
+            <div class="p-2 h-12 text-center text-white flex-1 flex flex-col text-white">
+              <h3 class="">{{user.firstName}} {{user.lastName}}</h3>
                 <div class=" text-grey-darker text-sm flex-1">
                  <p>{{user.userId}} </p>
                 </div>

@@ -13502,6 +13502,22 @@ html,body{
   table-layout: fixed;
 }
 
+.hover\:table-auto:hover {
+  table-layout: auto;
+}
+
+.hover\:table-fixed:hover {
+  table-layout: fixed;
+}
+
+.focus\:table-auto:focus {
+  table-layout: auto;
+}
+
+.focus\:table-fixed:focus {
+  table-layout: fixed;
+}
+
 .text-left {
   text-align: left;
 }
@@ -30759,6 +30775,22 @@ html,body{
   }
 
   .sm\:table-fixed {
+    table-layout: fixed;
+  }
+
+  .sm\:hover\:table-auto:hover {
+    table-layout: auto;
+  }
+
+  .sm\:hover\:table-fixed:hover {
+    table-layout: fixed;
+  }
+
+  .sm\:focus\:table-auto:focus {
+    table-layout: auto;
+  }
+
+  .sm\:focus\:table-fixed:focus {
     table-layout: fixed;
   }
 
@@ -48023,6 +48055,22 @@ html,body{
     table-layout: fixed;
   }
 
+  .md\:hover\:table-auto:hover {
+    table-layout: auto;
+  }
+
+  .md\:hover\:table-fixed:hover {
+    table-layout: fixed;
+  }
+
+  .md\:focus\:table-auto:focus {
+    table-layout: auto;
+  }
+
+  .md\:focus\:table-fixed:focus {
+    table-layout: fixed;
+  }
+
   .md\:text-left {
     text-align: left;
   }
@@ -65284,6 +65332,22 @@ html,body{
     table-layout: fixed;
   }
 
+  .lg\:hover\:table-auto:hover {
+    table-layout: auto;
+  }
+
+  .lg\:hover\:table-fixed:hover {
+    table-layout: fixed;
+  }
+
+  .lg\:focus\:table-auto:focus {
+    table-layout: auto;
+  }
+
+  .lg\:focus\:table-fixed:focus {
+    table-layout: fixed;
+  }
+
   .lg\:text-left {
     text-align: left;
   }
@@ -82542,6 +82606,22 @@ html,body{
   }
 
   .xl\:table-fixed {
+    table-layout: fixed;
+  }
+
+  .xl\:hover\:table-auto:hover {
+    table-layout: auto;
+  }
+
+  .xl\:hover\:table-fixed:hover {
+    table-layout: fixed;
+  }
+
+  .xl\:focus\:table-auto:focus {
+    table-layout: auto;
+  }
+
+  .xl\:focus\:table-fixed:focus {
     table-layout: fixed;
   }
 
