@@ -27,13 +27,15 @@ export class DashboardComponent implements OnInit {
   page: number = 1;
   currentUser=JSON.parse(localStorage.getItem("user"));
   fetchedUsers = false;
-
+  spinnerMsg;
 
   ngOnInit() {
+    this.spinnerMsg="Experience magic! <br/> Setting up your dashboard";
     this.spinner.show("spinner-2");
+    this.userArr=[];
     this.getDepartmentUsers("COED");
     this.currentUser = JSON.parse(localStorage.getItem('user'));
-    this.userService.getImageUrlForUser().subscribe((data) => {
+    this.userService.getImageUrlForUser({"face":"front"}).subscribe((data) => {
       if (!data.action) {
         console.log(data.message)
       } else {
@@ -113,6 +115,7 @@ export class DashboardComponent implements OnInit {
   }
 
   logout(){
+    this.spinnerMsg="We will be waiting for you.<br/> Come back soon :)"
     this.userService.logout();
   }
 

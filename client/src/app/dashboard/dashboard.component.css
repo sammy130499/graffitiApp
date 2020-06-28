@@ -13,6 +13,32 @@
 
 .dropdown:hover .dropdown-menu {
     display: block;
-  }
+}
+
+.my-pagination /deep/ .ngx-pagination .current{
+    background: red;
+    color:white;
+}
+
+.my-pagination /deep/ .ngx-pagination .current a span {
+    color:white;
+}
+
+.my-pagination /deep/ .ngx-pagination .pagination-previous a{
+    color:white;
+}
+
+.my-pagination /deep/ .ngx-pagination .pagination-previous a:hover{
+    background: transparent;
+    text-decoration: underline;
+}
+
+.my-pagination /deep/ .ngx-pagination .pagination-next a{
+    color:white;
+}
+.my-pagination /deep/ .ngx-pagination .pagination-next a:hover{
+    background: transparent;
+    text-decoration: underline;
+}
   
   
