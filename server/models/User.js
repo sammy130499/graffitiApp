@@ -21,7 +21,9 @@ var userSchema = new Schema({
     }],
     usersAffected:[String],
     photoUrl:String,
+    photoUrlBack:String,
     imgPublicId:String,
+    imgPublicIdBack:String,
     department:String,
     firstName:String,
     lastName:String

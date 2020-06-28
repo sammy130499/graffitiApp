@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { User } from '../user.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import {ChangeDetectionStrategy, Input} from "@angular/core";
-
+import { HostListener } from '@angular/core';
 
 
 @Component({
@@ -64,7 +64,7 @@ export class DashboardComponent implements OnInit {
 
   callEdit(tshirtUser,currentUser){
     localStorage.setItem('tshirtUser',tshirtUser);
-    this.router.navigate(['/edit/'+currentUser+'/'+tshirtUser])
+    this.router.navigate(['/edit/'+currentUser+'/'+tshirtUser+'/front'])
   }
 
   searchWord(word: string) {
@@ -77,6 +77,7 @@ export class DashboardComponent implements OnInit {
     for (var i = 0; i < userArrLen; i++) {
       var tempString=this.userArr[i].firstName+" "+this.userArr[i].lastName;
       if ((this.userArr[i].userId).toLowerCase().indexOf(word.toLowerCase()) >= 0) {
+        // console.log(this.userArr[i])
         tempUser.push(this.userArr[i]);
         continue;
       }
@@ -96,6 +97,16 @@ export class DashboardComponent implements OnInit {
 
     }
     this.userArr = tempUser;
+  }
+
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    localStorage.setItem("isBackBtnPressed","true");
+    console.log('Back button pressed');
+  }
+
+  logout(){
+    this.userService.logout();
   }
 
 
