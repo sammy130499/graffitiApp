@@ -61,11 +61,11 @@
       </select>
     </div>
  <div class="relative mr-6 my-2 mb-2 ml-2">    
-
+ 
   
-  <div class="grid grid-cols-3 "> 
+  <div class="grid grid-cols-3 gap-4"> 
     <div *ngFor="let user of userArr |  paginate: { itemsPerPage: 6, currentPage: page }">
-      <div *ngIf="currentUser.userId!=user.userId">   
+      <div *ngIf="currentUser.userId!=user.userId" >   
         <a class="mb-2" (click)="callEdit(user.userId,currentUser.userId)">
         <div class=" text-gray-700 text-center bg-black rounded-lg shadow-lg px-4 py-12 m-2">
           <div class="bg-cover h-24 " [style.backgroundImage]="'url('+ user.photoUrl +')'" ></div>
@@ -82,8 +82,15 @@
         </div>
       </div>
     </div>
-      <div class="text-white-100">
+    <div class="w-full">
+    <div class="w-1/6 text-white-100">
+
+    </div>
+      <div class="w-4/6 text-white-100">
         <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    </div>
+    <div class="w-1/6 text-white-100">
+
     </div>
     </div>
   </div>

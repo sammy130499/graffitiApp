@@ -57,6 +57,7 @@ export class DashboardComponent implements OnInit {
         console.log(data.message);
       } else {
         this.userArr = JSON.parse(data.message);
+        this.userArr = this.userArr.filter(obj=>obj.userId!=this.currentUser.userId);
         this.userArrPermanent = this.userArr;
       }
     })
