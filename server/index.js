@@ -47,6 +47,7 @@ app.post('/api/updatePhoto',auth,(req,res)=>{
                         let photoUrl=ret1.secure_url;
                         ret.photoUrl=photoUrl;
                         ret.imgPublicId=imgPublicId;
+                        ret.writingUsers.push(req.user.userId);
                         User.findOneAndUpdate({userId:tshirtUser},ret).then(ret2=>{
                             req.user.usersAffected.push(tshirtUser);
                             User.findOneAndUpdate({userId:req.user.userId},req.user).then(()=>{
@@ -83,6 +84,7 @@ app.post('/api/updatePhotoBack',auth,(req,res)=>{
                         let photoUrlBack=ret1.secure_url;
                         ret.photoUrlBack=photoUrlBack;
                         ret.imgPublicIdBack=imgPublicIdBack;
+                        ret.writingUsers.push(req.user.userId)
                         User.findOneAndUpdate({userId:tshirtUser},ret).then(ret2=>{
                             req.user.usersAffected.push(tshirtUser);
                             User.findOneAndUpdate({userId:req.user.userId},req.user).then(()=>{
@@ -125,7 +127,7 @@ app.post('/api/createUser',async (req,res)=>{
                         photoUrlBack=ret2.secure_url;
                         imgPublicIdBack=ret2.public_id; 
                         console.log("photo url ");
-                        let user=new User({userId,password,department,usersAffected:[],photoUrl,photoUrlBack,imgPublicId,imgPublicIdBack,firstName,lastName});
+                        let user=new User({userId,password,department,usersAffected:[],photoUrl,photoUrlBack,imgPublicId,imgPublicIdBack,firstName,lastName,writingUsers:[]});
                         await user.save()
                         let token=await user.generateAuthToken();
                         res.send({
@@ -253,10 +255,17 @@ app.post('/api/getImageUrlForUser',auth,(req,res)=>{
     
 });
 
-app.post('api/getImageUrlForUserBack',auth,(req,res)=>{
+app.post('/api/getImageUrlForUserBack',auth,(req,res)=>{
     res.send({
         action:true,
         message:req.user.photoUrlBack
+    })
+})
+
+app.get('/api/getWritingUsers',auth,(req,res)=>{
+    res.send({
+        action:true,
+        message:req.user.writingUsers
     })
 })
 
