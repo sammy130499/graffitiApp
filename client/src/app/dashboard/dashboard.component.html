@@ -9,7 +9,11 @@
 
 
 
+
 <nav class="flex items-center justify-end border-bg p-6 bg-gray-900">
+  <div class="self-end">
+    <button (click)="showModal()" class="btn-primary mr-4"><img style="width:20px;height:20px;color:white" src="../../assets/images/info.svg" alt=""></button>
+  </div>
   <div class="self-end">
     <input type="search" #search name="search" id="search" class="bg-purple-white shadow rounded border-0 p-3"
       placeholder="Search by name..." (input)="searchWord(search.value)">
@@ -24,7 +28,7 @@
 <div class="hero-bg flex w-full h-full" >
   <div class="bg-no-repeat bg-bottom w-1/2 flex-auto" style="max-width:50%;">
     <div class="w-1/3 inline-block"></div>
-    <div class="bg-gray-900 w-2/3 inline-block rounded overflow-hidden mt-2" (click)="callProfile()" style="max-width: 50%;">
+    <div class="bg-gray-900 w-2/3 inline-block rounded overflow-hidden mt-2 cursor-pointer" (click)="callProfile()" style="max-width: 50%;">
       <img class="object-center sm:object-top md:object-right lg:object-bottom xl:object-center" src="{{photo}}"
         alt="Tshirt photo">
       <div class="px-6 py-4 text-white">
@@ -59,7 +63,7 @@
   
   <div *ngIf="!fetchedUsers" style="height: 400px;">
     <ngx-spinner
-      bdColor="rgba(51,51,51,0.8)"
+      bdColor="rgba(255,255,255,0.8)"
       size="large"
       color="#E5433E"
       type="pacman"
@@ -74,13 +78,13 @@
   <div *ngIf="fetchedUsers" class="grid grid-cols-3 "> 
     <div *ngFor="let user of userArr |  paginate: { itemsPerPage: 6, currentPage: page }">
       <div *ngIf="currentUser.userId!=user.userId">   
-        <a class="mb-2" (click)="callEdit(user.userId,currentUser.userId)">
+        <a class="mb-2 cursor-pointer" (click)="callEdit(user.userId,currentUser.userId)">
         <div class="text-center bg-gray-900 rounded-lg shadow-lg px-4 py-12 m-2">
           <div class="bg-cover h-24 " [style.backgroundImage]="'url('+ user.photoUrl +')'" ></div>
             <div class="p-2 h-12 text-center text-white flex-1 flex flex-col text-white">
-              <h3 class="">{{user.firstName}} {{user.lastName}}</h3>
+              <h3 class="text-xs">{{user.firstName}} {{user.lastName}}</h3>
                 <div class=" text-grey-darker text-sm flex-1">
-                 <p>{{user.userId}} </p>
+                 <p class="text-xs">{{user.userId}} </p>
                 </div>
                   <a href="#" class="border-t border-grey-light pt-2 text-xs text-grey hover:text-red uppercase no-underline tracking-wide">{{user.department}}</a>
             </div>
