@@ -29,10 +29,15 @@ export class HomepageComponent implements OnInit {
     let username=this.form.get('username').value;
     let password=this.form.get('password').value;
     if(!username || !password){
+      this.spinner.hide();
       return;
     }
+    username=username.trim();
+    username=username.toLowerCase();
+    password=password.trim();
     this.global.loggedInUsername=username;
     const hashedPass = SHA256(password).toString(enc.Hex);
+    console.log(hashedPass);
     this.user.loginUser({"userId":username,"password":hashedPass}).subscribe((data)=>{
       if(!data.action){
         console.log(data.message);

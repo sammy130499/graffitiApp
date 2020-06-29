@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UserService } from '../user.service';
+import { AlertService } from '../alert.service';
 
 @Component({
   selector: 'app-profile',
@@ -8,9 +10,19 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private router:Router,private route:ActivatedRoute) { }
-
+  constructor(private router:Router,private route:ActivatedRoute,private user:UserService,private alert:AlertService) { }
+  userArr;
   ngOnInit() {
+    this.userArr=[];
+    this.user.getWritingUsers().subscribe((ret:any)=>{
+      if(!ret.action){
+        this.alert.error(ret.message);
+      }
+      else{
+        console.log(ret.message); 
+        this.userArr=ret.message;
+      }
+    })
   }
 
   showHome(){
