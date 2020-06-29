@@ -106,6 +106,8 @@ export class SignUpComponent implements OnInit {
 
   checkUsername(){
     let username=this.form.get('username').value;
+    username=username.trim();
+    username=username.toLowerCase();
     if(username.length==0)return;
     let usernameLen=username.length;
     if(usernameLen<6)
@@ -141,6 +143,7 @@ export class SignUpComponent implements OnInit {
       return;
     }
     this.allowSignupUsername=true;
+    console.log(username);
     this.userService.checkUser({"userId":username}).subscribe((data)=>{
         if(!data.action && username!=" "){
           console.log(data.message);
@@ -165,14 +168,25 @@ export class SignUpComponent implements OnInit {
     this.checkLastName();
     this.checkPassword();
     this.checkUsername();
+    if(!this.allowSignupFirstName || !this.allowSignupLastName
+      || !this.allowSignupPassword || !this.allowSignupUsername){
+        this.spinner.hide();
+        this.alertService.error("please enter valid values");
+        return;
+      }
     let username=this.form.get('username').value;
     let firstName=this.form.get('firstName').value;
     let lastName=this.form.get('lastName').value;
     let password=this.form.get('password').value;
-    if(!this.allowSignupFirstName || !this.allowSignupLastName
-      || !this.allowSignupLastName || !this.allowSignupUsername)return;
+    username=username.trim();
+    username=username.toLowerCase();
+    password=password.trim();
+    if(!username || !password || !lastName || !firstName){
+      this.spinner.hide();
+      this.alertService.error("please enter valid values");
+      return;
+    }
     const hashedPass = SHA256(password).toString(enc.Hex);
-    console.log("in signup");
     this.userService.createUser({"userId":username,"firstName":firstName,"lastName":lastName,"password":hashedPass,"department":this.department}).subscribe(data=>{
       if(!data.action){
         this.spinner.hide();

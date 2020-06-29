@@ -9,7 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl = "/api/";
+  private baseUrl = "http://localhost:8000/api/";
   constructor( private http : HttpClient, private router : Router,private alert:AlertService,private spinner:NgxSpinnerService ) { }
 
 
@@ -19,6 +19,11 @@ export class UserService {
     let headers=new HttpHeaders();
     headers.set('Content-Type','application/json');
     return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
+  }
+
+  getWritingUsers(){
+    let url = this.baseUrl + "getWritingUsers";
+    return this.http.get(url);
   }
   
   getUsersAffected():any{

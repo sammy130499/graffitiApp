@@ -1,8 +1,25 @@
 <div class="flex justify-evenly" style="background-color: #1F1F1F;width: 100%;">
-        <button class="btn-secondary" (click)="showFront()">Front Side</button>
-        <button class="btn-secondary" (click)="showHome()">Home</button>
-        <button class="btn-secondary" (click)="showBack()">Back Side</button>
+  <button class="btn-secondary" (click)="showFront()">Front Side</button>
+  <button class="btn-secondary" (click)="showHome()">Home</button>
+  <button class="btn-secondary" (click)="showBack()">Back Side</button>
 </div>
-
-
-<router-outlet></router-outlet>
+<div class="flex justify-center">
+  <div class="table w-1/2">
+    <table class="table-auto">
+      <thead>
+        <tr>
+          <th class="px-4 py-2">Friends who wrote on your shirt</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of userArr">
+          <td class="border px-4 py-2 text-center">{{user}}</td>
+        </tr>
+        <tr *ngIf="userArr.length==0">
+          <td class="border px-4 py-2 text-center">no modifications yet!</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <router-outlet></router-outlet>
+</div>
