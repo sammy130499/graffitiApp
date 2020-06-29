@@ -25,7 +25,8 @@ var userSchema = new Schema({
     imgPublicIdBack:String,
     department:String,
     firstName:String,
-    lastName:String
+    lastName:String,
+    writingUsers:[String]
   });
 
 

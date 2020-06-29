@@ -20,6 +20,11 @@ export class UserService {
     headers.set('Content-Type','application/json');
     return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
   }
+
+  getWritingUsers(){
+    let url = this.baseUrl + "getWritingUsers";
+    return this.http.get(url);
+  }
   
   getUsersAffected():any{
     let url = this.baseUrl + "getUsersAffected";
