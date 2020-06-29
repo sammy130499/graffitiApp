@@ -12,6 +12,8 @@ const {Mutex}=require('await-semaphore');
 const path=require('path');
 let mutex=new Mutex();
 const{v4}=require('uuid');
+const http=require('http');
+const socketio = require('socket.io');
 
 cloudinary.config({ 
     cloud_name: 'dvxx5f4hr', 
@@ -19,16 +21,27 @@ cloudinary.config({
     api_secret: 'RxNhjMPi7_OUTbfFlZM_oFzqFRg' 
   });
 
-const app = express();
+var app = express();
+var server = http.createServer(app);
+var io = socketio.listen(server);
+
 const photo=require('./photo');
 const photo_back=require('./photo_back');
+
 app.use(morgan('combined'));
 app.use(bodyParser.json({limit: '10mb', extended: true}));
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
+
 app.use(cors());
+
 const auth=require('./auth');
 var distDir = __dirname + "/dist/graphClient";
 app.use(express.static(distDir));
+
+app.set('socketio',io);
+app.set('server', server);
+let numClients = {};
+let clients={}
 
 const User=require('./models/User');
 mongoose.connect(process.env.MONGODB_URL, {
@@ -38,7 +51,37 @@ mongoose.connect(process.env.MONGODB_URL, {
     }).then(res => console.log('connected'))
     .catch(e => console.log(e));
 
+io.on("connection", socket => {
+        console.log("user connected");
+      
+        
+        socket.on('ack',({room,user})=>{
+            socket.join(room,()=>{
+                socket.room=room;
+                if (numClients[room] == undefined) {
+                    numClients[room] = 1;
+                    clients[room]=[];
+                    clients[room].push(user);
+                } else if(numClients[room]==0) {
+                    numClients[room] = 1;
+                    clients[room]=[];
+                    clients[room].push(user);
+                }else{
+                    numClients[room]++;
+                    if(!clients[room].includes(user))
+                    clients[room].push(user);
+                }
+                socket.on('disconnect',()=>{
+                    numClients[socket.room]--;
+                    if(clients[socket.room])
+                    clients[socket.room]=clients[socket.room].filter(val=>val!=user)
+                })
+                io.in(room).emit('ackback',{num:numClients[room],present:clients[room][0]});
 
+            })
+        })
+    
+    });
 
 app.post('/api/updatePhoto',auth,async (req,res)=>{
     let {tshirtUser,photo}=req.body;
@@ -341,6 +384,6 @@ app.get('*', (req, res) => {
 });
 
 
-app.listen(process.env.PORT, () => {
+app.get('server').listen(process.env.PORT, () => {
     console.log('listening at port 8000');
 });
