@@ -34,6 +34,7 @@ import {
 } from './profile/profile.component';
 import { FrontProfileComponent } from './front-profile/front-profile.component';
 import { BackProfileComponent } from './back-profile/back-profile.component';
+import { TeamComponent } from './team/team.component';
 
 const routes: Routes = [{
     path: "homepage",
@@ -82,7 +83,8 @@ const routes: Routes = [{
       }
     ],
     canActivate: [AuthGuardService]
-  }
+  },
+  {path:'team',component:TeamComponent}
 
 ];
 

@@ -1,7 +1,7 @@
 import {
   NgxSpinnerService
 } from 'ngx-spinner';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { UserService } from '../user.service';
 import { GlobalDataService } from '../global-data.service';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { User } from '../user.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HostListener } from '@angular/core';
 import { AlertService } from '../alert.service';
-
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-dashboard',
@@ -18,29 +18,53 @@ import { AlertService } from '../alert.service';
   providers: [],
   
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
 
   constructor(private userService:UserService,private alertService:AlertService,private global:GlobalDataService,private router:Router,private sanitizer: DomSanitizer,private spinner:NgxSpinnerService) { }
   photo="";
   userArr:User[];
   userArrPermanent:User[];
   page: number = 1;
-  currentUser=JSON.parse(localStorage.getItem("user"));
+  currentUser;
   fetchedUsers = false;
   spinnerMsg;
-
   ngOnInit() {
     this.spinnerMsg="Experience magic! <br/> Setting up your dashboard";
     this.spinner.show("spinner-2");
     this.userArr=[];
-    this.getDepartmentUsers("COED");
     this.currentUser = JSON.parse(localStorage.getItem('user'));
+    this.getDepartmentUsers(this.currentUser.department);    
     this.userService.getImageUrlForUser({"face":"front"}).subscribe((data) => {
       if (!data.action) {
         console.log(data.message)
       } else {
         this.photo = data.message;
       }
+    })
+  }
+
+  @ViewChild("department", {static:true}) department: ElementRef;
+  ngAfterViewInit(){
+    this.department.nativeElement.value=this.currentUser.department;
+    
+  }
+
+  showModal(){
+    Swal.fire({
+      title: '<strong>Guide to use the application</strong>',
+      icon: 'info',
+      html:
+        `<ul>
+        <li>1. Life is short, but not your love for your friends. Use this app to let them know!</li>
+        <li>2. Find your friend from the list of users available on the right hand side. You can also search for his name.</li>
+        <li>3. We know you have so much to say but we can only allow you a <b> single chance</b> to edit a Tee. Pre-think what you gonna send</li>
+        <li>4. If you click on your photo you can also download em. We dont want to keep everything to ourselves, obviously.</li>
+      </ul>`,
+      showCloseButton: true,
+      focusConfirm: true,
+      confirmButtonText:
+        '<i class="fa fa-thumbs-up"></i> Great!',
+      confirmButtonAriaLabel: 'Thumbs up, great!'
     })
   }
 

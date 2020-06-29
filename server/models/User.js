@@ -1,5 +1,4 @@
 const mongoose=require('mongoose');
-const validator = require('validator')
 const jwt = require('jsonwebtoken')
 let Schema=mongoose.Schema;
 

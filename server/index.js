@@ -2,14 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
-const path = require('path');
-const fs = require('fs');
 const mongoose = require('mongoose');
-const jwt = require("jsonwebtoken");
 const cloudinary = require('cloudinary').v2;
-const {
-    v4
-} = require('uuid')
+
 
 cloudinary.config({ 
     cloud_name: 'dvxx5f4hr', 
