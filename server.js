@@ -8,6 +8,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cloudinary = require('cloudinary').v2;
+const sem=require('semaphore')(1);
 
 
 cloudinary.config({ 
@@ -39,75 +40,83 @@ mongoose.connect(process.env.MONGODB_URL, {
 
 app.post('/api/updatePhoto',auth,(req,res)=>{
     let {tshirtUser,photo}=req.body;
-    User.findOne({userId:tshirtUser}).then(ret=>{
-        if(!ret){
-            res.send({
-                action:false,
-                message:"invalid request"
-            })
-        }
-        else{
-            cloudinary.uploader.destroy(ret.imgPublicId).then(()=>{
-                    cloudinary.uploader.upload(photo).then((ret1)=>{
-                        let imgPublicId=ret1.public_id;
-                        let photoUrl=ret1.secure_url;
-                        ret.photoUrl=photoUrl;
-                        ret.imgPublicId=imgPublicId;
-                        ret.writingUsers.push(req.user.userId);
-                        User.findOneAndUpdate({userId:tshirtUser},ret).then(ret2=>{
-                            req.user.usersAffected.push(tshirtUser);
-                            User.findOneAndUpdate({userId:req.user.userId},req.user).then(()=>{
-                                res.send({
-                                    action:true,
-                                    message:"successfully updated"
+    sem.take(()=>{
+        User.findOne({userId:tshirtUser}).then(ret=>{
+            if(!ret){
+                res.send({
+                    action:false,
+                    message:"invalid request"
+                })
+            }
+            else{
+                cloudinary.uploader.destroy(ret.imgPublicId).then(()=>{
+                        cloudinary.uploader.upload(photo).then((ret1)=>{
+                            let imgPublicId=ret1.public_id;
+                            let photoUrl=ret1.secure_url;
+                            ret.photoUrl=photoUrl;
+                            ret.imgPublicId=imgPublicId;
+                            ret.writingUsers.push(req.user.userId);
+                            User.findOneAndUpdate({userId:tshirtUser},ret).then(ret2=>{
+                                req.user.usersAffected.push(tshirtUser);
+                                User.findOneAndUpdate({userId:req.user.userId},req.user).then(()=>{
+                                    sem.leave();
+                                    res.send({
+                                        action:true,
+                                        message:"successfully updated"
+                                    })
                                 })
                             })
                         })
-                    })
-            }).catch(e=>{
-                console.log(e);
-            })
-        }
-    }).catch(e=>{
-        console.log(e);
+                }).catch(e=>{
+                    console.log(e);
+                })
+            }
+        }).catch(e=>{
+            console.log(e);
+        })
     })
+    
 })
 
 
 app.post('/api/updatePhotoBack',auth,(req,res)=>{
     let {tshirtUser,photo}=req.body;
-    User.findOne({userId:tshirtUser}).then(ret=>{
-        if(!ret){
-            res.send({
-                action:false,
-                message:"invalid request"
-            })
-        }
-        else{
-            cloudinary.uploader.destroy(ret.imgPublicId).then(()=>{
-                    cloudinary.uploader.upload(photo).then((ret1)=>{
-                        let imgPublicIdBack=ret1.public_id;
-                        let photoUrlBack=ret1.secure_url;
-                        ret.photoUrlBack=photoUrlBack;
-                        ret.imgPublicIdBack=imgPublicIdBack;
-                        ret.writingUsers.push(req.user.userId)
-                        User.findOneAndUpdate({userId:tshirtUser},ret).then(ret2=>{
-                            req.user.usersAffected.push(tshirtUser);
-                            User.findOneAndUpdate({userId:req.user.userId},req.user).then(()=>{
-                                res.send({
-                                    action:true,
-                                    message:"successfully updated"
+    sem.take(()=>{
+        User.findOne({userId:tshirtUser}).then(ret=>{
+            if(!ret){
+                res.send({
+                    action:false,
+                    message:"invalid request"
+                })
+            }
+            else{
+                cloudinary.uploader.destroy(ret.imgPublicId).then(()=>{
+                        cloudinary.uploader.upload(photo).then((ret1)=>{
+                            let imgPublicIdBack=ret1.public_id;
+                            let photoUrlBack=ret1.secure_url;
+                            ret.photoUrlBack=photoUrlBack;
+                            ret.imgPublicIdBack=imgPublicIdBack;
+                            ret.writingUsers.push(req.user.userId)
+                            User.findOneAndUpdate({userId:tshirtUser},ret).then(ret2=>{
+                                req.user.usersAffected.push(tshirtUser);
+                                User.findOneAndUpdate({userId:req.user.userId},req.user).then(()=>{
+                                    sem.leave();
+                                    res.send({
+                                        action:true,
+                                        message:"successfully updated"
+                                    })
                                 })
                             })
                         })
-                    })
-            }).catch(e=>{
-                console.log(e);
-            })
-        }
-    }).catch(e=>{
-        console.log(e);
+                }).catch(e=>{
+                    console.log(e);
+                })
+            }
+        }).catch(e=>{
+            console.log(e);
+        })
     })
+    
 })
 
 
