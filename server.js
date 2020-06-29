@@ -8,9 +8,9 @@ const cors = require('cors');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cloudinary = require('cloudinary').v2;
-const sem=require('semaphore')(1);
+const {Mutex}=require('await-semaphore');
 const path=require('path');
-
+let mutex=new Mutex();
 
 cloudinary.config({ 
     cloud_name: 'dvxx5f4hr', 
@@ -39,86 +39,76 @@ mongoose.connect(process.env.MONGODB_URL, {
 
 
 
-app.post('/api/updatePhoto',auth,(req,res)=>{
+app.post('/api/updatePhoto',auth,async (req,res)=>{
     let {tshirtUser,photo}=req.body;
-    sem.take(()=>{
-        User.findOne({userId:tshirtUser}).then(ret=>{
-            if(!ret){
-                res.send({
-                    action:false,
-                    message:"invalid request"
-                })
-            }
-            else{
-                cloudinary.uploader.destroy(ret.imgPublicId).then(()=>{
-                        cloudinary.uploader.upload(photo).then((ret1)=>{
-                            let imgPublicId=ret1.public_id;
-                            let photoUrl=ret1.secure_url;
-                            ret.photoUrl=photoUrl;
-                            ret.imgPublicId=imgPublicId;
-                            ret.writingUsers.push(req.user.userId);
-                            User.findOneAndUpdate({userId:tshirtUser},ret).then(ret2=>{
-                                req.user.usersAffected.push(tshirtUser);
-                                User.findOneAndUpdate({userId:req.user.userId},req.user).then(()=>{
-                                    sem.leave();
-                                    res.send({
-                                        action:true,
-                                        message:"successfully updated"
-                                    })
-                                })
-                            })
-                        })
-                }).catch(e=>{
-                    console.log(e);
-                })
-            }
-        }).catch(e=>{
-            console.log(e);
-        })
-    })
+        console.log('here1')
+        let release= await mutex.acquire();
+        console.log('here2')
+        let ret=await User.findOne({userId:tshirtUser});
+        console.log('here3')
+        if(!ret){
+            release();
+            res.send({
+                action:false,
+                message:"invalid request"
+            })
+        }
+        else{
+            console.log('here4')
+            await cloudinary.uploader.destroy(ret.imgPublicId);
+            console.log('here5')
+            let ret1=await cloudinary.uploader.upload(photo);
+            console.log('here6')
+            let imgPublicId=ret1.public_id;
+            let photoUrl=ret1.secure_url;
+            ret.photoUrl=photoUrl;
+            ret.imgPublicId=imgPublicId;
+            ret.writingUsers.push(req.user.userId);
+            let ret2=await User.findOneAndUpdate({userId:tshirtUser},ret);
+            req.user.usersAffected.push(tshirtUser);
+            console.log('here7')
+            await User.findOneAndUpdate({userId:req.user.userId},req.user);
+            console.log('here8')            
+            release();
+            console.log('here9')            
+            res.send({
+                action:true,
+                message:"successfully updated"
+            })
+        }
     
 })
 
 
-app.post('/api/updatePhotoBack',auth,(req,res)=>{
+app.post('/api/updatePhotoBack',auth,async (req,res)=>{
     let {tshirtUser,photo}=req.body;
-    sem.take(()=>{
-        User.findOne({userId:tshirtUser}).then(ret=>{
-            if(!ret){
-                res.send({
-                    action:false,
-                    message:"invalid request"
-                })
-            }
-            else{
-                cloudinary.uploader.destroy(ret.imgPublicId).then(()=>{
-                        cloudinary.uploader.upload(photo).then((ret1)=>{
-                            let imgPublicIdBack=ret1.public_id;
-                            let photoUrlBack=ret1.secure_url;
-                            ret.photoUrlBack=photoUrlBack;
-                            ret.imgPublicIdBack=imgPublicIdBack;
-                            ret.writingUsers.push(req.user.userId)
-                            User.findOneAndUpdate({userId:tshirtUser},ret).then(ret2=>{
-                                req.user.usersAffected.push(tshirtUser);
-                                User.findOneAndUpdate({userId:req.user.userId},req.user).then(()=>{
-                                    sem.leave();
-                                    res.send({
-                                        action:true,
-                                        message:"successfully updated"
-                                    })
-                                })
-                            })
-                        })
-                }).catch(e=>{
-                    console.log(e);
-                })
-            }
-        }).catch(e=>{
-            console.log(e);
-        })
+    let release= await mutex.acquire();
+        let ret=await User.findOne({userId:tshirtUser});
+        if(!ret){
+            release();
+            res.send({
+                action:false,
+                message:"invalid request"
+            })
+        }
+        else{
+            await cloudinary.uploader.destroy(ret.imgPublicIdBack);
+            let ret1=await cloudinary.uploader.upload(photo);
+            let imgPublicId=ret1.public_id;
+            let photoUrl=ret1.secure_url;
+            ret.photoUrlBack=photoUrl;
+            ret.imgPublicIdBack=imgPublicId;
+            ret.writingUsers.push(req.user.userId);
+            let ret2=await User.findOneAndUpdate({userId:tshirtUser},ret);
+            req.user.usersAffected.push(tshirtUser);
+            await User.findOneAndUpdate({userId:req.user.userId},req.user);
+            release();
+            res.send({
+                action:true,
+                message:"successfully updated"
+            })
+        }
     })
-    
-})
 
 
 app.post('/api/createUser',async (req,res)=>{
