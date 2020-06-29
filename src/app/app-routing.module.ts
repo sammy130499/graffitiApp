@@ -35,6 +35,8 @@ import {
 import { FrontProfileComponent } from './front-profile/front-profile.component';
 import { BackProfileComponent } from './back-profile/back-profile.component';
 import { TeamComponent } from './team/team.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ServerErrorComponent } from './server-error/server-error.component';
 
 const routes: Routes = [{
     path: "homepage",
@@ -84,7 +86,19 @@ const routes: Routes = [{
     ],
     canActivate: [AuthGuardService]
   },
-  {path:'team',component:TeamComponent}
+  {path:'team',component:TeamComponent},
+  {
+    path:'page404',
+    component:PageNotFoundComponent
+  },
+  {
+    path:'servererror',
+    component:ServerErrorComponent
+  },
+  {
+    path:'**',
+    redirectTo:'/page404'
+  }
 
 ];
 

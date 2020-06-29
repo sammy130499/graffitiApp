@@ -26,6 +26,8 @@ import { AuthInterceptor } from './httpconfig.interceptor';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { TeamComponent } from './team/team.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ServerErrorComponent } from './server-error/server-error.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -43,7 +45,9 @@ export function tokenGetter() {
     ProfileComponent,
     FrontProfileComponent,
     BackProfileComponent,
-    TeamComponent
+    TeamComponent,
+    PageNotFoundComponent,
+    ServerErrorComponent
   ],
   imports: [
     BrowserModule,
