@@ -1,0 +1,118 @@
+{
+  "configVersion": 1,
+  "timestamp": 1593434342112,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/main-es2015.139168c71a4f994da0f6.js",
+        "/main-es5.139168c71a4f994da0f6.js",
+        "/manifest.webmanifest",
+        "/polyfills-es2015.621d94a072aeafd539f2.js",
+        "/polyfills-es5.6563a08d06cc10160534.js",
+        "/runtime-es2015.cdfb0ddb511f65fdc0a0.js",
+        "/runtime-es5.cdfb0ddb511f65fdc0a0.js",
+        "/styles.18b18da3d139f22f7f39.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/images/atharva.jpeg",
+        "/assets/images/avi.jpg",
+        "/assets/images/background1.jpg",
+        "/assets/images/background2.jpg",
+        "/assets/images/header.jpg",
+        "/assets/images/images.jpg",
+        "/assets/images/info.svg",
+        "/assets/images/load.svg",
+        "/assets/images/logo.png",
+        "/assets/images/rogin.jpeg",
+        "/assets/images/sameer.jpeg",
+        "/assets/images/svnit.png",
+        "/assets/images/tshirtBack.png",
+        "/assets/images/tshirtFront.png",
+        "/assets/js/download.js",
+        "/background1.c96dad6210a380c56b5f.jpg",
+        "/background2.e3000dfd10f668b15d59.jpg",
+        "/header.0a11e223a7d6f21bba04.jpg",
+        "/logo.cf1c238a6cb5d0213fae.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/assets/images/atharva.jpeg": "2574e10393abce82cb0068742fd1720edeb8ff2e",
+    "/assets/images/avi.jpg": "2e0ac9b898394b97c1e011fe486f4c37d48746f1",
+    "/assets/images/background1.jpg": "89cd0a6d09300f9cae4e51e21e18389f7c763ddb",
+    "/assets/images/background2.jpg": "7f1d808b62456a0e15eed8f8faed5d86745e2c02",
+    "/assets/images/header.jpg": "0f47e799e763c01194924ad5d9e1c402b774901c",
+    "/assets/images/images.jpg": "672a31f32900813839b67ce3d5822fa4c0f3a6ad",
+    "/assets/images/info.svg": "6558cccbb93d16ad9cedf2ab44880300d6485578",
+    "/assets/images/load.svg": "8f29dfbb7d39fd07361c159e6a8c8e7d91b4a426",
+    "/assets/images/logo.png": "7cf5583a1724c3554f3a4bb2939b80a50633fe82",
+    "/assets/images/rogin.jpeg": "34e6f0ab969536dec515fe6f3b2d31b781942eac",
+    "/assets/images/sameer.jpeg": "19abf9abc1d887b8335521025868a69b424633d4",
+    "/assets/images/svnit.png": "5a491879155b22dad24c0d87b43f414b22bed221",
+    "/assets/images/tshirtBack.png": "6b21202949328d6d1fbcdc154af218a7347977e5",
+    "/assets/images/tshirtFront.png": "86cf919397aa2aecd63ea8dd56ddfa62dee0f157",
+    "/assets/js/download.js": "baf424cf933d34d9e678f505031c961c8e66471b",
+    "/background1.c96dad6210a380c56b5f.jpg": "89cd0a6d09300f9cae4e51e21e18389f7c763ddb",
+    "/background2.e3000dfd10f668b15d59.jpg": "7f1d808b62456a0e15eed8f8faed5d86745e2c02",
+    "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/header.0a11e223a7d6f21bba04.jpg": "0f47e799e763c01194924ad5d9e1c402b774901c",
+    "/index.html": "dcf029d912bd8369215d38bcfb7ee0a8959a2ab2",
+    "/logo.cf1c238a6cb5d0213fae.png": "7cf5583a1724c3554f3a4bb2939b80a50633fe82",
+    "/main-es2015.139168c71a4f994da0f6.js": "a3dcf3bad4b77fb18b459ba06bcf0d9b792e736d",
+    "/main-es5.139168c71a4f994da0f6.js": "0115ab0bd0dfd900ff945f045d17eec8a90b7cf0",
+    "/manifest.webmanifest": "ac97057ef07aa090c2f159836b3cb31d41b1922d",
+    "/polyfills-es2015.621d94a072aeafd539f2.js": "607ce49cbc33e2cc80ea00f153e7517365e8f137",
+    "/polyfills-es5.6563a08d06cc10160534.js": "64da9f06ab7a1ffad24a14e9ce91bf635275e9ec",
+    "/runtime-es2015.cdfb0ddb511f65fdc0a0.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "/runtime-es5.cdfb0ddb511f65fdc0a0.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "/styles.18b18da3d139f22f7f39.css": "79e01939358281f10b5cedaf9f3ebed72a7d2186"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
