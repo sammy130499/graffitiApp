@@ -143,15 +143,12 @@ export class SignUpComponent implements OnInit {
       return;
     }
     this.allowSignupUsername=true;
-    console.log(username);
     this.userService.checkUser({"userId":username}).subscribe((data)=>{
         if(!data.action && username!=" "){
-          console.log(data.message);
           this.allowSignup=false;
           this.alertService.error(data.message); 
         }
         else{
-          console.log(data.message);
           this.allowSignup=true;
           if(username!=" "){
             this.alertService.info(data.message);

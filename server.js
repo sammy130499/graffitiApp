@@ -11,6 +11,7 @@ const cloudinary = require('cloudinary').v2;
 const {Mutex}=require('await-semaphore');
 const path=require('path');
 let mutex=new Mutex();
+const{v4}=require('uuid');
 
 cloudinary.config({ 
     cloud_name: 'dvxx5f4hr', 
@@ -133,7 +134,7 @@ app.post('/api/createUser',async (req,res)=>{
                         photoUrlBack=ret2.secure_url;
                         imgPublicIdBack=ret2.public_id; 
                         console.log("photo url ");
-                        let user=new User({userId,password,department,usersAffected:[],photoUrl,photoUrlBack,imgPublicId,imgPublicIdBack,firstName,lastName,writingUsers:[]});
+                        let user=new User({userId,password,department,usersAffected:[],photoUrl,photoUrlBack,imgPublicId,imgPublicIdBack,firstName,lastName,writingUsers:[],room:v4()});
                         await user.save()
                         let token=await user.generateAuthToken();
                         res.send({
@@ -275,12 +276,23 @@ app.get('/api/getWritingUsers',auth,(req,res)=>{
     })
 })
 
-app.get('/api/getUsersAffected',auth,(req,res)=>{
-    console.log(req.user.usersAffected);
-    res.send({
-        action:true,
-        message:JSON.stringify(req.user.usersAffected)
+app.post('/api/getUsersAffectedAndRoom',auth,(req,res)=>{
+    let {tshirtUser}=req.body;
+    User.findOne({userId:tshirtUser}).then((ret)=>{
+        if(!ret){
+            res.send({
+                action:false,
+                message:"user invalid"
+            })
+        }
+        else{
+            res.send({
+                action:true,
+                message:{arr:JSON.stringify(req.user.usersAffected),room:ret.room}
+            })
+        }
     })
+    
 });
 
 app.post('/api/getImageUrlForTshirtUser',auth,(req,res)=>{

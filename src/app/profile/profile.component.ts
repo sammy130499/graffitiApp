@@ -19,7 +19,6 @@ export class ProfileComponent implements OnInit {
         this.alert.error(ret.message);
       }
       else{
-        console.log(ret.message); 
         this.userArr=ret.message;
       }
     })

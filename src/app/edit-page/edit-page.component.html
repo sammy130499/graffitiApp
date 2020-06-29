@@ -1,8 +1,21 @@
 <div class="flex justify-evenly p-2" style="background-color: #1F1F1F;width: 100%;">
-            <button class="btn-secondary" (click)="showFront()">Front Side</button>
+            <button *ngIf="!notAllowed" class="btn-secondary" (click)="showFront()">Front Side</button>
             <button class="btn-secondary" (click)="showHome()">Home</button>
-            <button class="btn-secondary" (click)="showBack()">Back Side</button>
+            <button *ngIf="!notAllowed" class="btn-secondary" (click)="showBack()">Back Side</button>
 </div>
-
+<div *ngIf="notAllowed" class="text-center h-screen text-3xl flex justify-center items-center">
+    Seems like someone is already writing on the User's Tshirt.
+    <br>
+    Please come back after sometime or try refreshing!!
+</div>
+<ngx-spinner
+  bdColor="rgba(255,255,255,0.8)"
+  size="medium"
+  color="#E5433E"
+  type="pacman"
+  name="edit"
+  >
+  <p style="font-size: 20px; color:black">Checking if the resource is available to edit</p>
+  </ngx-spinner>
 
 <router-outlet style="width: 100%;height: 100%;"></router-outlet>

@@ -32,7 +32,7 @@ export class FrontProfileComponent implements OnInit {
     this.userService.getImageUrlForUser({"face":"front"}).subscribe(async (res) => {
       this.spinner.hide();
       if (!res.action) {
-        console.log(res.message);
+        this.alert.error(res.message);
       } else {
         this.dataUrl=res.message;
       }

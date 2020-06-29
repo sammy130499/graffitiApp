@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.getDepartmentUsers(this.currentUser.department);    
     this.userService.getImageUrlForUser({"face":"front"}).subscribe((data) => {
       if (!data.action) {
-        console.log(data.message)
+        this.alertService.error(data.message)
       } else {
         this.photo = data.message;
       }
@@ -92,7 +92,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   callEdit(tshirtUser,currentUser){
     localStorage.setItem('tshirtUser',tshirtUser);
-    this.router.navigate(['/edit/'+currentUser+'/'+tshirtUser+'/front'])
+    this.router.navigate(['/edit/'+currentUser+'/'+tshirtUser])
   }
 
   callProfile(){
@@ -110,7 +110,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     for (var i = 0; i < userArrLen; i++) {
       var tempString=this.userArr[i].firstName+" "+this.userArr[i].lastName;
       if ((this.userArr[i].userId).toLowerCase().indexOf(word.toLowerCase()) >= 0) {
-        // console.log(this.userArr[i])
         tempUser.push(this.userArr[i]);
         continue;
       }
@@ -135,7 +134,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   @HostListener('window:popstate', ['$event'])
   onPopState(event) {
     localStorage.setItem("isBackBtnPressed","true");
-    console.log('Back button pressed');
   }
 
   logout(){

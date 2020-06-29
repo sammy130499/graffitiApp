@@ -26,11 +26,11 @@ export class UserService {
     return this.http.get(url);
   }
   
-  getUsersAffected():any{
-    let url = this.baseUrl + "getUsersAffected";
+  getUsersAffectedAndRoom(user:any):any{
+    let url = this.baseUrl + "getUsersAffectedAndRoom";
     let headers=new HttpHeaders();
     headers.set('Content-Type','application/json');
-    return this.http.get(url);
+    return this.http.post(url,user,{headers});
   }
   createUser(user:any):any{
     let url = this.baseUrl + "createUser";

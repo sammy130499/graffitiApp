@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "env-cmd -f ./.env node server.js",
+    "start": "env-cmd -f ./.env nodemon server.js",
+    "socketStart": "env-cmd -f ./.env nodemon socketserver.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -41,10 +42,13 @@
     "ngx-pagination": "^5.0.0",
     "ngx-spinner": "^9.0.2",
     "rxjs": "~6.4.0",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
     "sweetalert2": "^9.15.2",
     "tailwindcss": "^1.4.6",
     "tslib": "^1.10.0",
     "tui-image-editor": "^3.9.0",
+    "uuid": "^8.2.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {

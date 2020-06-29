@@ -37,10 +37,8 @@ export class HomepageComponent implements OnInit {
     password=password.trim();
     this.global.loggedInUsername=username;
     const hashedPass = SHA256(password).toString(enc.Hex);
-    console.log(hashedPass);
     this.user.loginUser({"userId":username,"password":hashedPass}).subscribe((data)=>{
       if(!data.action){
-        console.log(data.message);
         this.alertService.error(data.message);
         this.spinner.hide();
       }

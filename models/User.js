@@ -26,7 +26,8 @@ var userSchema = new Schema({
     department:String,
     firstName:String,
     lastName:String,
-    writingUsers:[String]
+    writingUsers:[String],
+    room:String
   });
 
 

@@ -24,7 +24,7 @@ export class BackProfileComponent implements OnInit {
     this.userService.getImageUrlForUser({"face":"back"}).subscribe(async (res) => {
       this.spinner.hide();
       if (!res.action) {
-        console.log(res.message);
+        this.alert.error(res.message);
       } else {
         this.dataUrl=res.message;
       }

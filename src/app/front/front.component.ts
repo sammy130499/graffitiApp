@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import ImageEditor from 'tui-image-editor';
 import { ThrowStmt } from '@angular/compiler';
+import { AlertService } from '../alert.service';
 
 @Component({
   selector: 'app-front',
@@ -13,7 +14,7 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class FrontComponent implements OnInit, AfterViewInit {
 
-  constructor(private userService:UserService,private global:GlobalDataService,private spinner:NgxSpinnerService,private router:Router) { }
+  constructor(private userService:UserService,private global:GlobalDataService,private spinner:NgxSpinnerService,private router:Router,private alert:AlertService) { }
   private imageEditor;
   enableButton;
   spinnerMsg;
@@ -27,7 +28,7 @@ export class FrontComponent implements OnInit, AfterViewInit {
   this.userService.getImageUrlForTshirtUser({"userId":localStorage.getItem('tshirtUser')}).subscribe( async (res)=>{
     this.spinner.hide();    
     if(!res.action){
-      console.log(res.message);
+      this.alert.error(res.message);
     }
     else{
       this.imageEditor=new ImageEditor('#tui-image-editor-container', {
@@ -78,7 +79,7 @@ sendPhoto(){
   this.userService.updatePhoto({"tshirtUser":localStorage.getItem('tshirtUser'),"photo":data}).subscribe(ret=>{
     this.spinner.hide();
     if(!ret.action){
-      console.log(ret.message);
+      this.alert.error(ret.message);
     }
     else{
      localStorage.removeItem('tshirtUser');
