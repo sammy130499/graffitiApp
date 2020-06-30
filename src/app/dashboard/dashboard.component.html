@@ -1,4 +1,23 @@
-<ngx-spinner
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="shortcut icon" href="./assets/img/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="./assets/img/apple-icon.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css"
+    />
+    <title></title>
+  </head>
+  <body class="text-gray-800 antialiased">
+    <ngx-spinner
   bdColor="rgba(255,255,255,0.8)"
   size="medium"
   color="#E5433E"
@@ -6,62 +25,133 @@
   >
   <p style="font-size: 20px; color:black" [innerHtml]="spinnerMsg"></p>
   </ngx-spinner>
-
-
-
-
-<nav class="flex items-center justify-end border-bg p-6 bg-gray-900">
-  <div class="self-end">
-    <button (click)="showModal()" class="btn-primary mr-4"><img style="width:20px;height:20px;color:white" src="../../assets/images/info.svg" alt=""></button>
-  </div>
-  <div class="self-end">
-    <input type="search" #search name="search" id="search" class="bg-purple-white shadow rounded border-0 p-3"
-      placeholder="Search by name..." (input)="searchWord(search.value)">
-  </div>
-  <div class="self-end ml-4">
-    <button type="button" class="btn-primary" (click)="logout()">Logout</button>
-  </div>
-</nav>
-
-
-
-<div class="hero-bg flex w-full h-full" >
-  <div class="bg-no-repeat bg-bottom w-1/2 flex-auto" style="max-width:50%;">
-    <div class="w-1/3 inline-block"></div>
-    <div class="bg-gray-900 w-2/3 inline-block rounded overflow-hidden mt-2 cursor-pointer" (click)="callProfile()" style="max-width: 50%;">
-      <img class="object-center sm:object-top md:object-right lg:object-bottom xl:object-center" src="{{photo}}"
-        alt="Tshirt photo">
-      <div class="px-6 py-4 text-white">
-        <p class="text-center text-xl">
-          {{currentUser.firstName}} {{currentUser.lastName}}
-       </p>
-        <p class="text-center text-base sm:text-sm md:text-sm lg:text-sm xl:text-sm">
-           Username: {{currentUser.userId}}
-        </p>
-        
-        <p class="text-center text-base sm:text-sm md:text-sm lg:text-sm xl:text-sm">
-          Branch: {{currentUser.department}}
-        </p>
+    <nav
+      class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg"
+    >
+      <div
+        class="container px-4 mx-auto flex flex-wrap items-center justify-between"
+      >
+        <div
+          class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
+        >
+        <img class="w-64 pl-12"  src="../../assets/images/logo.png" alt="" >
+          <button
+            class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+            type="button"
+            onclick="toggleNavbar('example-collapse-navbar')"
+          >
+            <i class="text-white fas fa-bars"></i>
+          </button>
+        </div>
+        <div
+          class="lg:flex flex-grow items-center bg-white lg:bg-transparent lg:shadow-none hidden"
+          id="example-collapse-navbar"
+        >
+          <ul class="flex flex-col lg:flex-row list-none mr-auto">
+            <li class="flex items-center">
+               
+            </li>
+            
+          </ul>
+          
+           
+          
+        </div>
+        <div class="">
+          <button class="object-center bg-red-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
+          type="button" (click)="logout()">Logout</button>
+        </div>
       </div>
-    </div>
-    <div class="w-1/3 inline-block"></div>
-  </div>
+    </nav>
+    <main class="profile-page">
+      <section class="relative block" style="height: 350px;">
+        <div
+          class="absolute top-0 w-full h-full bg-center bg-cover"
+          style='background-image: url("../../assets/images/dashboard.jpg");'
+        >
+          
+        </div>
+        
+      </section>
+      <section class="relative py-16" style='background-image: url("../../assets/images/dashboard.jpg");'>
+    
+        
+        <div class="container mx-auto  px-4">
+          <div
+            class="relative flex flex-col  min-w-0 break-words bg-gray-300 w-full  mb-24 shadow-xl rounded-lg -mt-64"
+          >
+            <div class="px-6">
+              <div class="flex flex-wrap justify-center">
+                <div
+                  class="w-full lg:w-3/12 px-4  lg:order-2 flex justify-center"
+                >
+                  <div class="relative cursor-pointer">
+                    <img
+                      alt="..." (click)="callProfile()" 
+                      src="{{photo}}"
+                      class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
+                      style="max-width: 150px;"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center"
+                >
+                  <div class="py-6 px-3 mt-32 sm:mt-0">
+                   
+                      <select name="department" id="department" class="px-3 py-3 text-center text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-auto"
+                          (change)="getDepartmentUsers(department.value)" #department>
+                          <option value="COED">Computer Engineering Department</option>
+                          <option value="CHED">Chemical Engineering Department</option>
+                          <option value="MED">Mechanical Engineering Department</option>
+                          <option value="ECED"> Electronics Engineering Department</option>
+                          <option value="CED">Civil Engineering Department</option>
+                          <option value="EED">Electrical Engineering Department</option>
+                        </select>
+                     
+                 
+                  </div>
+                </div>
+                <div class="w-full lg:w-4/12 px-4 lg:order-1">
+                  <div class="flex justify-center py-4 lg:pt-4 pt-8">
+                    
+                  </div>
+                </div>
+              </div>
+             
+              <div class="text-center mt-12">                 
+                <h3
+                  class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
+                >
+                {{currentUser.firstName}} {{currentUser.lastName}}
+                </h3>
+                <div
+                  class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
+                >
+                  <i
+                    class="fas fa-map-marker-alt mr-2 text-lg text-gray-500"
+                  ></i>
+                  {{currentUser.userId}} , {{currentUser.department}} 
+                </div>
+                
+               
+              </div> 
+              
+              <div class="mt-10 py-10 border-t border-gray-600 text-center">             
+                <div class="self-end">
+                  <input type="search" #search name="search" id="search" class="px-3 py-3  text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-auto"
+                    placeholder="Search by name..." (input)="searchWord(search.value)">
+                </div>
+                
+                <div class="flex flex-wrap justify-center">
+                  <div class="w-full lg:w-9/12 px-4">
+                  </div>
+                </div>
+              </div>
+            </div>
+          
 
-  <div class="flex-auto" style="max-width:50%;">
-    <div class="relative mr-6 my-2 mb-2 ml-48">
-    <select name="department" id="department" class="w-auto block text-center px-4 py-2 bg-red-600 text-white"
-        (change)="getDepartmentUsers(department.value)" #department>
-        <option value="COED">Computer Engineering Department</option>
-        <option value="CHED">Chemical Engineering Department</option>
-        <option value="MED">Mechanical Engineering Department</option>
-        <option value="ECED"> Electronics Engineering Department</option>
-        <option value="CED">Civil Engineering Department</option>
-        <option value="EED">Electrical Engineering Department</option>
-      </select>
-    </div>
- <div class="relative mr-6 my-2 mb-2 ml-2">    
-  
-  <div *ngIf="!fetchedUsers" style="height: 400px;">
+            <div *ngIf="!fetchedUsers" style="height: 400px;">
     <ngx-spinner
       bdColor="rgba(255,255,255,0.8)"
       size="large"
@@ -74,34 +164,67 @@
       <p style="font-size: 20px; color:black; color: white;">Finding people...</p>
     </ngx-spinner>
   </div>
-
-  <div *ngIf="fetchedUsers" class="grid grid-cols-3 "> 
-    <div *ngFor="let user of userArr |  paginate: { itemsPerPage: 6, currentPage: page }">
-      <div *ngIf="currentUser.userId!=user.userId">   
-        <a class="mb-2 cursor-pointer" (click)="callEdit(user.userId,currentUser.userId)">
-        <div class="text-center bg-gray-900 rounded-lg shadow-lg px-4 py-12 m-2">
-          <div class="bg-cover h-24 " [style.backgroundImage]="'url('+ user.photoUrl +')'" ></div>
-            <div class="p-2 h-12 text-center text-white flex-1 flex flex-col text-white">
-              <h3 class="text-xs">{{user.firstName}} {{user.lastName}}</h3>
-                <div class=" text-grey-darker text-sm flex-1">
-                 <p class="text-xs">{{user.userId}} </p>
-                </div>
-                  <a href="#" class="border-t border-grey-light pt-2 text-xs text-grey hover:text-red uppercase no-underline tracking-wide">{{user.department}}</a>
+          
+            <div class="grid  sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 p-6">
+            <div *ngFor="let user of userArr |  paginate: { itemsPerPage: 8, currentPage: page }">
+              <div *ngIf="fetchedUsers" >            
+              <div class="w-48 text-center bg-gray-900 rounded-lg m-6 px-6 py-6 "> 
+                <a class="cursor-pointer" (click)="callEdit(user.userId,currentUser.userId)">       
+              <div class="w-auto bg-cover h-24" [style.backgroundImage]="'url('+ user.photoUrl +')'"></div>
+                  </a>
+                  <div class="p-2 h-12 text-center text-white flex-1 flex flex-col text-white">
+                    <h3 class="text-xs">{{user.firstName}} {{user.lastName}}</h3>
+                      <div class=" text-grey-darker text-sm flex-1">
+                       <p class="text-xs">{{user.userId}} </p>
+                      </div>
+                        <p class="border-t border-grey-light pt-2 text-xs text-grey hover:text-red uppercase no-underline tracking-wide">{{user.department}}</p>
+                  </div>
+            </div>
+            </div>
+            </div>
+            
+          </div>
+          <div *ngIf="userArr.length!==0" class="w-1/2  text-white-100">
+            <pagination-controls (pageChange)="page = $event" class="object-center"></pagination-controls>
+          <div class="w-1/2 text-white-100"></div>
+          </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="absolute w-full  bg-gray-900 pb-6">
+      <div class="container mx-auto px-4">
+        <hr class="mb-6 border-b-1 border-gray-700" />
+        <div
+          class="flex flex-wrap items-center md:justify-between justify-center"
+        >
+          <div class="w-full md:w-4/12 px-4">
+            <div class="text-sm text-white font-semibold py-1">
+             S V N I T  2020
             </div>
           </div>
-          </a>
+          <div class="w-full md:w-8/12 px-4">
+            <ul
+              class="flex flex-wrap list-none md:justify-end  justify-center"
+            >
+              <li>
+                <a
+                  routerLink="/team"
+                  class=" text-white hover:text-gray-400 text-sm font-semibold block py-1 px-3"
+                  >About Us</a
+                >
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-    
-    
-    <div *ngIf="userArr.length!==0" class="w-1/2 text-white-100">
-        <pagination-controls (pageChange)="page = $event" class="my-pagination"></pagination-controls>
-      <div class="w-1/2 text-white-100">
-  </div>
-</div>
+    </footer>
+  </body>
+  <script>
+    function toggleNavbar(collapseID) {
+      document.getElementById(collapseID).classList.toggle("hidden");
+      document.getElementById(collapseID).classList.toggle("block");
+    }
+  </script>
+</html>
 
-
-
-
- 

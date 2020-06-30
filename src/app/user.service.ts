@@ -9,7 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl = "http://localhost:3000/api/";
+  private baseUrl = "/api/";
   constructor( private http : HttpClient, private router : Router,private alert:AlertService,private spinner:NgxSpinnerService ) { }
 
 

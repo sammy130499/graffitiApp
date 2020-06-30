@@ -29,7 +29,7 @@ export class EditPageComponent implements OnInit,OnDestroy {
       }
       else{
         this.usersAffected=JSON.stringify(data.message.arr);
-        this.socket=io("http://localhost:3000/");
+        this.socket=io();
         let currentUser=localStorage.getItem('loggedInUsername');
         let tshirtUser=localStorage.getItem('tshirtUser');
         if(!this.usersAffected.includes(tshirtUser)){
