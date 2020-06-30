@@ -3,7 +3,7 @@
 @tailwind components;
 
 .btn-primary{
-    @apply inline-block text-white border p-3 rounded-sm border-white shadow-md tracking-normal font-bold bg-red-600;
+    @apply bg-gray-900 text-white text-sm font-bold uppercase px-6 py-3 rounded shadow  outline-none mr-1 mb-1 w-full;
 }
 
 .btn-primary:focus{
@@ -11,11 +11,11 @@
 }
 
 .btn-primary:hover{
-  @apply bg-red-700;
+  @apply bg-gray-800 shadow-md;
 }
 
 .btn-secondary{
-  @apply inline-block text-white p-2 rounded-lg shadow-md tracking-normal font-bold bg-yellow-600;
+  @apply inline-block text-white px-3  py-2 rounded-lg shadow-md tracking-normal font-bold bg-yellow-600;
 } 
 
 .btn-secondary:focus{ 
@@ -23,15 +23,15 @@
 }
 
 .btn-secondary:hover{
-@apply bg-yellow-700;
+@apply bg-yellow-500;
 }
 
 .btn-3d{
-  @apply bg-white text-red-500 font-bold py-2 px-4 border-b-4 border-green-900 rounded m-4 ;
+  @apply bg-gray-200 shadow-lg text-gray-900 font-bold py-2 px-4 border-b-4 border-yellow-600 rounded m-4 ;
 }
 
 .btn-3d:hover{
-  @apply border-red-800 shadow-lg;
+  @apply bg-gray-300 border-b-2 shadow-xs;
 }
 
 

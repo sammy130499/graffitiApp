@@ -12,8 +12,10 @@ export class ProfileComponent implements OnInit {
 
   constructor(private router:Router,private route:ActivatedRoute,private user:UserService,private alert:AlertService) { }
   userArr;
+  username;
   ngOnInit() {
     this.userArr=[];
+    this.username=localStorage.getItem("loggedInUsername").toUpperCase();
     this.user.getWritingUsers().subscribe((ret:any)=>{
       if(!ret.action){
         this.alert.error(ret.message);

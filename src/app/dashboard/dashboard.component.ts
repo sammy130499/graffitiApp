@@ -26,10 +26,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   userArrPermanent:User[];
   page: number = 1;
   currentUser;
-  fetchedUsers = false;
+  fetchedUsers;
   spinnerMsg;
   ngOnInit() {
     this.spinnerMsg="Experience magic! <br/> Setting up your dashboard";
+    this.fetchedUsers=false;
     this.spinner.show("spinner-2");
     this.userArr=[];
     this.currentUser = JSON.parse(localStorage.getItem('user'));
@@ -79,13 +80,18 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       if (!data.action) {
         this.userArr = [];
         this.userArrPermanent = [];
-        this.alertService.info("You haven't made any friends in this branch, that's SAD!!")
+        this.alertService.info("Call more of your friends oboard!")
       } else {
         this.userArr = JSON.parse(data.message);
         this.userArr = this.userArr.filter(obj=>obj.userId!=this.currentUser.userId);
         this.userArrPermanent = this.userArr;
         this.spinner.hide("spinner-2");
+        if(this.userArrPermanent.length>0){
         this.fetchedUsers=true;
+        }
+        else{
+        this.fetchedUsers=false;
+        }
       }
     })
   }
