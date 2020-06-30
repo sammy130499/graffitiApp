@@ -83,6 +83,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       } else {
         this.userArr = JSON.parse(data.message);
         this.userArr = this.userArr.filter(obj=>obj.userId!=this.currentUser.userId);
+        console.log("heyyy",JSON.stringify(this.userArr));
         this.userArrPermanent = this.userArr;
         this.spinner.hide("spinner-2");
         this.fetchedUsers=true;

@@ -10,10 +10,6 @@
       sizes="76x76"
       href="./assets/img/apple-icon.png"
     />
-    <!-- <link
-      rel="stylesheet"
-      href="./assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
-    /> -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css"
@@ -30,11 +26,6 @@
           class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
         >
         <img class="w-64 pl-12"  src="../../assets/images/logo.png" alt="" >
-          <!-- <a
-            class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-no-wrap uppercase text-white"
-            href="#"
-            >GRAFFI-TEE</a
-          > -->
           <button
             class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
             type="button"
@@ -49,37 +40,10 @@
         >
           <ul class="flex flex-col lg:flex-row list-none mr-auto">
             <li class="flex items-center">
-              <!-- <a
-                class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/login"
-                ><i
-                  class="lg:text-gray-300 text-gray-500 far fa-file-alt text-lg leading-lg mr-2"
-                ></i>
-                Docs</a
-              > -->
             </li>
           </ul>
            <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
-           <!-- <li class="flex items-center">
-              <a
-                class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                href="#pablo"
-                ><i
-                  class="lg:text-gray-300 text-gray-500 fab fa-facebook text-lg leading-lg "
-                ></i
-                ><span class="lg:hidden inline-block ml-2">Share</span></a
-              >
-            </li>
-            <li class="flex items-center">
-              <a
-                class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                href="#pablo"
-                ><i
-                  class="lg:text-gray-300 text-gray-500 fab fa-twitter text-lg leading-lg "
-                ></i
-                ><span class="lg:hidden inline-block ml-2">Tweet</span></a
-              >
-            </li> -->
+        
             <li class="flex items-center">
               <a
                 class="lg:text-white lg:hover:text-gray-300 text-gray-800  flex items-center text-xs uppercase font-bold"
@@ -87,15 +51,7 @@
                 ><img class="pr-12" src="https://img.icons8.com/fluent/48/000000/telegram-app.png"/>
                 <span class="lg:hidden inline-block ml-2">Star</span></a>
             </li>
-            <!-- <li class="flex items-center">
-              <button
-                class="bg-white text-gray-800 active:bg-gray-100 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3"
-                type="button"
-                style="transition: all 0.15s ease 0s;"
-              >
-                <i class="fas fa-arrow-alt-circle-down"></i> Download
-              </button>
-            </li> -->
+           
           </ul> 
         </div>
       </div>
@@ -113,34 +69,6 @@
                 class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0"
               >
                 <div class="rounded-t mb-0 px-4 py-4">
-                  <!-- <div class="text-center mb-3">
-                    <h6 class="text-gray-600 text-sm font-bold">
-                      Sign in with
-                    </h6>
-                  </div> -->
-                  <!-- <div class="btn-wrapper text-center">
-                    <button
-                      class="bg-white active:bg-gray-100 text-gray-800 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs"
-                      type="button"
-                      style="transition: all 0.15s ease 0s;"
-                    >
-                      <img
-                        alt="..."
-                        class="w-5 mr-1"
-                        src="./assets/img/github.svg"
-                      />Github</button
-                    ><button
-                      class="bg-white active:bg-gray-100 text-gray-800 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs"
-                      type="button"
-                      style="transition: all 0.15s ease 0s;"
-                    >
-                      <img
-                        alt="..."
-                        class="w-5 mr-1"
-                        src="./assets/img/google.svg"
-                      />Google
-                    </button>
-                  </div> -->
         
                 </div>
                 <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
@@ -209,50 +137,37 @@
                         >
                       </div>
                     <div>
-                      <!-- <label class="inline-flex items-center cursor-pointer"
-                        ><input
-                          id="customCheckLogin"
-                          type="checkbox"
-                          class="form-checkbox text-gray-800 ml-1 w-5 h-5"
-                          style="transition: all 0.15s ease 0s;"
-                        /><span class="ml-2 text-sm font-semibold text-gray-700"
-                          >Remember me</span
-                        ></label
-                      > -->
                     </div>
-                    <div class="text-center mt-1/2">
-                      <button
+                    <div class="inline-block text-center mt-1/2 p-5">
+                      <ngx-spinner
+                      bdColor="rgba(255,255,255,0.8)"
+                      size="medium"
+                      color="#E5433E"
+                      type="pacman"
+                      >
+                      <p class="text-gray-900 text-xl p-2 mt-2">Creating a Graffi-Tee for you. <br>Wait for a few seconds</p>
+                      </ngx-spinner>
+                      <button [disabled]="!allowSignupUsername||!allowSignupPassword||!allowSignupFirstName||!allowSignupLastName" type="button" [ngClass]="{'bg-red-500':!allowSignupUsername||!allowSignupPassword||!allowSignupFirstName||!allowSignupLastName}" (click)="signup()"
                         class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
-                        type="button" routerLink="/homepage"
+                        type="button"
+                        style="transition: all 0.15s ease 0s;"
+                      >
+                        Sign Up
+                      </button>
+                    </div>
+                    <div class="inline-block text-center mt-1/2 p-5">
+                      <button routerLink="/homepage"
+                        class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                        type="button"
                         style="transition: all 0.15s ease 0s;"
                       >
                         Sign In
                       </button>
                     </div>
-                    <div class="text-center mt-1/2">
-                        <button
-                          class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
-                          type="button"
-                          style="transition: all 0.15s ease 0s;"
-                        >
-                          Sign Up
-                        </button>
-                      </div>
+                    
                   </form>
                 </div>
               </div>
-              <!-- <div class="flex flex-wrap mt-6">
-                <div class="w-1/2">
-                  <a href="#pablo" class="text-gray-300"
-                    ><small>Forgot password?</small></a
-                  >
-                </div>
-                <div class="w-1/2 text-right">
-                  <a href="#pablo" class="text-gray-300"
-                    ><small>Create new account</small></a
-                  >
-                </div>
-              </div> -->
             </div>
           </div>
         </div>
@@ -265,24 +180,12 @@
               <div class="w-full md:w-4/12 px-4">
                 <div class="text-sm text-white font-semibold py-1">
                  S V N I T  2020
-                  <!-- <a
-                    href="https://www.creative-tim.com"
-                    class="text-white hover:text-gray-400 text-sm font-semibold py-1"
-                    >Creative Tim</a
-                  > -->
                 </div>
               </div>
               <div class="w-full md:w-8/12 px-4">
                 <ul
                   class="flex flex-wrap list-none md:justify-end  justify-center"
                 >
-                  <!-- <li>
-                    <a
-                      href="https://www.creative-tim.com"
-                      class="text-white hover:text-gray-400 text-sm font-semibold block py-1 px-3"
-                      >Creative Tim</a
-                    >
-                  </li> -->
                   <li>
                     <a
                       href="https://www.creative-tim.com/presentation"
@@ -290,20 +193,6 @@
                       >About Us</a
                     >
                   </li>
-                  <!-- <li>
-                    <a
-                      href="http://blog.creative-tim.com"
-                      class="text-white hover:text-gray-400 text-sm font-semibold block py-1 px-3"
-                      >Blog</a
-                    >
-                  </li> -->
-                  <!-- <li>
-                    <a
-                      href="https://github.com/creativetimofficial/argon-design-system/blob/master/LICENSE.md"
-                      class="text-white hover:text-gray-400 text-sm font-semibold block py-1 px-3"
-                      >MIT License</a
-                    >
-                  </li> -->
                 </ul>
               </div>
             </div>
@@ -312,10 +201,4 @@
       </section>
     </main>
   </body>
-  <script>
-    function toggleNavbar(collapseID) {
-      document.getElementById(collapseID).classList.toggle("hidden");
-      document.getElementById(collapseID).classList.toggle("block");
-    }
-  </script>
 </html>
