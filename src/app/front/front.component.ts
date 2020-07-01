@@ -40,6 +40,7 @@ export class FrontComponent implements OnInit, AfterViewInit {
             },
             initMenu: 'text',
             menuBarPosition: 'bottom',
+            uiSize:{width:`${window.innerWidth}px`,height:`${window.innerHeight}px`}
         },
         cssMaxWidth:600,
         cssMaxHeight:700,
