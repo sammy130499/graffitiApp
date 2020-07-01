@@ -8,6 +8,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 
 import { AlertService } from '../alert.service';
 import { first } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign-up',
@@ -170,7 +171,6 @@ export class SignUpComponent implements OnInit {
   }
 
   signup(){
-    this.spinner.show();
     this.checkFirstName();
     this.checkLastName();
     this.checkPassword();
@@ -201,19 +201,32 @@ export class SignUpComponent implements OnInit {
       return;
     }
     const hashedPass = SHA256(password).toString(enc.Hex);
-    this.userService.createUser({"userId":username,"firstName":firstName,"lastName":lastName,"password":hashedPass,"department":this.department}).subscribe(data=>{
-      if(!data.action){
-        this.spinner.hide();
-        this.alertService.error(data.message);
-      }
-      else{
-        let username=data.message.user.userId;
-        localStorage.setItem("user",JSON.stringify(data.message.user));
-        localStorage.setItem("loggedInUsername",username);        
-        localStorage.setItem("access_token",data.message.token);
-        this.router.navigate(['/dashboard/'+username]);
-        this.spinner.hide();
-        this.alertService.success("you have been registered !!");
+    Swal.fire({
+      title: 'Do you remember your password?',
+      text: "We wont be able to retrieve it later. Hashing n all!!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, I Do!'
+    }).then((result) => {
+      if (result.value) {
+        this.spinner.show();
+        this.userService.createUser({"userId":username,"firstName":firstName,"lastName":lastName,"password":hashedPass,"department":this.department}).subscribe(data=>{
+          if(!data.action){
+            this.spinner.hide();
+            this.alertService.error(data.message);
+          }
+          else{
+            let username=data.message.user.userId;
+            localStorage.setItem("user",JSON.stringify(data.message.user));
+            localStorage.setItem("loggedInUsername",username);        
+            localStorage.setItem("access_token",data.message.token);
+            this.router.navigate(['/dashboard/'+username]);
+            this.spinner.hide();
+            this.alertService.success("you have been registered !!");
+          }
+        })
       }
     })
   }

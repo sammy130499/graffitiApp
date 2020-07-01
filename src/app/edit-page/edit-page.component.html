@@ -3,7 +3,7 @@
             <button class="btn-secondary" (click)="showHome()">Home</button>
             <button *ngIf="!notAllowed" class="btn-secondary" (click)="showBack()">Back Side</button>
 </div>
-<div *ngIf="notAllowed" class="text-center h-screen text-3xl flex justify-center items-center">
+<div *ngIf="notAllowed" class="text-center h-screen text-3xl sm:text-2xl flex justify-center items-center">
     Seems like someone is already writing on the User's Tshirt.
     <br>
     Please come back after sometime!!
