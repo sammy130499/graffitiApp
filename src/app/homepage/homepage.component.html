@@ -7,13 +7,13 @@
         class="container px-4 mx-auto flex flex-wrap items-center lg:justify-between sm:justify-center"
       >
         <div
-          class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start sm:justify-center"
+          class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start sm:justify-center justify-center"
         >
-         <p style="font-family: Lobster;font-style: cursive; color:white" class="text-6xl">Graffi-Tee</p>
+         <p style="font-family: Lobster;font-style: cursive; color:white" class="text-6xl text-center w-full">Graffi-Tee</p>
         </div>
         <a
         target="_blank"
-        class="lg:text-white lg:hover:text-gray-300 text-gray-800 flex items-center text-base justify-center font-bold sm:hidden lg:flex"
+        class="lg:text-white lg:hover:text-gray-300 text-gray-800 flex items-center text-base justify-center font-bold sm:hidden lg:flex hidden"
         href="https://t.me/graffiTee"
         ><img class="mr-4" src="https://img.icons8.com/fluent/48/000000/telegram-app.png"/>
         <p class="">Please join our <br/> Channel for updates</p>
@@ -72,17 +72,17 @@
                     <p style="font-size: 20px; color:black">Authenticating if you are who you thing you are :'-)</p>
                     </ngx-spinner>
                     <div class="flex justify-center">
-                      <div class="inline-block text-center mt-1/2 p-5">
+                      <div class="inline-block text-center mt-1/2 p-2">
                         <button (click)="login()"
-                          class="btn-primary"
+                          class="btn-primary text-xs"
                           type="button"
                         >
                           Sign In
                         </button>
                       </div>
-                      <div class="inline-block text-center mt-1/2 p-5">
+                      <div class="inline-block text-center mt-1/2 p-2">
                         <button routerLink="/signup"
-                          class="btn-primary"
+                          class="btn-primary text-xs"
                           type="button"
                         >
                           Sign Up
@@ -98,27 +98,27 @@
             </div>
           </div>
         </div>
-        <div class="w-full absolute bottom-0 bg-gray-900 pb-4 mt-2">
+        <div class="w-full absolute bottom-0 bg-gray-900 h-16">
           <div class="container mx-auto px-4">
-            <hr class="mb-6 border-b-1 border-gray-700" />
+            <hr class="border-b-1 border-gray-700" />
             <div
               class="flex items-center md:justify-between sm:justify-center"
             >
               <div class="w-full md:w-4/12 px-4">
-                <div class="text-lg text-white font-semibold py-1 sm:text-2xl">
+                <div class="text-white font-semibold py-1 sm:text-2xl text-xs">
                  S V N I T  2020
                 </div>
               </div>
               <a
         target="_blank"
-        class="lg:hidden "
+        class="lg:hidden mt-1"
         href="https://t.me/graffiTee"
-        ><img class="h-20 w-40" src="https://img.icons8.com/fluent/48/000000/telegram-app.png"/>
+        ><img class="h-12 w-24" src="https://img.icons8.com/fluent/48/000000/telegram-app.png"/>
         </a>
               <div class="w-full md:w-8/12 px-4">
                     <a
                       routerLink="/team"
-                      class=" text-white hover:text-gray-400 text-lg font-semibold block py-1 px-3 text-right sm:text-2xl sm:tracking-wider"
+                      class=" text-white hover:text-gray-400 text-xs font-semibold block py-1 px-3 text-right sm:text-2xl sm:tracking-wider"
                       >About Us</a
                     >
               </div>

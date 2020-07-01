@@ -1,5 +1,5 @@
 <div class="flex justify-center items-center bg-gray-900">
-  <p class="text-4xl text-white leading-loose tracking-widest" style="font-family: lobster;font-style: cursive;">{{username}}'s PROFILE</p>
+  <p class="text-2xl text-white leading-loose tracking-widest" style="font-family: lobster;font-style: cursive;">{{username}}'s PROFILE</p>
 </div>
 <div class="flex justify-evenly mt-4" style="width: 100%;">
   <button class="btn-secondary" (click)="showFront()">Front Side</button>
@@ -7,12 +7,12 @@
   <button class="btn-secondary" (click)="showBack()">Back Side</button>
 </div>
 <hr class="mt-4 mb-2 border-2 border-gray-200">
-<div class="flex justify-center mt-10 sm:flex-col lg:flex-row sm:justify-center sm:items-center lg:items-baseline">
-  <div class="table w-1/2">
+<div class="flex justify-center mt-10 flex-col lg:flex-row sm:justify-center sm:items-center lg:items-baseline">
+  <div class="table">
     <table class="table-auto">
       <thead>
         <tr>
-          <th class="px-4 py-2 text-2xl">Friends who wrote on your shirt</th>
+          <th class="px-4 py-2 text-2xl text-center">Friends who wrote on your shirt</th>
         </tr>
       </thead>
       <tbody>
@@ -27,12 +27,12 @@
   
 
     
-    <div class="flex justify-center mt-10 lg:w-1/2">
+    <div class="flex justify-center mt-10">
       <button class="btn-3d" (click)="deleteAccountToggle()">Delete Account</button>
     </div>
     
 
-<form [formGroup]="form" *ngIf="clickedDeleteAccount" class="lg:w-1/2">
+<form [formGroup]="form" *ngIf="clickedDeleteAccount" class="">
    
   <div class="relative w-full mb-3 flex justify-center flex-col items-center">
     <p style="font-family:Roboto;font-style:serif; " class="text-2xl lg:text-xl">Tussi ja rahe ho? Tussi na jao :'(</p>

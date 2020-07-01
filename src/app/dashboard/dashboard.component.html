@@ -17,7 +17,7 @@
     <div
       class="flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
     >
-     <p style="font-family: Lobster;font-style: cursive; color:white" class="text-5xl">Graffi-Tee</p>
+     <p style="font-family: Lobster;font-style: cursive; color:white" class="text-4xl lg:text-5xl">Graffi-Tee</p>
     </div>
     <button class="btn-secondary"
           type="button" (click)="logout()">Logout</button>
@@ -39,7 +39,7 @@
                 <div
                   class="w-full px-4 lg:order-1 flex justify-center"
                 >
-                  <div class="cursor-pointer flex justify-center -mt-16">
+                  <div class="cursor-pointer flex justify-center -mt-12">
                     <img
                       alt="..." (click)="callProfile()" 
                       src="{{photo}}"
@@ -49,10 +49,10 @@
                   </div>
                 </div>
                 <div
-                  class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center sm:order-3 sm:flex sm:justify-center"
+                  class="lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center sm:order-3 sm:flex sm:justify-center order-3"
                 >
-                  <div class="sm:mt-0">
-                      <select name="department" id="department" class="px-3 py-3 text-center text-gray-700 bg-white rounded text-lg shadow focus:outline-none focus:shadow-outline w-auto"
+                  <div class="sm:mt-0 mt-4">
+                      <select name="department" id="department" class="px-3 py-3 text-center text-gray-700 bg-white rounded text-xs shadow focus:outline-none focus:shadow-outline w-auto"
                           (change)="getDepartmentUsers(department.value)" #department>
                           <option value="COED">Computer Engineering Department</option>
                           <option value="CHED">Chemical Engineering Department</option>
@@ -65,7 +65,7 @@
                  
                   </div>
                 </div>
-                <div class="text-center mt-8 sm:order-2 ">                 
+                <div class="text-center mt-8 sm:order-2 order-2">                 
                   <h3
                     class="text-4xl font-semibold leading-normal text-gray-800"
                   >
@@ -86,7 +86,7 @@
              
               
               
-              <div class="mt-4 py-10 border-t border-gray-600 text-center">
+              <div class="py-10 mt-2 border-t border-gray-600 text-center">
                 <div class="mt-2 mb-2 text-xl">
                   find your friends here!
                 </div>             
@@ -122,11 +122,11 @@
             <div class="grid  sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 p-6">
             <div *ngFor="let user of userArr|  paginate: { itemsPerPage: 10, currentPage: page };index as i">
               <div *ngIf="fetchedUsers" class="flex justify-center items-center">            
-              <div class="w-48 text-center rounded-lg m-6 px-6 py-6 sm:m-2" 
+              <div class="w-64 h-64 text-center rounded-lg m-4 px-6 py-6 sm:m-2" 
               [ngClass]="{'bg-green-600':i==0,'bg-blue-600':i==1,'bg-purple-600':i==2,'bg-pink-600':i==3,'bg-indigo-600':i==4,
               'bg-gray-600':i==5,'bg-red-600':i==6,'bg-yellow-600':i==7,'bg-teal-600':i==8,'bg-orange-600':i==9}"> 
                 <a class="cursor-pointer" (click)="callEdit(user.userId,currentUser.userId)">       
-              <div class="w-auto bg-cover h-24" [style.backgroundImage]="'url('+ user.photoUrl +')'"></div>
+              <div class="w-auto bg-cover h-40" [style.backgroundImage]="'url('+ user.photoUrl +')'"></div>
                   </a>
                   <div class="p-2 h-12 text-center text-white flex-1 flex flex-col text-white">
                     <h3 class="text-xs">{{user.firstName}} {{user.lastName}}</h3>
@@ -140,41 +140,40 @@
             </div>
             
           </div>
-          <div *ngIf="userArr.length!==0" class="w-1/2  text-white-100">
+          <div *ngIf="userArr.length!==0" class="flex justify-center text-white-100">
             <pagination-controls (pageChange)="page = $event" class="object-center"></pagination-controls>
-          <div class="w-1/2 text-white-100"></div>
           </div>
           </div>
         </div>
       </section>
     </main>
-    <footer class="w-full bg-gray-900 pb-4">
+    <div class="w-full relative bottom-0 bg-gray-900 h-16">
       <div class="container mx-auto px-4">
-        <hr class="mb-6 border-b-1 border-gray-700" />
+        <hr class="border-b-1 border-gray-700" />
         <div
-          class="flex items-center sm:justify-center"
+          class="flex items-center md:justify-between sm:justify-center"
         >
-          <div class="w-full w-4/12 px-4">
-            <div class="text-lg text-white font-semibold py-1 sm:text-2xl">
+          <div class="w-full md:w-4/12 px-4">
+            <div class="text-white font-semibold py-1 sm:text-2xl text-xs">
              S V N I T  2020
             </div>
           </div>
           <a
     target="_blank"
-    class=""
+    class="lg:hidden mt-1"
     href="https://t.me/graffiTee"
-    ><img class="sm:h-20 sm:w-40 lg:h-14 lg:w-30" src="https://img.icons8.com/fluent/48/000000/telegram-app.png"/>
+    ><img class="h-12 w-24" src="https://img.icons8.com/fluent/48/000000/telegram-app.png"/>
     </a>
-          <div class="w-full w-8/12 px-4">
+          <div class="w-full md:w-8/12 px-4">
                 <a
                   routerLink="/team"
-                  class=" text-white hover:text-gray-400 text-lg font-semibold block py-1 px-3 text-right sm:text-2xl sm:tracking-wider"
+                  class=" text-white hover:text-gray-400 text-xs font-semibold block py-1 px-3 text-right sm:text-2xl sm:tracking-wider"
                   >About Us</a
                 >
           </div>
         </div>
       </div>
-    </footer>
+    </div>
   </body>
  
 

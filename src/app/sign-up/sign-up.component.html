@@ -3,26 +3,26 @@
   style="background-image: url(./assets/images/register_bg_2.png); background-size:cover; background-repeat: no-repeat;"
   >
   <nav
-  class="w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg"
->
-  <div
-    class="container px-4 mx-auto flex flex-wrap items-center lg:justify-between sm:justify-center"
-  >
-    <div
-      class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start sm:justify-center"
+      class="w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg"
     >
-     <p style="font-family: Lobster;font-style: cursive; color:white" class="text-6xl">Graffi-Tee</p>
-    </div>
-    <a
-    target="_blank"
-    class="lg:text-white lg:hover:text-gray-300 text-gray-800 flex items-center text-base justify-center font-bold sm:hidden lg:flex"
-    href="https://t.me/graffiTee"
-    ><img class="mr-4" src="https://img.icons8.com/fluent/48/000000/telegram-app.png"/>
-    <p class="">Please join our <br/> Channel for updates</p>
-    </a>
+      <div
+        class="container px-4 mx-auto flex flex-wrap items-center lg:justify-between sm:justify-center"
+      >
+        <div
+          class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start sm:justify-center justify-center"
+        >
+         <p style="font-family: Lobster;font-style: cursive; color:white" class="text-6xl text-center w-full">Graffi-Tee</p>
+        </div>
+        <a
+        target="_blank"
+        class="lg:text-white lg:hover:text-gray-300 text-gray-800 flex items-center text-base justify-center font-bold sm:hidden lg:flex hidden"
+        href="https://t.me/graffiTee"
+        ><img class="mr-4" src="https://img.icons8.com/fluent/48/000000/telegram-app.png"/>
+        <p class="">Please join our <br/> Channel for updates</p>
+        </a>
 
-  </div>
-</nav>
+      </div>
+    </nav>
     <main>
       <section class="w-full h-full">
         <div
@@ -52,7 +52,7 @@
                         for="username"
                         >Admission Number</label
                       ><input 
-                      formControlName="username" (blur)="checkUsername()" type="text" id="username" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                      formControlName="username" (blur)="checkUsername()" type="text" id="username" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-xs shadow focus:outline-none focus:shadow-outline w-full"
                         placeholder="Fill admission number!"
                         style="transition: all 0.15s ease 0s;"
                       />
@@ -65,7 +65,7 @@
                         for="password"
                         >Password</label
                       ><input
-                        type="password" (blur)="checkPassword()" formControlName="password" id="password" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                        type="password" (blur)="checkPassword()" formControlName="password" id="password" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-xs shadow focus:outline-none focus:shadow-outline w-full"
                         placeholder="Do remember it. We wont be able to retrieve em back"
                         style="transition: all 0.15s ease 0s;"
                       />
@@ -76,7 +76,7 @@
                         for="password"
                         >Confirm Password</label
                       ><input
-                        type="password" (blur)="checkConfPassword()" formControlName="confpassword" id="confpassword" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                        type="password" (blur)="checkConfPassword()" formControlName="confpassword" id="confpassword" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-xs shadow focus:outline-none focus:shadow-outline w-full"
                         placeholder="Don't copy paste. Type it out for confirmation "
                         style="transition: all 0.15s ease 0s;"
                       />
@@ -88,7 +88,7 @@
                           for="firstName"
                           >First Name</label
                         ><input formControlName="firstName" type="text"  id="firstName" (blur)="checkFirstName()"
-                           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-xs shadow focus:outline-none focus:shadow-outline w-full"
                           placeholder="Your good first name"
                           style="transition: all 0.15s ease 0s;"
                         />
@@ -99,7 +99,7 @@
                         for="lastName"
                         >Last Name</label
                       ><input formControlName="lastName" type="text" class="input-area" id="lastName" (blur)="checkLastName()"
-                        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-xs shadow focus:outline-none focus:shadow-outline w-full"
                         placeholder="Your good last name"                        
                         style="transition: all 0.15s ease 0s;"
                       />
@@ -108,7 +108,7 @@
                         <label
                           class="block  uppercase text-xs font-bold mb-2"
                           for="department"
-                          >Department<select name="department" id="department" class="px-3 py-3 mt-2 text-gray-700 bg-white rounded text-lg shadow focus:outline-none focus:shadow-outline w-full" (change)="setDepartment(department.value)" #department>
+                          >Department<select name="department" id="department" class="px-3 py-3 mt-2 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full" (change)="setDepartment(department.value)" #department>
                             <option disabled>Choose your department</option>
                             <option value="COED">Computer Engineering Department</option>
                             <option value="CHED">Chemical Engineering Department</option>
@@ -127,7 +127,7 @@
                       color="#E5433E"
                       type="pacman"
                       >
-                      <p class="text-gray-900 text-xl p-2 mt-2">Creating a Graffi-Tee for you. <br>Wait for a few seconds</p>
+                      <p class="text-gray-900 text-sm p-2 mt-2">Creating a Graffi-Tee for you. <br>Wait for a few seconds</p>
                       </ngx-spinner>
                     <div class="flex justify-center items-center text-center mt-1/2 p-5">
                       <button [disabled]="!allowSignupUsername||!allowSignupPassword||!allowSignupFirstName||!allowSignupLastName||!allowSignupConfPassword" type="button" [ngClass]="{'bg-red-500':!allowSignupUsername||!allowSignupPassword||!allowSignupFirstName||!allowSignupLastName||!allowSignupConfPassword}" (click)="signup()"
@@ -153,33 +153,33 @@
             </div>
           </div>
         </div>
-          <div class="w-full bg-gray-900 pb-4 mt-2">
-            <div class="container mx-auto px-4">
-              <hr class="mb-6 border-b-1 border-gray-700" />
-              <div
-                class="flex items-center md:justify-between sm:justify-center"
-              >
-                <div class="w-full md:w-4/12 px-4">
-                  <div class="text-lg text-white font-semibold py-1 sm:text-2xl">
-                   S V N I T  2020
-                  </div>
+        <div class="w-full relative bottom-0 bg-gray-900 h-16">
+          <div class="container mx-auto px-4">
+            <hr class="border-b-1 border-gray-700" />
+            <div
+              class="flex items-center md:justify-between sm:justify-center"
+            >
+              <div class="w-full md:w-4/12 px-4">
+                <div class="text-white font-semibold py-1 sm:text-2xl text-xs">
+                 S V N I T  2020
                 </div>
-                <a
+              </div>
+              <a
         target="_blank"
-        class="lg:hidden "
+        class="lg:hidden mt-1"
         href="https://t.me/graffiTee"
-        ><img class="h-20 w-40" src="https://img.icons8.com/fluent/48/000000/telegram-app.png"/>
+        ><img class="h-12 w-24" src="https://img.icons8.com/fluent/48/000000/telegram-app.png"/>
         </a>
-                <div class="w-full md:w-8/12 px-4">
-                      <a
-                        routerLink="/team"
-                        class=" text-white hover:text-gray-400 text-lg font-semibold block py-1 px-3 text-right sm:text-2xl sm:tracking-wider"
-                        >About Us</a
-                      >
-                </div>
+              <div class="w-full md:w-8/12 px-4">
+                    <a
+                      routerLink="/team"
+                      class=" text-white hover:text-gray-400 text-xs font-semibold block py-1 px-3 text-right sm:text-2xl sm:tracking-wider"
+                      >About Us</a
+                    >
               </div>
             </div>
           </div>
+        </div>
       </section>
     </main>
   </div>
