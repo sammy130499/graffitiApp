@@ -120,7 +120,7 @@
   </div>
           
             <div class="grid  sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 p-6">
-            <div *ngFor="let user of userArr|  paginate: { itemsPerPage: 8, currentPage: page };index as i">
+            <div *ngFor="let user of userArr|  paginate: { itemsPerPage: 10, currentPage: page };index as i">
               <div *ngIf="fetchedUsers" class="flex justify-center items-center">            
               <div class="w-48 text-center rounded-lg m-6 px-6 py-6 sm:m-2" 
               [ngClass]="{'bg-green-600':i==0,'bg-blue-600':i==1,'bg-purple-600':i==2,'bg-pink-600':i==3,'bg-indigo-600':i==4,

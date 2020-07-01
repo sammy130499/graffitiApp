@@ -37,6 +37,7 @@ import { BackProfileComponent } from './back-profile/back-profile.component';
 import { TeamComponent } from './team/team.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
+import { EditDetailsComponent } from './edit-details/edit-details.component';
 
 const routes: Routes = [{
     path: "homepage",

@@ -156,7 +156,7 @@ app.post('/api/updatePhotoBack',auth,async (req,res)=>{
 
 
 app.post('/api/createUser',async (req,res)=>{
-    let {userId,password,department,firstName,lastName}=req.body;
+    let {userId,displayUsername,password,department,firstName,lastName}=req.body;
     User.findOne({userId}).then(async ret=>{
         if(ret){
             res.send({
@@ -253,6 +253,7 @@ app.get('/api/logout',auth,async (req,res)=>{
 
 app.post('/api/checkUser',(req,res)=>{
     let {userId}=req.body;
+    console.log({userId});
     User.findOne({userId}).then(ret=>{
         if(ret){
             res.send({
@@ -378,6 +379,48 @@ app.post('/api/getImageUrlForTshirtUserBack',auth,(req,res)=>{
     })
     
 });
+
+app.put('/api/updateUsername/',auth,(req,res)=>{
+    
+    User.updateOne({userId:req.body.userId},{userId:req.body.userIdNew}).then(ret=>{
+        if(!ret){
+            res.send({
+                action:false,
+                message:"invalid user request"
+            })
+        }
+        else{
+            res.send({
+                action:true,
+                message:"username updated!",
+            })
+        }
+
+
+    })
+
+});
+
+app.delete('/api/deleteUser',auth,(req,res)=>{
+    console.log("this is the userid",req.user.userId);
+    User.findOneAndDelete({userId:req.user.userId}).then(ret=>{
+        if(!ret)
+        {   
+            res.send({
+                action:false,
+                message:"invalid user request"
+            })
+        }
+        else{
+            res.send({
+                action:true,
+                message:"Account successfully deleted!",
+            })
+            console.log("successfully deleted");
+        }
+
+    })
+})  
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(distDir, 'index.html'));    

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../user.service';
 import { AlertService } from '../alert.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SHA256, enc } from 'crypto-js';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-profile',
@@ -10,15 +13,16 @@ import { AlertService } from '../alert.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private router:Router,private route:ActivatedRoute,private user:UserService,private alert:AlertService) { }
+  constructor(private spinner:NgxSpinnerService,private router:Router,private route:ActivatedRoute,private userService:UserService,private alertService:AlertService,private activeRoute:ActivatedRoute) { }
   userArr;
   username;
   ngOnInit() {
+    this.checkUrl();
     this.userArr=[];
     this.username=localStorage.getItem("loggedInUsername").toUpperCase();
-    this.user.getWritingUsers().subscribe((ret:any)=>{
+    this.userService.getWritingUsers().subscribe((ret:any)=>{
       if(!ret.action){
-        this.alert.error(ret.message);
+        this.alertService.error(ret.message);
       }
       else{
         this.userArr=ret.message;
@@ -26,6 +30,90 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+  allowSignupPassword=false;
+  allowSignupUsername=false;
+  clickedDeleteAccount=false;
+  form = new FormGroup({
+    username : new FormControl('',Validators.required),
+    password : new FormControl('',Validators.required),
+    department : new FormControl('',Validators.required),
+  });
+
+  checkPassword()
+  {
+  
+    let password=this.form.get('password').value;
+    if(password.length==0)
+    {
+      this.allowSignupPassword=false;
+      return;
+    }
+    const hashedPass = SHA256(password).toString(enc.Hex);
+    let user= JSON.parse(localStorage.getItem("user"));
+    if(hashedPass!=user.password)
+    {
+      this.alertService.error("Incorrect Password!");
+      this.allowSignupPassword=false;
+      return;
+    }
+    this.allowSignupPassword=true;
+
+  }
+
+
+  deleteAccountToggle()
+  {
+    if(this.clickedDeleteAccount==false)
+    {
+      this.clickedDeleteAccount=true;
+    }  
+    else{
+      this.clickedDeleteAccount=false;
+    }
+  }
+  
+  deleteAccount()
+  {
+    let username=localStorage.getItem("loggedInUsername");
+    this.userService.deleteUser({"userId":username}).subscribe((data)=>{
+      if(!data.action)
+        {
+          this.spinner.hide();
+          this.alertService.error(data.message);
+        }
+        else
+        {
+          this.spinner.hide();
+          this.alertService.success(data.message)
+          this.logout();
+        }
+    })
+  }
+
+  logout()
+  {
+
+    this.userService.logout();
+  }
+
+
+
+  gotoEditDetails()
+  {
+  
+    this.router.navigate(['editdetails'],{relativeTo:this.route});
+  }
+
+  checkUrl()
+  {
+    let urlUser=this.activeRoute.snapshot.url[1].path;
+    let loggedInUsername=localStorage.getItem("loggedInUsername");
+    if(urlUser!=loggedInUsername)
+    {
+      this.router.navigate(['/']);
+    }
+  }
+  
   showHome(){
     let username=localStorage.getItem('loggedInUsername');
     this.router.navigate(['/dashboard/'+username])

@@ -4,7 +4,7 @@ import {
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { UserService } from '../user.service';
 import { GlobalDataService } from '../global-data.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../user.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HostListener } from '@angular/core';
@@ -20,7 +20,7 @@ import Swal from 'sweetalert2'
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
 
-  constructor(private userService:UserService,private alertService:AlertService,private global:GlobalDataService,private router:Router,private sanitizer: DomSanitizer,private spinner:NgxSpinnerService) { }
+  constructor(private userService:UserService,private alertService:AlertService,private global:GlobalDataService,private router:Router,private sanitizer: DomSanitizer,private spinner:NgxSpinnerService,private activeRoute: ActivatedRoute) { }
   photo="";
   userArr:User[];
   userArrPermanent:User[];
@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   spinnerMsg;
   bgColors;
   ngOnInit() {
+    this.checkUrl();
     this.spinnerMsg="Experience magic! <br/> Setting up your dashboard";
     this.fetchedUsers=false;
     this.bgColors=["bg-green-600","bg-red-600","bg-blue-600","bg-yellow-600","bg-teal-600","bg-orange-600","bg-indigo-600","bg-pink-600","bg-purple-600","bg-gray-600"]
@@ -49,6 +50,16 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   @ViewChild("department", {static:true}) department: ElementRef;
   ngAfterViewInit(){
     this.department.nativeElement.value=this.currentUser.department;
+    
+  }
+
+  checkUrl()
+  {
+    let urlUser=this.activeRoute.snapshot.url[1].path;
+    if(urlUser!=localStorage.getItem("loggedInUsername"))
+    {
+      this.router.navigate(['/']);
+    }
     
   }
 
