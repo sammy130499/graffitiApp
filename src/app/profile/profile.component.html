@@ -7,7 +7,7 @@
   <button class="btn-secondary" (click)="showBack()">Back Side</button>
 </div>
 <hr class="mt-4 mb-2 border-2 border-gray-200">
-<div class="flex justify-center mt-10">
+<div class="flex justify-center mt-10 sm:flex-col lg:flex-row sm:justify-center sm:items-center lg:items-baseline">
   <div class="table w-1/2">
     <table class="table-auto">
       <thead>
@@ -24,6 +24,7 @@
         </tr>
       </tbody>
     </table>
+    <hr class="sm:block lg:hidden border-2 border-gray-200">
   </div>
   <router-outlet></router-outlet>
 </div>

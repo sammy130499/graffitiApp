@@ -1,35 +1,31 @@
 
-  <div class="text-gray-800 antialiased">
+  <div class="text-gray-800 h-screen antialiased bg-gray-900" style="background-image: url(../assets/images/register_bg_2.png); background-size: cover; background-repeat: no-repeat;">
     <nav
-      class="top-0 absolute z-10 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg"
+      class="w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg"
     >
       <div
-        class="container px-4 mx-auto flex flex-wrap items-center justify-between"
+        class="container px-4 mx-auto flex flex-wrap items-center lg:justify-between sm:justify-center"
       >
         <div
-          class="w-full relative  flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
+          class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start sm:justify-center"
         >
-         <p style="font-family: Lobster;font-style: cursive; color:white" class="text-4xl">Graffi-Tee</p>
+         <p style="font-family: Lobster;font-style: cursive; color:white" class="text-6xl">Graffi-Tee</p>
         </div>
         <a
         target="_blank"
-        class="lg:text-white lg:hover:text-gray-300 text-gray-800  flex items-center text-base justify-center  font-bold"
+        class="lg:text-white lg:hover:text-gray-300 text-gray-800 flex items-center text-base justify-center font-bold sm:hidden lg:flex"
         href="https://t.me/graffiTee"
         ><img class="mr-4" src="https://img.icons8.com/fluent/48/000000/telegram-app.png"/>
-        <p>Please join our <br/> Channel for updates</p>
+        <p class="">Please join our <br/> Channel for updates</p>
         </a>
 
       </div>
     </nav>
     <main>
-      <section class="absolute w-full h-full">
-        <div
-          class="absolute top-0 w-full h-full bg-gray-900"
-          style="background-image: url(../assets/images/register_bg_2.png); background-size: 100%; background-repeat: no-repeat;"
-        ></div>
+      <section class="w-full h-full sm:mt-10 lg:mt-2">
         <div class="container mx-auto px-4 h-full">
           <div class="flex content-center items-center justify-center h-full">
-            <div class="w-full lg:w-4/12 px-4">
+            <div class="w-full lg:w-5/12 px-4">
               <div
                 class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-200 border-0"
               >
@@ -75,15 +71,16 @@
                     >
                     <p style="font-size: 20px; color:black">Authenticating if you are who you thing you are :'-)</p>
                     </ngx-spinner>
-                    <div class="inline-block text-center mt-1/2 p-5">
-                      <button (click)="login()"
-                        class="btn-primary"
-                        type="button"
-                      >
-                        Sign In
-                      </button>
-                    </div>
-                    <div class="inline-block text-center mt-1/2 p-5">
+                    <div class="flex justify-center">
+                      <div class="inline-block text-center mt-1/2 p-5">
+                        <button (click)="login()"
+                          class="btn-primary"
+                          type="button"
+                        >
+                          Sign In
+                        </button>
+                      </div>
+                      <div class="inline-block text-center mt-1/2 p-5">
                         <button routerLink="/signup"
                           class="btn-primary"
                           type="button"
@@ -91,6 +88,9 @@
                           Sign Up
                         </button>
                       </div>
+                    </div>
+                    
+                    
                   </form>
                 </div>
               </div>
@@ -98,29 +98,29 @@
             </div>
           </div>
         </div>
-        <div class="absolute w-full bottom-0 bg-gray-900 pb-4 mt-2">
+        <div class="w-full absolute bottom-0 bg-gray-900 pb-4 mt-2">
           <div class="container mx-auto px-4">
             <hr class="mb-6 border-b-1 border-gray-700" />
             <div
-              class="flex flex-wrap items-center md:justify-between justify-center"
+              class="flex items-center md:justify-between sm:justify-center"
             >
               <div class="w-full md:w-4/12 px-4">
-                <div class="text-sm text-white font-semibold py-1">
+                <div class="text-lg text-white font-semibold py-1 sm:text-2xl">
                  S V N I T  2020
                 </div>
               </div>
+              <a
+        target="_blank"
+        class="lg:hidden "
+        href="https://t.me/graffiTee"
+        ><img class="h-20 w-40" src="https://img.icons8.com/fluent/48/000000/telegram-app.png"/>
+        </a>
               <div class="w-full md:w-8/12 px-4">
-                <ul
-                  class="flex flex-wrap list-none md:justify-end  justify-center"
-                >
-                  <li>
                     <a
                       routerLink="/team"
-                      class=" text-white hover:text-gray-400 text-sm font-semibold block py-1 px-3"
+                      class=" text-white hover:text-gray-400 text-lg font-semibold block py-1 px-3 text-right sm:text-2xl sm:tracking-wider"
                       >About Us</a
                     >
-                  </li>
-                </ul>
               </div>
             </div>
           </div>

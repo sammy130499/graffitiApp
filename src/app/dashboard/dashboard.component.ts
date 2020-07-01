@@ -28,9 +28,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   currentUser;
   fetchedUsers;
   spinnerMsg;
+  bgColors;
   ngOnInit() {
     this.spinnerMsg="Experience magic! <br/> Setting up your dashboard";
     this.fetchedUsers=false;
+    this.bgColors=["bg-green-600","bg-red-600","bg-blue-600","bg-yellow-600","bg-teal-600","bg-orange-600","bg-indigo-600","bg-pink-600","bg-purple-600","bg-gray-600"]
     this.spinner.show("spinner-2");
     this.userArr=[];
     this.currentUser = JSON.parse(localStorage.getItem('user'));
