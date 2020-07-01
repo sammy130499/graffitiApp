@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { GlobalDataService } from '../global-data.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import ImageEditor from 'tui-image-editor';
 import { ThrowStmt } from '@angular/compiler';
 import { AlertService } from '../alert.service';
@@ -14,7 +14,7 @@ import { AlertService } from '../alert.service';
 })
 export class FrontComponent implements OnInit, AfterViewInit {
 
-  constructor(private userService:UserService,private global:GlobalDataService,private spinner:NgxSpinnerService,private router:Router,private alert:AlertService) { }
+  constructor(private userService:UserService,private global:GlobalDataService,private spinner:NgxSpinnerService,private router:Router,private alert:AlertService,private activeRoute:ActivatedRoute) { }
   private imageEditor;
   enableButton;
   spinnerMsg;
@@ -71,6 +71,8 @@ export class FrontComponent implements OnInit, AfterViewInit {
 ngAfterViewInit(){
   
 }
+
+
 
 sendPhoto(){
   this.spinnerMsg="Sending your love to your loved one <br/> It might take a few moments"

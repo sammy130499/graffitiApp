@@ -24,7 +24,47 @@
         </tr>
       </tbody>
     </table>
+  
+
+    
+    <div class="flex justify-center mt-10">
+      <button class="btn-3d" (click)="deleteAccountToggle()">Delete Account</button>
+    </div>
+    
+
+<form [formGroup]="form" *ngIf="clickedDeleteAccount" class="justify-center">
+   
+  <div class="relative w-full mb-3">
+    <p style="font-family:Roboto;font-style:serif; " class="text-2xl ">Tussi ja rahe ho? Tussi na jao :'(</p>
+    <label 
+      class="block uppercase text-gray-700 text-xs font-bold mb-2 mt-2"
+      for="password"
+      >Password</label
+    ><input
+      type="password" (blur)="checkPassword()" formControlName="password" id="password" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-1/2"
+      placeholder="Confirm your password"
+      style="transition: all 0.15s ease 0s;"
+    />
+  </div>
+   
+ 
+  <ngx-spinner
+    bdColor="rgba(255,255,255,0.8)"
+    size="medium"
+    color="#E5433E"
+    type="pacman"
+    >
+    <p class="text-gray-900 text-xl p-2 mt-2">Deleting your account! Hope you rot in hell! </p>
+    </ngx-spinner>
+
+    <button class="btn-secondary bg-red-700 hover:bg-red-600" (click)="deleteAccount()">Delete account</button>
+</form>
+
+
+
+
     <hr class="sm:block lg:hidden border-2 border-gray-200">
   </div>
   <router-outlet></router-outlet>
+  
 </div>

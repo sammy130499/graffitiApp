@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import ImageEditor from 'tui-image-editor';
 import { UserService } from '../user.service';
 import { GlobalDataService } from '../global-data.service';
@@ -16,9 +16,9 @@ import { timer } from 'rxjs';
   templateUrl: './edit-page.component.html',
   styleUrls: ['./edit-page.component.css']
 })
-export class EditPageComponent implements OnInit,OnDestroy {
+export class EditPageComponent implements OnInit,OnDestroy,AfterViewInit {
 
-  constructor(private router:Router,private route:ActivatedRoute,private user:UserService,private alert:AlertService,private spinner:NgxSpinnerService) { }
+  constructor(private router:Router,private route:ActivatedRoute,private user:UserService,private alert:AlertService,private spinner:NgxSpinnerService,private activeRoute:ActivatedRoute) { }
   socket:any;
   room:string;
   usersAffected;
@@ -28,6 +28,7 @@ export class EditPageComponent implements OnInit,OnDestroy {
   timerSubscription;
   tshirtUser;
   ngOnInit() {
+    this.checkUrl();
     this.observableTimer();
     this.spinner.show("edit")
     this.tshirtUser=localStorage.getItem('tshirtUser');
@@ -66,6 +67,26 @@ export class EditPageComponent implements OnInit,OnDestroy {
     })
 
   }
+
+  ngAfterViewInit()
+  {
+      // this.checkUrl();
+  }
+  
+
+  checkUrl()
+  {
+    let url=this.activeRoute.snapshot.url;
+    let loggedInUsername=localStorage.getItem("loggedInUsername");
+    let tshirtUser=localStorage.getItem("tshirtUser");
+    if(url[1]["path"]!= loggedInUsername||url[2]["path"]!=tshirtUser)
+    {
+      this.router.navigate(['/']);
+    }
+
+    
+  }
+
 showHome(){
   let username=localStorage.getItem('loggedInUsername');
   this.router.navigate(['/dashboard/'+username])
@@ -100,6 +121,7 @@ showBack()
 }
 
 ngOnDestroy(){
+  if(this.socket)
   this.socket.close();
   this.timerSubscription.unsubscribe();
 }

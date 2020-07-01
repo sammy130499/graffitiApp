@@ -43,17 +43,22 @@
                   </div>
     
                   <form [formGroup]="form">
+                    
+
+
                     <div class="w-full mb-3">
                       <label
                         class="block uppercase text-gray-700 text-xs font-bold mb-2"
                         for="username"
-                        >Username</label
+                        >Admission Number</label
                       ><input 
                       formControlName="username" (blur)="checkUsername()" type="text" id="username" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-                        placeholder="Show your creativity !"
+                        placeholder="Fill admission number!"
                         style="transition: all 0.15s ease 0s;"
                       />
                     </div>
+
+                    
                     <div class="w-full mb-3">
                       <label
                         class="block uppercase text-gray-700 text-xs font-bold mb-2"
@@ -65,7 +70,19 @@
                         style="transition: all 0.15s ease 0s;"
                       />
                     </div>
-                    <div class="w-full mb-3">
+                    <div class="relative w-full mb-3">
+                      <label
+                        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        for="password"
+                        >Confirm Password</label
+                      ><input
+                        type="password" (blur)="checkConfPassword()" formControlName="confpassword" id="confpassword" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                        placeholder="Don't copy paste. Type it out for confirmation "
+                        style="transition: all 0.15s ease 0s;"
+                      />
+                    </div>
+
+                    <div class="relative w-full mb-3">
                         <label
                           class="block uppercase text-gray-700 text-xs font-bold mb-2"
                           for="firstName"
@@ -113,7 +130,7 @@
                       <p class="text-gray-900 text-xl p-2 mt-2">Creating a Graffi-Tee for you. <br>Wait for a few seconds</p>
                       </ngx-spinner>
                     <div class="flex justify-center items-center text-center mt-1/2 p-5">
-                      <button [disabled]="!allowSignupUsername||!allowSignupPassword||!allowSignupFirstName||!allowSignupLastName" type="button" [ngClass]="{'bg-red-500':!allowSignupUsername||!allowSignupPassword||!allowSignupFirstName||!allowSignupLastName}" (click)="signup()"
+                      <button [disabled]="!allowSignupUsername||!allowSignupPassword||!allowSignupFirstName||!allowSignupLastName||!allowSignupConfPassword" type="button" [ngClass]="{'bg-red-500':!allowSignupUsername||!allowSignupPassword||!allowSignupFirstName||!allowSignupLastName||!allowSignupConfPassword}" (click)="signup()"
                         class="btn-primary"
                         type="button"
                         style="transition: all 0.15s ease 0s;"
