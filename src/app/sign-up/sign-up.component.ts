@@ -203,7 +203,7 @@ export class SignUpComponent implements OnInit {
     const hashedPass = SHA256(password).toString(enc.Hex);
     Swal.fire({
       title: 'Do you remember your password?',
-      text: "We wont be able to retrieve it later. Hashing n all!!",
+      text: "We wont be able to retrieve it later.",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

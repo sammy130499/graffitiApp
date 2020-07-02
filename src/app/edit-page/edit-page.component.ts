@@ -41,19 +41,21 @@ export class EditPageComponent implements OnInit,OnDestroy,AfterViewInit {
         this.socket=io();
         let currentUser=localStorage.getItem('loggedInUsername');
         if(!this.usersAffected.includes(this.tshirtUser)){
+          console.log(data.message.room,currentUser);
           this.socket.emit('ack',{room:data.message.room,user:currentUser});
           this.socket.on('ackback',({num,present})=>{
+          console.log(num,present);
             this.spinner.hide("edit");
             if(present==currentUser && num==1){
               this.notAllowed=false;
               this.router.navigate(['front'],{relativeTo: this.route});
             }
-            else if(num>1 || present!==currentUser){
-              this.notAllowed=true;
-            }
-            else{
+            else if(num>1 && present==currentUser){
               this.notAllowed=false;
               this.router.navigate(['front'],{relativeTo: this.route});
+            }
+            else if(num>1 && present!==currentUser){
+              this.notAllowed=true;
             }
           })
         }

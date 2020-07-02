@@ -58,15 +58,22 @@ io.on("connection", socket => {
         socket.on('ack',({room,user})=>{
             socket.join(room,()=>{
                 socket.room=room;
-                if (numClients[room] == undefined) {
+                socket.thisUser=user;
+                if (numClients[room] === undefined) {
                     numClients[room] = 1;
                     clients[room]=[];
                     clients[room].push(user);
-                } else if(numClients[room]==0) {
+                } else if(numClients[room] === 0) {
                     numClients[room] = 1;
                     clients[room]=[];
                     clients[room].push(user);
-                }else{
+                }
+                else if(numClients[room]<0){
+                    numClients[room] = 1;
+                    clients[room]=[];
+                    clients[room].push(user);
+                }
+                else{
                     numClients[room]++;
                     if(!clients[room].includes(user))
                     clients[room].push(user);
@@ -74,7 +81,7 @@ io.on("connection", socket => {
                 socket.on('disconnect',()=>{
                     numClients[socket.room]--;
                     if(clients[socket.room])
-                    clients[socket.room]=clients[socket.room].filter(val=>val!=user)
+                    clients[socket.room]=clients[socket.room].filter(val=>val!=socket.thisUser)
                 })
                 io.in(room).emit('ackback',{num:numClients[room],present:clients[room][0]});
 
