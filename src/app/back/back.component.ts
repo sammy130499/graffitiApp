@@ -51,6 +51,9 @@ export class BackComponent implements OnInit, AfterViewInit {
         if(usersAffected.includes(tshirtUser)){
           this.enableButton=false;
         }
+        else if(localStorage.getItem("loggedInUsername")=="showcase"){
+          this.enableButton=false;
+        }
         else{
           this.enableButton=true;
         }

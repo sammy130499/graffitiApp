@@ -163,7 +163,7 @@ app.post('/api/updatePhotoBack',auth,async (req,res)=>{
 
 
 app.post('/api/createUser',async (req,res)=>{
-    let {userId,displayUsername,password,department,firstName,lastName}=req.body;
+    let {userId,password,department,firstName,lastName}=req.body;
     User.findOne({userId}).then(async ret=>{
         if(ret){
             res.send({
