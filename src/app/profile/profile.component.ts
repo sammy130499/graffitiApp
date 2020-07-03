@@ -5,6 +5,7 @@ import { AlertService } from '../alert.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SHA256, enc } from 'crypto-js';
 import { NgxSpinnerService } from 'ngx-spinner';
+import Swal from "sweetalert2"; 
 
 @Component({
   selector: 'app-profile',
@@ -74,20 +75,39 @@ export class ProfileComponent implements OnInit {
   
   deleteAccount()
   {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {
+    this.checkPassword();
+    if(!this.allowSignupPassword)
+    return;
     let username=localStorage.getItem("loggedInUsername");
-    this.userService.deleteUser({"userId":username}).subscribe((data)=>{
-      if(!data.action)
-        {
-          this.spinner.hide();
-          this.alertService.error(data.message);
-        }
-        else
-        {
-          this.spinner.hide();
-          this.alertService.success(data.message)
-          this.logout();
-        }
+        this.userService.deleteUser({"userId":username}).subscribe((data)=>{
+          if(!data.action)
+            {
+              this.spinner.hide();
+              this.alertService.error(data.message);
+            }
+            else
+            {
+              this.spinner.hide();
+              this.alertService.success(data.message)
+              this.logout();
+            }
+        })
+      }
     })
+
+    
+    
+    
   }
 
   logout()
