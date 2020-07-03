@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1593759808793,
+  "timestamp": 1593805406215,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -10,8 +10,8 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main-es2015.4a5f2727a1d1d36734dd.js",
-        "/main-es5.4a5f2727a1d1d36734dd.js",
+        "/main-es2015.f38e19e3674fdd30b047.js",
+        "/main-es5.f38e19e3674fdd30b047.js",
         "/manifest.webmanifest",
         "/polyfills-es2015.701787094bb54e1d6be2.js",
         "/polyfills-es5.63b893b6d7b7d760fd81.js",
@@ -75,9 +75,9 @@
     "/assets/images/tshirtFront.png": "86cf919397aa2aecd63ea8dd56ddfa62dee0f157",
     "/assets/js/download.js": "baf424cf933d34d9e678f505031c961c8e66471b",
     "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "886de75448f2cc622655a24d8f7bb4001f4685b6",
-    "/main-es2015.4a5f2727a1d1d36734dd.js": "c68063abe490bc2959b63b3ba4d447b7d7c809ce",
-    "/main-es5.4a5f2727a1d1d36734dd.js": "f46c33618d178b74cd80e552eec3f9837bc4e7d1",
+    "/index.html": "aedc572ec8bed82f20a7c248eb0ba6e33577fdd8",
+    "/main-es2015.f38e19e3674fdd30b047.js": "caa8613579560fc2315b78536ec535873354e4c5",
+    "/main-es5.f38e19e3674fdd30b047.js": "85f9f3b4fc809973e03a93847394372dfeff3637",
     "/manifest.webmanifest": "ac97057ef07aa090c2f159836b3cb31d41b1922d",
     "/polyfills-es2015.701787094bb54e1d6be2.js": "8344da40c751b5ec9c63f346a32302468bf0f92f",
     "/polyfills-es5.63b893b6d7b7d760fd81.js": "d4d59fb47880b248e149cb1969507c25f3370cf0",

@@ -100,6 +100,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         this.userArrPermanent = this.userArr;
         this.spinner.hide("spinner-2");
         if(this.userArrPermanent.length>0){
+          this.page=1;
         this.fetchedUsers=true;
         }
         else{
@@ -126,6 +127,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     var userArrLen = this.userArr.length;
     var tempUser: User[];
     tempUser = [];
+    this.page=1;
     for (var i = 0; i < userArrLen; i++) {
       var tempString=this.userArr[i].firstName+" "+this.userArr[i].lastName;
       if ((this.userArr[i].userId).toLowerCase().indexOf(word.toLowerCase()) >= 0) {

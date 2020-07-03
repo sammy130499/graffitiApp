@@ -88,16 +88,17 @@ export class ProfileComponent implements OnInit {
     this.checkPassword();
     if(!this.allowSignupPassword)
     return;
+    this.spinner.show("delete")
     let username=localStorage.getItem("loggedInUsername");
         this.userService.deleteUser({"userId":username}).subscribe((data)=>{
           if(!data.action)
             {
-              this.spinner.hide();
+              this.spinner.hide("delete");
               this.alertService.error(data.message);
             }
             else
             {
-              this.spinner.hide();
+              this.spinner.hide("delete");
               this.alertService.success(data.message)
               this.logout();
             }

@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import ImageEditor from 'tui-image-editor';
 import { AlertService } from '../alert.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -87,19 +88,33 @@ ngAfterViewInit(){
 }
 
 sendPhoto(){
-  this.spinnerMsg="Your loved one has so many well wishers <br/> Adding your wishes too<br>Wait for a few moments!"
-  this.spinner.show();
-  let data=this.imageEditor.toDataURL();
-  this.userService.updatePhotoBack({"tshirtUser":localStorage.getItem('tshirtUser'),"photo":data}).subscribe(ret=>{
-    this.spinner.hide();
-    if(!ret.action){
-      this.alert.error(ret.message);
-    }
-    else{
-     localStorage.removeItem('tshirtUser');
-     this.router.navigate(['/dashboard/'+localStorage.getItem("loggedInUsername")])
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You have a single chance to edit a shirt. Make it your best!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, edit it!'
+  }).then((result) => {
+    if (result.value) {
+      this.spinnerMsg="Your loved one has so many well wishers <br/> Adding your wishes too<br>Wait for a few moments!"
+      this.spinner.show();
+      let data=this.imageEditor.toDataURL();
+      this.userService.updatePhotoBack({"tshirtUser":localStorage.getItem('tshirtUser'),"photo":data}).subscribe(ret=>{
+      this.spinner.hide();
+      if(!ret.action){
+        this.alert.error(ret.message);
+      }
+      else{
+      localStorage.removeItem('tshirtUser');
+      this.router.navigate(['/dashboard/'+localStorage.getItem("loggedInUsername")])
+      }
+  })
     }
   })
+  
 }
 
 
