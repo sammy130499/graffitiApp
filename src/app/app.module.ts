@@ -29,6 +29,7 @@ import { TeamComponent } from './team/team.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { EditDetailsComponent } from './edit-details/edit-details.component';
+import {WindowRef} from './windowref.service';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -69,7 +70,7 @@ export function tokenGetter() {
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [UserService,AuthGuardLoginService,AuthGuardService,AlertService,NgxSpinnerService,PaginationService,
+  providers: [UserService,AuthGuardLoginService,AuthGuardService,AlertService,NgxSpinnerService,PaginationService, WindowRef,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
