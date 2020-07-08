@@ -1,0 +1,33 @@
+
+<form [formGroup]="form">
+   
+    <div class="relative w-full mb-3">
+      <p>Tussi ja rahe ho? Tussi na jao :'(</p>
+      <label
+        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        for="password"
+        >Password</label
+      ><input
+        type="password" (blur)="checkPassword()" formControlName="password" id="password" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        placeholder="Confirm your password"
+        style="transition: all 0.15s ease 0s;"
+      />
+    </div>
+   
+
+    
+   
+    <ngx-spinner
+      bdColor="rgba(255,255,255,0.8)"
+      size="medium"
+      color="#E5433E"
+      type="pacman"
+      >
+      <p class="text-gray-900 text-xl p-2 mt-2 text-center">Deleting your account! Hope you rot in hell! </p>
+      </ngx-spinner>
+  
+    
+    
+  </form>
+
+  <button class="btn" (click)="deleteAccount()">Delete account</button>

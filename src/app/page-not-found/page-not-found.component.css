@@ -3,7 +3,6 @@
   box-sizing: 0;
   margin: 0;
   padding: 0;
-  cursor: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/4424790/cursors-edge.png"), auto;
 }
 
 body {
@@ -81,7 +80,7 @@ main button {
           transform: skew(-5deg);
   -webkit-transition: all 0.1s ease;
   transition: all 0.1s ease;
-  cursor: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/4424790/cursors-eye.png"), auto;
+  cursor: pointer,auto;
 }
 main button:hover {
   background-color: #c5dc50;

@@ -1,11 +1,9 @@
 .hero-bg{
-    background-image: url(../../assets/images/header.jpg);
     background-position: center;
     
     background-size: cover;
 }
 .border-bg{
-    background-image: url(../../assets/images/logo.png);
     background-position: left;
     background-repeat: no-repeat; 
     background-size: contain;

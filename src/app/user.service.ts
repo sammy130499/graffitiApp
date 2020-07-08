@@ -9,7 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl = "/api/";
+  private baseUrl = "http://localhost:8000/api/";
   constructor( private http : HttpClient, private router : Router,private alert:AlertService,private spinner:NgxSpinnerService ) { }
 
 
@@ -88,6 +88,35 @@ export class UserService {
     return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
   }
 
+  deleteUser(user:any):any{
+    let url=this.baseUrl+"deleteUser";
+    let headers=new HttpHeaders();
+    headers.set('Content-Type','application/json');
+    return this.http.delete(url,JSON.parse(JSON.stringify(user)));
+  }
+
+  deleteUserfromAdmin(user:any):any{
+    let url=this.baseUrl+"deleteUserFromAdmin/"+user.userId;
+    let headers=new HttpHeaders();
+    headers.set('Content-Type','application/json');
+    return this.http.delete(url,JSON.parse(JSON.stringify(user)));
+  }
+
+  updateUserpass(user:any):any
+  {
+      let url=this.baseUrl+"updateUserpass";
+      let headers=new HttpHeaders();
+      headers.set('Content-Type','application/json');
+      return this.http.put(url,JSON.parse(JSON.stringify(user)),{headers});
+  }
+
+  updateUsername(user:any):any
+  {
+      let url=this.baseUrl+"updateUsername";
+      let headers=new HttpHeaders();
+      headers.set('Content-Type','application/json');
+      return this.http.put(url,JSON.parse(JSON.stringify(user)),{headers});
+  }
 
   isLoggedIn(){
     if(!localStorage.getItem("access_token"))
@@ -115,6 +144,31 @@ export class UserService {
         this.router.navigate(['/homepage']);
       }
     })
+    
+  }
+
+  logoutall(){
+    let url = this.baseUrl + "logoutall";
+    let headers=new HttpHeaders();
+    headers.set('Content-Type','application/json');
+    this.spinner.show()
+    this.http.get(url).subscribe((ret)=>{
+      this.spinner.hide();
+      if(!ret){
+        this.router.navigate(['/adminpage'])
+        this.alert.error("nothing bro!!!");
+      }
+      else{
+        this.router.navigate(['/adminpage'])
+        // localStorage.removeItem("access_token");
+        // localStorage.removeItem("loggedInUsername")
+        // localStorage.removeItem("tshirtUser")
+        // localStorage.removeItem("currentUser")
+        // this.router.navigate(['/homepage']);
+      }
+    })
+  
+    
   }
   
 }

@@ -1,7 +1,3 @@
-
-
-
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -44,6 +40,7 @@ let numClients = {};
 let clients={}
 
 const User=require('./models/User');
+const { findOne } = require('./models/User');
 mongoose.connect(process.env.MONGODB_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -58,15 +55,22 @@ io.on("connection", socket => {
         socket.on('ack',({room,user})=>{
             socket.join(room,()=>{
                 socket.room=room;
-                if (numClients[room] == undefined) {
+                socket.thisUser=user;
+                if (numClients[room] === undefined) {
                     numClients[room] = 1;
                     clients[room]=[];
                     clients[room].push(user);
-                } else if(numClients[room]==0) {
+                } else if(numClients[room] === 0) {
                     numClients[room] = 1;
                     clients[room]=[];
                     clients[room].push(user);
-                }else{
+                }
+                else if(numClients[room]<0){
+                    numClients[room] = 1;
+                    clients[room]=[];
+                    clients[room].push(user);
+                }
+                else{
                     numClients[room]++;
                     if(!clients[room].includes(user))
                     clients[room].push(user);
@@ -74,7 +78,7 @@ io.on("connection", socket => {
                 socket.on('disconnect',()=>{
                     numClients[socket.room]--;
                     if(clients[socket.room])
-                    clients[socket.room]=clients[socket.room].filter(val=>val!=user)
+                    clients[socket.room]=clients[socket.room].filter(val=>val!=socket.thisUser)
                 })
                 io.in(room).emit('ackback',{num:numClients[room],present:clients[room][0]});
 
@@ -231,11 +235,19 @@ app.post('/api/login',async (req,res)=>{
     }
 });
 
+
+
+
 app.get('/api/logout',auth,async (req,res)=>{
     try {
+        console.log(JSON.stringify(req.user.tokens));
+                 
+        
         req.user.tokens = req.user.tokens.filter((token) => {
-            return token.token != req.token
+            return token.token != req.token           
+
         })
+       
         await req.user.save()
         res.send({
             action:true,
@@ -249,10 +261,29 @@ app.get('/api/logout',auth,async (req,res)=>{
     }
 });
 
+app.get('/api/logoutall', (req,res)=>{
+    User.find({}).then(ret=>{
+
+        if(!ret)
+        {
+            
+        }
+        else{
+            ret.forEach(user=>{
+                user.tokens=[];
+                user.save()
+            })
+        }
+
+    })
+
+});
+
 
 
 app.post('/api/checkUser',(req,res)=>{
     let {userId}=req.body;
+    console.log({userId});
     User.findOne({userId}).then(ret=>{
         if(ret){
             res.send({
@@ -378,6 +409,95 @@ app.post('/api/getImageUrlForTshirtUserBack',auth,(req,res)=>{
     })
     
 });
+
+app.put('/api/updateUserpass/' ,(req,res)=>{
+    let {userPass}=req.body.password;
+    console.log("servercheck",req.body.password);
+    User.updateOne({"userId":req.body.userId},{"password":req.body.password}).then(ret=>{
+        if(!ret){
+            res.send({
+                action:false,
+                message:"invalid user request"
+            })
+        }
+        else{
+            res.send({
+                action:true,
+                message:"password updated !",
+            })
+        }
+
+
+    })
+
+});
+
+app.put('/api/updateUsername/',auth,(req,res)=>{
+
+    User.updateOne({userId:req.body.userId},{userId:req.body.userIdNew}).then(ret=>{
+        if(!ret){
+            res.send({
+                action:false,
+                message:"invalid user request"
+            })
+        }
+        else{
+            res.send({
+                action:true,
+                message:"username updated!",
+            })
+        }
+
+
+    })
+
+});
+
+
+
+app.delete('/api/deleteUserFromAdmin/:id',(req,res)=>{
+    // console.log("this is the userid ",req.body);
+    let {userId}=req.params.id;
+    User.findOneAndDelete({"userId":req.params.id}).then(ret=>{
+        if(!ret)
+        {   
+            res.send({
+                action:false,
+                message:"invalid user request"
+            })
+        }
+        else{
+            res.send({
+                action:true,
+                message:"Account successfully deleted!",
+            })
+            console.log("successfully deleted");
+        }
+
+    })
+})
+
+
+app.delete('/api/deleteUser',auth,(req,res)=>{
+    console.log("this is the userid",req.user.userId);
+    User.findOneAndDelete({userId:req.user.userId}).then(ret=>{
+        if(!ret)
+        {   
+            res.send({
+                action:false,
+                message:"invalid user request"
+            })
+        }
+        else{
+            res.send({
+                action:true,
+                message:"Account successfully deleted!",
+            })
+            console.log("successfully deleted");
+        }
+
+    })
+})  
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(distDir, 'index.html'));    

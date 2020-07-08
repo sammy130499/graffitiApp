@@ -1,0 +1,89 @@
+
+<p>admin-page works!</p>
+<div>
+<form [formGroup]="form" class="mt-8">
+    <div class="w-full mb-3">
+      <label
+        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        for="username"
+        >Username</label
+      ><input
+      formControlName="username" type="text" id="username" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        placeholder="Username"
+        style="transition: all 0.15s ease 0s;"
+      />
+    </div>
+    <div class="w-full mb-3">
+      <label
+        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        for="firstname"
+        >First Name</label
+      ><input
+        type="text" formControlName="firstname"  id="firstname" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        placeholder="first Name"
+        style="transition: all 0.15s ease 0s;"
+      />
+    </div>
+    <div class="w-full mb-3">
+        <label
+          class="block uppercase text-gray-700 text-xs font-bold mb-2"
+          for="lastname"
+          >Last Name</label
+        ><input
+          type="text" formControlName="lastname"  id="lastname" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          placeholder="Last Name"
+          style="transition: all 0.15s ease 0s;"
+        />
+      </div>
+      <div class="w-full mb-3">
+        <label
+          class="block uppercase text-gray-700 text-xs font-bold mb-2"
+          for="password"
+          >New Password</label
+        ><input
+          type="text" formControlName="password"  id="password" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          placeholder="New Password"
+          style="transition: all 0.15s ease 0s;"
+        />
+      </div>
+    <div>
+    </div>
+    <ngx-spinner
+    bdColor="rgba(255,255,255,0.8)"
+    size="medium"
+    color="#E5433E"
+    type="pacman"
+    >
+    <p style="font-size: 20px; color:black" class="text-center"></p>
+    </ngx-spinner>
+    <div class="flex justify-center">
+      
+      <div class="inline-block text-center mt-1/2 p-2">
+        <button (click)="deleteUserFromAdmin()"
+          class="btn-primary text-xs"
+          type="button"
+        >
+          Delete User
+        </button>
+      </div>
+      <div class="inline-block text-center mt-1/2 p-2">
+        <button (click)="changepass()"
+          class="btn-primary text-xs"
+          type="button"
+        >
+        Change Password of User
+        </button>
+      </div>
+      <div class="inline-block text-center mt-1/2 p-2">
+        <button (click)="logoutall()"
+          class="btn-primary text-xs"
+          type="button"
+        >
+           Logout all  User
+        </button>
+      </div>
+    </div>
+    
+    
+  </form>
+</div>

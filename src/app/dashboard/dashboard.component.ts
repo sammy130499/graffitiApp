@@ -4,7 +4,7 @@ import {
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { UserService } from '../user.service';
 import { GlobalDataService } from '../global-data.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../user.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HostListener } from '@angular/core';
@@ -20,16 +20,20 @@ import Swal from 'sweetalert2'
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
 
-  constructor(private userService:UserService,private alertService:AlertService,private global:GlobalDataService,private router:Router,private sanitizer: DomSanitizer,private spinner:NgxSpinnerService) { }
+  constructor(private userService:UserService,private alertService:AlertService,private global:GlobalDataService,private router:Router,private sanitizer: DomSanitizer,private spinner:NgxSpinnerService,private activeRoute: ActivatedRoute) { }
   photo="";
   userArr:User[];
   userArrPermanent:User[];
   page: number = 1;
   currentUser;
-  fetchedUsers = false;
+  fetchedUsers;
   spinnerMsg;
+  bgColors;
   ngOnInit() {
+    this.checkUrl();
     this.spinnerMsg="Experience magic! <br/> Setting up your dashboard";
+    this.fetchedUsers=false;
+    this.bgColors=["bg-green-600","bg-red-600","bg-blue-600","bg-yellow-600","bg-teal-600","bg-orange-600","bg-indigo-600","bg-pink-600","bg-purple-600","bg-gray-600"]
     this.spinner.show("spinner-2");
     this.userArr=[];
     this.currentUser = JSON.parse(localStorage.getItem('user'));
@@ -46,6 +50,16 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   @ViewChild("department", {static:true}) department: ElementRef;
   ngAfterViewInit(){
     this.department.nativeElement.value=this.currentUser.department;
+    
+  }
+
+  checkUrl()
+  {
+    let urlUser=this.activeRoute.snapshot.url[1].path;
+    if(urlUser!=localStorage.getItem("loggedInUsername"))
+    {
+      this.router.navigate(['/']);
+    }
     
   }
 
@@ -79,13 +93,19 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       if (!data.action) {
         this.userArr = [];
         this.userArrPermanent = [];
-        this.alertService.info("You haven't made any friends in this branch, that's SAD!!")
+        this.alertService.info("Call more of your friends oboard!")
       } else {
         this.userArr = JSON.parse(data.message);
         this.userArr = this.userArr.filter(obj=>obj.userId!=this.currentUser.userId);
         this.userArrPermanent = this.userArr;
         this.spinner.hide("spinner-2");
+        if(this.userArrPermanent.length>0){
+          this.page=1;
         this.fetchedUsers=true;
+        }
+        else{
+        this.fetchedUsers=false;
+        }
       }
     })
   }
@@ -107,6 +127,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     var userArrLen = this.userArr.length;
     var tempUser: User[];
     tempUser = [];
+    this.page=1;
     for (var i = 0; i < userArrLen; i++) {
       var tempString=this.userArr[i].firstName+" "+this.userArr[i].lastName;
       if ((this.userArr[i].userId).toLowerCase().indexOf(word.toLowerCase()) >= 0) {

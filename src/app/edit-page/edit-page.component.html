@@ -3,10 +3,10 @@
             <button class="btn-secondary" (click)="showHome()">Home</button>
             <button *ngIf="!notAllowed" class="btn-secondary" (click)="showBack()">Back Side</button>
 </div>
-<div *ngIf="notAllowed" class="text-center h-screen text-3xl flex justify-center items-center">
+<div *ngIf="notAllowed" class="text-center h-screen text-3xl sm:text-2xl flex justify-center items-center">
     Seems like someone is already writing on the User's Tshirt.
     <br>
-    Please come back after sometime or try refreshing!!
+    Please come back after sometime!!
 </div>
 <ngx-spinner
   bdColor="rgba(255,255,255,0.8)"
@@ -15,7 +15,7 @@
   type="pacman"
   name="edit"
   >
-  <p style="font-size: 20px; color:black">Checking if the resource is available to edit</p>
+  <p style="font-size: 20px; color:black" class="text-center">Checking if the resource is available to edit</p>
   </ngx-spinner>
 
-<router-outlet style="width: 100%;height: 100%;"></router-outlet>
+<router-outlet *ngIf="!notAllowed" style="width: 100%;height: 100%;"></router-outlet>
