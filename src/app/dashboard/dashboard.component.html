@@ -53,12 +53,10 @@
                   <div class="sm:mt-0 mt-4">
                       <select name="department" id="department" class="px-3 py-3 text-center text-gray-700 bg-white rounded text-xs shadow focus:outline-none focus:shadow-outline w-auto"
                           (change)="getDepartmentUsers(department.value)" #department>
-                          <option value="COED">Computer Engineering Department</option>
-                          <option value="CHED">Chemical Engineering Department</option>
-                          <option value="MED">Mechanical Engineering Department</option>
-                          <option value="ECED"> Electronics Engineering Department</option>
-                          <option value="CED">Civil Engineering Department</option>
-                          <option value="EED">Electrical Engineering Department</option>
+                          <option disabled>Choose your department</option>
+                          <option *ngFor="let dept of departments; let i = index" [value]="dept.code">
+                            {{dept.name}}
+                          </option>
                         </select>
                      
                  

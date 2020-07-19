@@ -34,6 +34,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   fetchedUsers;
   spinnerMsg;
   bgColors;
+  departments=[];
   ngOnInit() {
     
     this.checkUrl();
@@ -43,14 +44,23 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.spinner.show("spinner-2");
     this.userArr=[];
     this.currentUser = JSON.parse(localStorage.getItem('user'));
-    this.getDepartmentUsers(this.currentUser.department);    
-    this.userService.getImageUrlForUser({"face":"front"}).subscribe((data) => {
-      if (!data.action) {
-        this.alertService.error(data.message)
-      } else {
-        this.photo = data.message;
-      }
-    })
+    console.log(this.currentUser);
+    if(!localStorage.getItem('config')){
+      console.log(this.currentUser.college);
+      this.userService.getCollegeConfig({"college":this.currentUser.college}).subscribe((data:any)=>{
+        if(!data.action){
+          this.alertService.error("college not defined")
+        }
+        else{
+          localStorage.setItem('config',data.message);
+          this.setUpDashboard();
+        }
+      })
+    }
+    else{
+      this.setUpDashboard();
+    }
+    
     this.swUpdate.available.subscribe(event => {
 
       Swal.fire({
@@ -81,6 +91,18 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         confirmButtonAriaLabel: 'Thumbs up, great!'
       })
     });
+  }
+
+  setUpDashboard(){
+    this.departments=JSON.parse(localStorage.getItem('config')).departments;
+      this.getDepartmentUsers(this.currentUser.department);    
+      this.userService.getImageUrlForUser({"face":"front"}).subscribe((data) => {
+      if (!data.action) {
+        this.alertService.error(data.message)
+      } else {
+        this.photo = data.message;
+      }
+    })
   }
 
   @ViewChild("department", {static:true}) department: ElementRef;

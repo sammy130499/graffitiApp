@@ -1,11 +1,18 @@
 <div
   style="height:100%;max-width:100vw;max-height: 100vh;width: 100%;display: flex;text-align: center;flex-direction: column;">
+  
+  <div class="flex justify-center mt-4 order-1">
+    <img src="{{dataUrl}}" alt="tshirt" style="height: 80vh;">
+  </div>
   <div
-    style="height:70px; width: 100%;display: flex;justify-items: center;align-content: center;text-align: center;">
+    style="height:140px; width: 100%;display: flex;justify-items: center;align-content: center;text-align: center;flex-direction: column;">
     <a id="btn" download class="btn-primary mt-4 order-2" style="display: block;margin: 10px auto;width:50%"
       href="{{dataUrl}}">Download</a>
-  </div>
-  <div class="flex justify-center mt-4 order-1">
-    <img src="{{dataUrl}}" alt="tshirt back" style="height: 80vh;">
+      <div class="flex justify-center mt-4">
+      <fb-like url={{dataUrl}}></fb-like>
+      </div>
+      <div class="flex justify-center mt-2">
+        <tweet url={{dataUrl}} text="An awesome graffi-Tee created at graffitee.ml"></tweet>
+      </div>
   </div>
 </div>

@@ -29,6 +29,7 @@ import { TeamComponent } from './team/team.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { EditDetailsComponent } from './edit-details/edit-details.component';
+import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 import {WindowRef} from './windowref.service';
 
 export function tokenGetter() {
@@ -61,6 +62,7 @@ export function tokenGetter() {
     NgxPaginationModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    JwSocialButtonsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

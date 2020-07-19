@@ -44,6 +44,7 @@ let numClients = {};
 let clients={}
 
 const User=require('./models/User');
+const CollegeConfig=require("./models/CollegeConfig");
 mongoose.connect(process.env.MONGODB_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -92,11 +93,8 @@ io.on("connection", socket => {
 
 app.post('/api/updatePhoto',auth,async (req,res)=>{
     let {tshirtUser,photo}=req.body;
-        console.log('here1')
         let release= await mutex.acquire();
-        console.log('here2')
         let ret=await User.findOne({userId:tshirtUser});
-        console.log('here3')
         if(!ret){
             release();
             res.send({
@@ -105,29 +103,44 @@ app.post('/api/updatePhoto',auth,async (req,res)=>{
             })
         }
         else{
-            console.log('here4')
-            await cloudinary.uploader.destroy(ret.imgPublicId);
-            console.log('here5')
+            await cloudinary.uploader.destroy(ret.publicId);
             let ret1=await cloudinary.uploader.upload(photo);
-            console.log('here6')
-            let imgPublicId=ret1.public_id;
+            let publicId=ret1.public_id;
             let photoUrl=ret1.secure_url;
+            ret.oldPhotoUrl=ret.photoUrl;
+            ret.oldPublicId=ret.publicId
             ret.photoUrl=photoUrl;
-            ret.imgPublicId=imgPublicId;
+            ret.publicId=publicId;
             ret.writingUsers.push(req.user.userId);
             let ret2=await User.findOneAndUpdate({userId:tshirtUser},ret);
             req.user.usersAffected.push(tshirtUser);
-            console.log('here7')
             await User.findOneAndUpdate({userId:req.user.userId},req.user);
-            console.log('here8')            
             release();
-            console.log('here9')            
             res.send({
                 action:true,
                 message:"successfully updated"
             })
         }
     
+});
+
+app.post('/api/getCollegeConfig',(req,res)=>{
+    let {college}=req.body;
+    console.log(college);
+    CollegeConfig.findOne({college}).then(ret=>{
+        if(!ret){
+            res.send({
+                action:false,
+                message:'invalid college'
+            })
+        }
+        else{
+            res.send({
+                action:true,
+                message:JSON.stringify(ret)
+            })
+        }
+    })
 })
 
 
@@ -143,12 +156,14 @@ app.post('/api/updatePhotoBack',auth,async (req,res)=>{
             })
         }
         else{
-            await cloudinary.uploader.destroy(ret.imgPublicIdBack);
+            await cloudinary.uploader.destroy(ret.publicIdBack);
             let ret1=await cloudinary.uploader.upload(photo);
-            let imgPublicId=ret1.public_id;
+            let publicId=ret1.public_id;
             let photoUrl=ret1.secure_url;
+            ret.oldPhotoUrlBack=ret.photoUrlBack;
+            ret.oldPublicIdBack=ret.publicIdBack;
             ret.photoUrlBack=photoUrl;
-            ret.imgPublicIdBack=imgPublicId;
+            ret.publicIdBack=publicId;
             ret.writingUsers.push(req.user.userId);
             let ret2=await User.findOneAndUpdate({userId:tshirtUser},ret);
             req.user.usersAffected.push(tshirtUser);
@@ -163,7 +178,7 @@ app.post('/api/updatePhotoBack',auth,async (req,res)=>{
 
 
 app.post('/api/createUser',async (req,res)=>{
-    let {userId,password,department,firstName,lastName}=req.body;
+    let {userId,password,department,firstName,lastName,college}=req.body;
     User.findOne({userId}).then(async ret=>{
         if(ret){
             res.send({
@@ -173,18 +188,18 @@ app.post('/api/createUser',async (req,res)=>{
         }
         else{
             let photoUrl;
-            let imgPublicId;
+            let publicId;
             let photoUrlBack;
-            let imgPublicIdBack;
+            let publicIdBack;
             try{
                 cloudinary.uploader.upload(photo).then(async ret1=>{
                     photoUrl=ret1.secure_url;
-                    imgPublicId=ret1.public_id;
+                    publicId=ret1.public_id;
                     cloudinary.uploader.upload(photo_back).then(async ret2=>{
                         photoUrlBack=ret2.secure_url;
-                        imgPublicIdBack=ret2.public_id; 
+                        publicIdBack=ret2.public_id; 
                         console.log("photo url ");
-                        let user=new User({userId,password,department,usersAffected:[],photoUrl,photoUrlBack,imgPublicId,imgPublicIdBack,firstName,lastName,writingUsers:[],room:v4()});
+                        let user=new User({userId,password,department,usersAffected:[],photoUrl,photoUrlBack,publicId,publicIdBack,firstName,lastName,writingUsers:[],room:v4(),oldPhotoUrl:"",oldPublicId:"",oldPhotoUrlBack:"",oldPublicIdBack:"",college});
                         await user.save()
                         let token=await user.generateAuthToken();
                         res.send({
