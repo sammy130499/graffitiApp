@@ -44,9 +44,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.spinner.show("spinner-2");
     this.userArr=[];
     this.currentUser = JSON.parse(localStorage.getItem('user'));
-    console.log(this.currentUser);
     if(!localStorage.getItem('config')){
-      console.log(this.currentUser.college);
       this.userService.getCollegeConfig({"college":this.currentUser.college}).subscribe((data:any)=>{
         if(!data.action){
           this.alertService.error("college not defined")
