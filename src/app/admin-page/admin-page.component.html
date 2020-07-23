@@ -1,89 +1,158 @@
 
 <p>admin-page works!</p>
-<div>
-<form [formGroup]="form" class="mt-8">
-    <div class="w-full mb-3">
-      <label
-        class="block uppercase text-gray-700 text-xs font-bold mb-2"
-        for="username"
-        >Username</label
-      ><input
-      formControlName="username" type="text" id="username" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-        placeholder="Username"
-        style="transition: all 0.15s ease 0s;"
-      />
-    </div>
-    <div class="w-full mb-3">
-      <label
-        class="block uppercase text-gray-700 text-xs font-bold mb-2"
-        for="firstname"
-        >First Name</label
-      ><input
-        type="text" formControlName="firstname"  id="firstname" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-        placeholder="first Name"
-        style="transition: all 0.15s ease 0s;"
-      />
-    </div>
-    <div class="w-full mb-3">
-        <label
-          class="block uppercase text-gray-700 text-xs font-bold mb-2"
-          for="lastname"
-          >Last Name</label
-        ><input
-          type="text" formControlName="lastname"  id="lastname" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-          placeholder="Last Name"
-          style="transition: all 0.15s ease 0s;"
-        />
-      </div>
-      <div class="w-full mb-3">
-        <label
-          class="block uppercase text-gray-700 text-xs font-bold mb-2"
-          for="password"
-          >New Password</label
-        ><input
-          type="text" formControlName="password"  id="password" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-          placeholder="New Password"
-          style="transition: all 0.15s ease 0s;"
-        />
-      </div>
-    <div>
-    </div>
-    <ngx-spinner
-    bdColor="rgba(255,255,255,0.8)"
-    size="medium"
-    color="#E5433E"
-    type="pacman"
+<button class="btn-secondary"
+        type="button" (click)="logout()">Logout</button>
+<div class="flex content-center items-center justify-center ">
+  <div class="w-full lg:w-5/12 px-4">
+    <div
+      class="flex flex-col min-w-0 break-words w-full mb-4 shadow-lg rounded-lg bg-gray-200 border-0 sm:mb-0"
     >
-    <p style="font-size: 20px; color:black" class="text-center"></p>
-    </ngx-spinner>
-    <div class="flex justify-center">
-      
-      <div class="inline-block text-center mt-1/2 p-2">
-        <button (click)="deleteUserFromAdmin()"
-          class="btn-primary text-xs"
-          type="button"
-        >
-          Delete User
-        </button>
+      <div class="rounded-t mb-0 px-6 py-6">
+        <hr class="mt-6 border-b-1 border-gray-400" />
       </div>
-      <div class="inline-block text-center mt-1/2 p-2">
-        <button (click)="changepass()"
-          class="btn-primary text-xs"
-          type="button"
-        >
-        Change Password of User
-        </button>
-      </div>
-      <div class="inline-block text-center mt-1/2 p-2">
-        <button (click)="logoutall()"
-          class="btn-primary text-xs"
-          type="button"
-        >
-           Logout all  User
-        </button>
+      <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+        <div class="text-black-500 text-center mb-3 font-bold">
+          <p class="text-xl">Change password of the user.</p>
+        </div>
+
+
+        <form [formGroup]="form" class="mt-8">
+          <div class="w-full mb-3">
+            <label
+              class="block uppercase text-gray-700 text-xs font-bold mb-2"
+              for="username"
+              >Username</label
+            ><input
+            formControlName="username" type="text" id="username" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+              placeholder="Username"
+              style="transition: all 0.15s ease 0s;"
+            />
+          </div>
+          <div class="w-full mb-3">
+            <label
+              class="block uppercase text-gray-700 text-xs font-bold mb-2"
+              for="password"
+              >Password</label
+            ><input
+              type="password" formControlName="password" type="password" id="password" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+              placeholder="Password"
+              style="transition: all 0.15s ease 0s;"
+            />
+          </div>
+          <div>
+          </div>
+          <ngx-spinner
+          bdColor="rgba(255,255,255,0.8)"
+          size="medium"
+          color="#E5433E"
+          type="pacman"
+          >
+          <p style="font-size: 20px; color:black" class="text-center">changing password . . .</p>
+          </ngx-spinner>
+          <div class="flex justify-center">
+            <div class="inline-block text-center mt-1/2 p-2">
+              <button (click)="changepass()"
+                class="btn-primary text-xs"
+                type="button"
+              >
+                Change Password
+              </button>
+            </div>
+  
+          </div>
+          
+          
+        </form>
       </div>
     </div>
-    
-    
-  </form>
+
+  </div>
 </div>
+<br>
+<div class="flex content-center items-center justify-center ">
+  <div class="w-full lg:w-5/12 px-4">
+    <div
+      class="flex flex-col min-w-0 break-words w-full mb-4 shadow-lg rounded-lg bg-gray-200 border-0 sm:mb-0"
+    >
+      <div class="rounded-t mb-0 px-6 py-6">
+        <hr class="mt-6 border-b-1 border-gray-400" />
+      </div>
+      <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+        <div class="text-black-500 text-center mb-3 font-bold">
+          <p class="text-xl">Delete User</p>
+        </div>
+
+
+        <form [formGroup]="form" class="mt-8">
+          <div class="w-full mb-3">
+            <label
+              class="block uppercase text-gray-700 text-xs font-bold mb-2"
+              for="username"
+              >Username</label
+            ><input
+            formControlName="username" type="text" id="username" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+              placeholder="Username"
+              style="transition: all 0.15s ease 0s;"
+            />
+          </div>
+          <div>
+          </div>
+          <ngx-spinner
+          bdColor="rgba(255,255,255,0.8)"
+          size="medium"
+          color="#E5433E"
+          type="pacman"
+          >
+          <p style="font-size: 20px; color:black" class="text-center">deleting user. . .</p>
+          </ngx-spinner>
+          <div class="flex justify-center">
+            <div class="inline-block text-center mt-1/2 p-2">
+              <button (click)="deleteUserFromAdmin()"
+                class="btn-primary text-xs"
+                type="button"
+              >
+                Delete User
+              </button>
+            </div>
+          </div>
+          
+          
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+<br>
+<div class="flex content-center items-center justify-center ">
+  <div class="w-full lg:w-5/12 px-4">
+    <div
+      class="flex flex-col min-w-0 break-words w-full mb-4 shadow-lg rounded-lg bg-gray-200 border-0 sm:mb-0"
+    >
+      <div class="rounded-t mb-0 px-6 py-6">
+        <hr class="mt-6 border-b-1 border-gray-400" />
+      </div>
+      <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+        <div class="text-black-500 text-center mb-3 font-bold">
+          <p class="text-xl">Logout all user</p>
+        </div>
+        <div class="text-center mt-1/2 p-2">
+          <button (click)="logoutall()"
+            class="btn-primary text-xs"
+            type="button"
+          >
+            Logout All
+          </button>
+        </div>
+
+        
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+

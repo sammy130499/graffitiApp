@@ -48,6 +48,7 @@
     "tslib": "^1.10.0",
     "tui-image-editor": "^3.9.0",
     "uuid": "^8.2.0",
+    "vue-router": "^3.3.4",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {

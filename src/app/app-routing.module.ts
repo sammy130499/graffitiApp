@@ -41,7 +41,16 @@ import { EditDetailsComponent } from './edit-details/edit-details.component';
 import {
   AdminPageComponent
 } from './admin-page/admin-page.component';
+import {
+  AdminLoginComponent
+} from './admin-login/admin-login.component'
+import {
+  AdminRegisterComponent
+}
+ from './admin-register/admin-register.component'
+import { AdminGuard } from './admin.guard'
 import { from } from 'rxjs';
+import { AdminLoginGuard } from './admin-login.guard';
 
 const routes: Routes = [{
     path: "homepage",
@@ -70,7 +79,20 @@ const routes: Routes = [{
   {
     path: "adminpage",
     component: AdminPageComponent,
-    canActivate: [AuthGuardLoginService]
+    canActivate : [AdminGuard]
+    
+  },
+  {
+    path: "adminregister",
+    component: AdminRegisterComponent
+    
+  },
+  {
+    path: "adminlogin",
+    component: AdminLoginComponent,
+    canActivate : [AdminLoginGuard]
+
+    
   },
   {
     path: "dashboard/:userId",

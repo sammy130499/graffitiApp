@@ -10,12 +10,20 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class UserService {
   private baseUrl = "http://localhost:8000/api/";
+  private baseUrl2 = "http://localhost:3000/api/";
   constructor( private http : HttpClient, private router : Router,private alert:AlertService,private spinner:NgxSpinnerService ) { }
 
 
 
   loginUser(user:any):any{
     let url = this.baseUrl + "login";
+    let headers=new HttpHeaders();
+    headers.set('Content-Type','application/json');
+    return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
+  }
+
+  loginAdmin(user:any):any{
+    let url = this.baseUrl2 + "login";
     let headers=new HttpHeaders();
     headers.set('Content-Type','application/json');
     return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
@@ -36,6 +44,13 @@ export class UserService {
     let url = this.baseUrl + "createUser";
     let headers=new HttpHeaders();
     headers.set('Content-Type','application/json');
+    return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
+  }
+
+  createUseradmin(user:any):any{  
+    let url = this.baseUrl2 + "createUseradmin";  
+    let headers=new HttpHeaders();  
+    headers.set('Content-Type','application/json');  
     return this.http.post(url,JSON.parse(JSON.stringify(user)),{headers});
   }
 
@@ -147,6 +162,25 @@ export class UserService {
     
   }
 
+  logoutadmin(){
+    let url = this.baseUrl2 + "logout";
+    let headers=new HttpHeaders();
+    headers.set('Content-Type','application/json');
+    this.spinner.show()
+    this.http.get(url).subscribe((data:any)=>{
+      this.spinner.hide();
+      if(!data.action){
+        this.alert.error(data.message);
+      }
+      else{
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("loggedInUsername")
+        this.router.navigate(['/adminlogin']);
+      }
+    })
+    
+  }
+
   logoutall(){
     let url = this.baseUrl + "logoutall";
     let headers=new HttpHeaders();
@@ -155,11 +189,11 @@ export class UserService {
     this.http.get(url).subscribe((ret)=>{
       this.spinner.hide();
       if(!ret){
-        this.router.navigate(['/adminpage'])
-        this.alert.error("nothing bro!!!");
+        
+        this.alert.error("function didn't worked !");
       }
       else{
-        this.router.navigate(['/adminpage'])
+        this.alert.error("Everyone logged out!!!");
         // localStorage.removeItem("access_token");
         // localStorage.removeItem("loggedInUsername")
         // localStorage.removeItem("tshirtUser")
@@ -170,5 +204,8 @@ export class UserService {
   
     
   }
+
+ 
+    
   
 }

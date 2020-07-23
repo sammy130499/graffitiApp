@@ -1,20 +1,20 @@
 const jwt = require('jsonwebtoken')
-const User = require('./models/User')
+const User = require('./models/admin');
+
 
 const auth = async(req, res, next) => {
-    console.log(7);
-    console.log(req.header('Authorization'));
+    const demo = req.header('Authorization');
+    console.log(req);
+    console.log(JSON.stringify(req),"heyyyyeee");
     const token = req.header('Authorization').replace('Bearer ', '')
     let data;
-    try{
-        console.log(8);
-    data = jwt.verify(token, process.env.JWT_KEY);
+    try{     
+    data = jwt.verify(token, 'iNsertCooLName143');
     }
     catch(e){
         res.status(401).send({ error: 'Not authorized to access this resource. token expired' }) 
     }
     try {
-        console.log(9);
         const user = await User.findOne({ _id: data._id, 'tokens.token': token })
         if (!user) {
             throw new Error()
@@ -25,6 +25,6 @@ const auth = async(req, res, next) => {
     } catch (error) {
         res.status(401).send({ error: 'Not authorized to access this resource' })
     }
-    console.log(10);
+
 }
 module.exports = auth

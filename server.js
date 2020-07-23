@@ -10,7 +10,6 @@ let mutex=new Mutex();
 const{v4}=require('uuid');
 const http=require('http');
 const socketio = require('socket.io');
-
 cloudinary.config({ 
     cloud_name: 'dvxx5f4hr', 
     api_key: '233683522225317', 
@@ -211,6 +210,8 @@ app.post('/api/createUser',async (req,res)=>{
     })
 });
 
+
+
 app.post('/api/login',async (req,res)=>{
     let {userId,password}=req.body;
     try{
@@ -226,9 +227,9 @@ app.post('/api/login',async (req,res)=>{
     res.send({
         action:true,
         message:{token,user}
-    
+        
     })
-    
+   
     }
     catch(e){
         res.send({message:"wrong credentials",action:false});
@@ -240,16 +241,20 @@ app.post('/api/login',async (req,res)=>{
 
 app.get('/api/logout',auth,async (req,res)=>{
     try {
+        console.log(1);
         console.log(JSON.stringify(req.user.tokens));
-                 
+        console.log(2);
         
         req.user.tokens = req.user.tokens.filter((token) => {
+            console.log(3);
             return token.token != req.token           
 
         })
-       
+        console.log(4);
         await req.user.save()
+        console.log(5);
         res.send({
+        
             action:true,
             message:"user logged out"
         })
@@ -259,25 +264,9 @@ app.get('/api/logout',auth,async (req,res)=>{
             message:error
         })
     }
+    console.log(6);
 });
 
-app.get('/api/logoutall', (req,res)=>{
-    User.find({}).then(ret=>{
-
-        if(!ret)
-        {
-            
-        }
-        else{
-            ret.forEach(user=>{
-                user.tokens=[];
-                user.save()
-            })
-        }
-
-    })
-
-});
 
 
 
@@ -410,27 +399,6 @@ app.post('/api/getImageUrlForTshirtUserBack',auth,(req,res)=>{
     
 });
 
-app.put('/api/updateUserpass/' ,(req,res)=>{
-    let {userPass}=req.body.password;
-    console.log("servercheck",req.body.password);
-    User.updateOne({"userId":req.body.userId},{"password":req.body.password}).then(ret=>{
-        if(!ret){
-            res.send({
-                action:false,
-                message:"invalid user request"
-            })
-        }
-        else{
-            res.send({
-                action:true,
-                message:"password updated !",
-            })
-        }
-
-
-    })
-
-});
 
 app.put('/api/updateUsername/',auth,(req,res)=>{
 
@@ -477,27 +445,53 @@ app.delete('/api/deleteUserFromAdmin/:id',(req,res)=>{
     })
 })
 
+app.get('/api/logoutall', (req,res)=>{
+        User.find({}).then(ret=>{
+            console.log(ret);
+            if(!ret)
+            {
+                
+            }
+            else{
+                ret.forEach(user=>{
+                    user.tokens=[];
+                    user.save()
+                   
+                })
+                res.send({
+                    action:true,
+                    message:"everyone logged out",
+                })
+            }
+    
+        })
+    
+    });
 
-app.delete('/api/deleteUser',auth,(req,res)=>{
-    console.log("this is the userid",req.user.userId);
-    User.findOneAndDelete({userId:req.user.userId}).then(ret=>{
-        if(!ret)
-        {   
-            res.send({
-                action:false,
-                message:"invalid user request"
-            })
-        }
-        else{
-            res.send({
-                action:true,
-                message:"Account successfully deleted!",
-            })
-            console.log("successfully deleted");
-        }
+     app.put('/api/updateUserpass/' ,(req,res)=>{
+        let {userPass}=req.body.password;
+        console.log("servercheck",req.body.password);
+        User.updateOne({"userId":req.body.userId},{"password":req.body.password}).then(ret=>{
+            if(!ret){
+                res.send({
+                    action:false,
+                    message:"invalid user request"
+                })
+            }
+            else{
+                res.send({
+                    action:true,
+                    message:"password updated !",
+                })
+            }
+    
+    
+        })
+    
+    });
 
-    })
-})  
+
+
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(distDir, 'index.html'));    

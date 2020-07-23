@@ -5,6 +5,7 @@ import { UserService } from '../user.service';
 import { GlobalDataService } from '../global-data.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
+import { HostListener } from '@angular/core';
 
 import { AlertService } from '../alert.service';
 import { first } from 'rxjs/operators';
@@ -56,6 +57,8 @@ export class AdminPageComponent implements OnInit {
       }
   })
 
+  
+
   }
 
   changepass(){
@@ -93,5 +96,15 @@ export class AdminPageComponent implements OnInit {
     this.userService.logoutall();
   }
 
+  logout(){
+    this.userService.logoutadmin();
+    // localStorage.removeItem("access_token");
+    // localStorage.removeItem("loggedInUsername")
+    // this.router.navigate(['/adminlogin']);
+  }
 
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    localStorage.setItem("isBackBtnPressed","true");
+  }
 }

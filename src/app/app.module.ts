@@ -30,6 +30,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { EditDetailsComponent } from './edit-details/edit-details.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { AdminRegisterComponent } from './admin-register/admin-register.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -51,7 +53,9 @@ export function tokenGetter() {
     PageNotFoundComponent,
     ServerErrorComponent,
     EditDetailsComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    AdminLoginComponent,
+    AdminRegisterComponent
   ],
   imports: [
     BrowserModule,
