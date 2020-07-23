@@ -44,7 +44,17 @@
     
                   <form [formGroup]="form">
                     
-
+                    <div class="w-full mb-3">
+                      <label
+                        class="block text-gray-700  uppercase text-xs font-bold mb-2"
+                        for="college"
+                        >College<select name="college" id="college" class="px-3 py-3 mt-2 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full" (change)="getCollegeConfig(college.value)" #college>
+                          <option disabled>Choose your college</option>
+                          <option value="svnit-msc">SVNIT MSC</option>
+                          <option value="svnit-3rd-year">SVNIT 3rd Year</option>
+                      </select></label
+                      >
+                    </div>
 
                     <div class="w-full mb-3">
                       <label
@@ -73,7 +83,7 @@
                     <div class="relative w-full mb-3">
                       <label
                         class="block uppercase text-gray-700 text-xs font-bold mb-2"
-                        for="password"
+                        for="confpassword"
                         >Confirm Password</label
                       ><input
                         type="password" (blur)="checkConfPassword()" formControlName="confpassword" id="confpassword" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-xs shadow focus:outline-none focus:shadow-outline w-full"
@@ -106,18 +116,15 @@
                     </div>                
                       <div class="w-full mb-3">
                         <label
-                          class="block  uppercase text-xs font-bold mb-2"
+                          class="block text-gray-700  uppercase text-xs font-bold mb-2"
                           for="department"
-                          >Department<select name="department" id="department" class="px-3 py-3 mt-2 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full" (change)="setDepartment(department.value)" #department>
+                        >Department<select name="department" id="department" class="px-3 py-3 mt-2 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full" (change)="setDepartment(department.value)" #department
+                         >
                             <option disabled>Choose your department</option>
-                            <option value="COED">Computer Engineering Department</option>
-                            <option value="CHED">Chemical Engineering Department</option>
-                            <option value="MED">Mechanical Engineering Department</option>
-                            <option value="ECED"> Electronics Engineering Department</option>
-                            <option value="CED">Civil Engineering Department</option>
-                            <option value="EED">Electrical Engineering Department</option>
-                        </select></label
-                        >
+                            <option *ngFor="let dept of departments; let i = index" [value]="dept.code">
+                              {{dept.name}}
+                            </option>
+                        </select></label>
                       </div>
                     <div>
                     </div>
@@ -128,6 +135,15 @@
                       type="pacman"
                       >
                       <p class="text-gray-900 text-sm p-2 mt-2 text-center">Creating a Graffi-Tee for you. <br>Wait for a few seconds</p>
+                      </ngx-spinner>
+                      <ngx-spinner
+                      bdColor="rgba(255,255,255,0.8)"
+                      size="medium"
+                      color="#E5433E"
+                      type="pacman"
+                      name="college"
+                      >
+                      <p class="text-gray-900 text-sm p-2 mt-2 text-center">Hold tight! Finding your college details!</p>
                       </ngx-spinner>
                     <div class="flex justify-center items-center text-center mt-1/2 p-5">
                       <button [disabled]="!allowSignupUsername||!allowSignupPassword||!allowSignupFirstName||!allowSignupLastName||!allowSignupConfPassword" type="button" [ngClass]="{'bg-red-500':!allowSignupUsername||!allowSignupPassword||!allowSignupFirstName||!allowSignupLastName||!allowSignupConfPassword}" (click)="signup()"

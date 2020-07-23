@@ -21,13 +21,18 @@ var userSchema = new Schema({
     usersAffected:[String],
     photoUrl:String,
     photoUrlBack:String,
-    imgPublicId:String,
-    imgPublicIdBack:String,
+    publicId:String,
+    publicIdBack:String,
+    oldPhotoUrl:String,
+    oldPublicId:String,
+    oldPhotoUrlBack:String,
+    oldPublicIdBack:String,
     department:String,
     firstName:String,
     lastName:String,
     writingUsers:[String],
-    room:String
+    room:String,
+    college:String
   });
 
 

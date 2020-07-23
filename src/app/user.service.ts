@@ -33,6 +33,13 @@ export class UserService {
     let url = this.baseUrl + "getWritingUsers";
     return this.http.get(url);
   }
+
+  getCollegeConfig(college:any){
+    let url = this.baseUrl + "getCollegeConfig";
+    let headers=new HttpHeaders();
+    headers.set('Content-Type','application/json');
+    return this.http.post(url,JSON.parse(JSON.stringify(college)),{headers});
+  }
   
   getUsersAffectedAndRoom(user:any):any{
     let url = this.baseUrl + "getUsersAffectedAndRoom";

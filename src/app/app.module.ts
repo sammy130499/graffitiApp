@@ -32,6 +32,8 @@ import { EditDetailsComponent } from './edit-details/edit-details.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminRegisterComponent } from './admin-register/admin-register.component';
+import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
+import {WindowRef} from './windowref.service';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -66,6 +68,7 @@ export function tokenGetter() {
     NgxPaginationModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    JwSocialButtonsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -75,7 +78,7 @@ export function tokenGetter() {
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [UserService,AuthGuardLoginService,AuthGuardService,AlertService,NgxSpinnerService,PaginationService,
+  providers: [UserService,AuthGuardLoginService,AuthGuardService,AlertService,NgxSpinnerService,PaginationService, WindowRef,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

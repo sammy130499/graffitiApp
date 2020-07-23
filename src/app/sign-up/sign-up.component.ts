@@ -25,17 +25,21 @@ export class SignUpComponent implements OnInit {
   allowSignupLastName=false;
   allowSignupUsername=false;
   allowSignupConfPassword=false;
+
+  collegeConfig;
+  departments;
   
   form = new FormGroup({
-    username : new FormControl('',Validators.required),
-    password : new FormControl('',Validators.required),
-    confpassword: new FormControl('',Validators.required),
-    firstName : new FormControl('',Validators.required),
-    lastName : new FormControl('',Validators.required),
-    department : new FormControl('',Validators.required),
+    username : new FormControl({value:"",disabled:true},Validators.required),
+    password : new FormControl({value:"",disabled:true},Validators.required),
+    confpassword: new FormControl({value:"",disabled:true},Validators.required),
+    firstName : new FormControl({value:"",disabled:true},Validators.required),
+    lastName : new FormControl({value:"",disabled:true},Validators.required),
+    department : new FormControl({value:"",disabled:true},Validators.required),
   });
 
   department="COED";
+  college=""
   ngOnInit() {
   }
 
@@ -43,6 +47,29 @@ export class SignUpComponent implements OnInit {
 
   setDepartment(v){
     this.department=v;
+  }
+
+  getCollegeConfig(v){
+    this.spinner.show("college");
+    this.userService.getCollegeConfig({"college":v}).subscribe((data:any)=>{
+      if(!data.action){
+        this.alertService.error(data.message);
+        this.spinner.hide("college");
+      }
+      else{
+        localStorage.setItem("config",data.message);
+        this.collegeConfig=JSON.parse(data.message);
+        this.spinner.hide("college");
+        this.college=v;
+        this.departments=this.collegeConfig.departments;
+        this.form.get('password').enable();
+        this.form.get('username').enable();
+        this.form.get('confpassword').enable();
+        this.form.get('firstName').enable();
+        this.form.get('lastName').enable();
+        this.form.get('department').enable();
+      }
+    })
   }
 
 
@@ -100,7 +127,7 @@ export class SignUpComponent implements OnInit {
       {
         continue;
       }
-      this.alertService.error("Unless you are Elon Musk's son, you are only allowed to have alphabets in your name");
+      this.alertService.error("Unless you are Elon Musk's kid, you are only allowed to have alphabets in your name");
       this.allowSignupFirstName=false;
       return;
     }
@@ -141,10 +168,9 @@ export class SignUpComponent implements OnInit {
     username=username.toLowerCase();
     if(username.length==0)return;
     
-    let reg="\^u1[56](co||me||ce||ee||ec||ch)[0-2][0-9][0-9]$";
+    let reg=`${this.collegeConfig.admNumRegex}`;
     
-    const regex=RegExp(reg);
-    console.log("this is the truth value",regex.test(username));
+    const regex=RegExp(reg,'ig');
     if(!regex.test(username) )
     {
       this.alertService.error("Bahut tez ho rahe hain? Enter your admission number");
@@ -212,7 +238,7 @@ export class SignUpComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.spinner.show();
-        this.userService.createUser({"userId":username,"firstName":firstName,"lastName":lastName,"password":hashedPass,"department":this.department}).subscribe(data=>{
+        this.userService.createUser({"userId":username,"firstName":firstName,"lastName":lastName,"password":hashedPass,"department":this.department,college:this.college}).subscribe(data=>{
           if(!data.action){
             this.spinner.hide();
             this.alertService.error(data.message);

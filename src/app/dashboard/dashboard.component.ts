@@ -10,6 +10,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { HostListener } from '@angular/core';
 import { AlertService } from '../alert.service';
 import Swal from 'sweetalert2'
+import { SwUpdate } from '@angular/service-worker';
+import { WindowRef } from '../windowref.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +22,10 @@ import Swal from 'sweetalert2'
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
 
-  constructor(private userService:UserService,private alertService:AlertService,private global:GlobalDataService,private router:Router,private sanitizer: DomSanitizer,private spinner:NgxSpinnerService,private activeRoute: ActivatedRoute) { }
+  constructor(private userService:UserService,private alertService:AlertService,
+    private global:GlobalDataService,private router:Router,private sanitizer: DomSanitizer,
+    private spinner:NgxSpinnerService,private activeRoute: ActivatedRoute,
+    private swUpdate:SwUpdate, private windowref:WindowRef) { }
   photo="";
   userArr:User[];
   userArrPermanent:User[];
@@ -29,7 +34,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   fetchedUsers;
   spinnerMsg;
   bgColors;
+  departments=[];
   ngOnInit() {
+    
     this.checkUrl();
     this.spinnerMsg="Experience magic! <br/> Setting up your dashboard";
     this.fetchedUsers=false;
@@ -37,8 +44,57 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.spinner.show("spinner-2");
     this.userArr=[];
     this.currentUser = JSON.parse(localStorage.getItem('user'));
-    this.getDepartmentUsers(this.currentUser.department);    
-    this.userService.getImageUrlForUser({"face":"front"}).subscribe((data) => {
+    if(!localStorage.getItem('config')){
+      this.userService.getCollegeConfig({"college":this.currentUser.college}).subscribe((data:any)=>{
+        if(!data.action){
+          this.alertService.error("college not defined")
+        }
+        else{
+          localStorage.setItem('config',data.message);
+          this.setUpDashboard();
+        }
+      })
+    }
+    else{
+      this.setUpDashboard();
+    }
+    
+    this.swUpdate.available.subscribe(event => {
+
+      Swal.fire({
+        title: 'A new version of the application is available.',
+        text: "Install it!",
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Great!'
+      }).then((result) => {
+        if (result.value) {
+          this.windowref.nativeWindow.location.reload()
+        }
+      })
+    });
+
+    this.swUpdate.activated.subscribe(event => {
+      Swal.fire({
+        title: '<strong>Version upgraded!!</strong>',
+        icon: 'info',
+        html:
+          `<b>UI and bug fixes</b>`,
+        showCloseButton: true,
+        focusConfirm: true,
+        confirmButtonText:
+          '<i class="fa fa-thumbs-up"></i> Great!',
+        confirmButtonAriaLabel: 'Thumbs up, great!'
+      })
+    });
+  }
+
+  setUpDashboard(){
+    this.departments=JSON.parse(localStorage.getItem('config')).departments;
+      this.getDepartmentUsers(this.currentUser.department);    
+      this.userService.getImageUrlForUser({"face":"front"}).subscribe((data) => {
       if (!data.action) {
         this.alertService.error(data.message)
       } else {

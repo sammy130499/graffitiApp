@@ -41,10 +41,8 @@ export class EditPageComponent implements OnInit,OnDestroy,AfterViewInit {
         this.socket=io("ws://localhost:8000/");
         let currentUser=localStorage.getItem('loggedInUsername');
         if(!this.usersAffected.includes(this.tshirtUser)){
-          console.log(data.message.room,currentUser);
           this.socket.emit('ack',{room:data.message.room,user:currentUser});
           this.socket.on('ackback',({num,present})=>{
-          console.log(num,present);
             this.spinner.hide("edit");
             if(present==currentUser && num==1){
               this.notAllowed=false;
