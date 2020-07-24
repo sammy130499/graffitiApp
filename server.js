@@ -238,7 +238,7 @@ app.post('/api/login',async (req,res)=>{
         return res.status(401).send({message: 'Login failed! Check authentication credentials',action:false})
     }
     const token = await user.generateAuthToken();
-    
+    console.log(req.headers());
     res.send({
         action:true,
         message:{token,user}

@@ -3,9 +3,6 @@ const User = require('./models/admin');
 
 
 const auth = async(req, res, next) => {
-    const demo = req.header('Authorization');
-    console.log(req);
-    console.log(JSON.stringify(req),"heyyyyeee");
     const token = req.header('Authorization').replace('Bearer ', '')
     let data;
     try{     

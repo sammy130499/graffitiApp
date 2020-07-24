@@ -26,9 +26,11 @@ var adminSchema = new Schema({
 
   adminSchema.methods.generateAuthToken = async function() {
     let user=this;
-    const token = jwt.sign({_id: user._id}, 'iNsertCooLName143',{expiresIn:"2h"})
-    user.tokens = user.tokens.concat({token})    
+   
+    const token = jwt.sign({_id: user._id}, 'iNsertCooLName143',{expiresIn:"2h"})   
+    user.tokens = user.tokens.concat({token}) 
     await user.save();
+  
     return token;
 }
 

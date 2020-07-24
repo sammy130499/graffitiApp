@@ -33,8 +33,8 @@ const User=require('./models/admin');
 const { findOne } = require('./models/admin');
 
 
-//5LgBMVvJ2h1rs6gf  
-mongoose.connect('mongodb+srv://sameer:5LgBMVvJ2h1rs6gf@cluster0.r6ar5.mongodb.net/admindetails?retryWrites=true&w=majority', {
+
+mongoose.connect('mongodb+srv://m001-student:mBVI3SbOLiX22EPT@avinash-001-q92dl.mongodb.net/graffiti?retryWrites=true&w=majority', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true
@@ -93,7 +93,7 @@ mongoose.connect('mongodb+srv://sameer:5LgBMVvJ2h1rs6gf@cluster0.r6ar5.mongodb.n
         {
             return res.status(401).send({message: 'Login failed! Check authentication credentials',action:false})
         }
-        console.log(user,"helloworld");
+        console.log(req);
         const token = await user.generateAuthToken();
         
         res.send({
